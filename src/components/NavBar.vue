@@ -1,8 +1,8 @@
 <template>
   <header>
-    <nav class="navbar navbar-expand-md fixed-top bg-secondary bg-gradient">
+    <nav class="navbar navbar-expand-md bg-secondary bg-gradient">
       <div class="container-fluid mx-1">
-        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'home' }">
+        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
           <i class="fas fa-user-astronaut me-3" style="font-size: 5em" alt="Logo"></i>
           <span class="placeholder col-10">Title</span>
         </router-link>
@@ -29,11 +29,11 @@
               </div>
             </div>
             <div class="bg-light d-flex rounded-5 px-5 py-3">
-              <div class="d-flex align-items-center me-3">
+              <div class="d-flex align-items-center me-4">
                 <span class="placeholder">Inox total</span>
                 <i class="fas fa-sack-dollar ms-2 fs-1"></i>
               </div>
-              <div class="d-flex flex-column ms-3">
+              <div class="d-flex text-center flex-column ms-4">
                 <i class="fas fa-map-location-dot fs-1"></i>
                 <span class="placeholder mt-2">Location</span>
               </div>
