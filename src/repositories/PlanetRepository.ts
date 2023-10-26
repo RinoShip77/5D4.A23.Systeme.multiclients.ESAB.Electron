@@ -15,4 +15,16 @@ export class PlanetRepository {
       throw err;
     }
   }
+  
+  public async retrieveOne(idPlanet: any) {
+    try {
+      const res = await this.axios.get('https://api.andromia.science/planets/' + idPlanet);
+
+      if(res.status === 200) {
+        return res.data;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
 }
