@@ -170,14 +170,15 @@
     <div class="col-12" v-else>
       <div class="row row-cols-5 g-2">
         <div class="col my-2" v-for="(planet, index) of planets" :key="index">
-            <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <div class="text-center">
                 <h4>{{ planet.name }}</h4>
                 <h7>{{ index }}</h7>
               </div>
               <div class="text-center card-body">
-                <img :src="planet.icon" class="planet">
+                <img :src="planet.icon" class="planetList">
               </div>
+              <input :value="planet.href">
             </div>
         </div>
       </div>
@@ -186,32 +187,35 @@
 
   <!-- Modal for the details of one Ally -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="card h-100 p-2">
           <div class="d-flex">
-            <img src="..." class="placeholder img-fluid img-thumbnail m-1" alt="Nom du Ally" title="Nom du Ally">
+            <img :src="planet?.icon" class="img-fluid img-thumbnail m-1" alt="{{ planet.name }}" title="{{ planet.name }}">
             <div class="card-body">
               <div class="d-flex justify-content-between">
-                <h2 class="card-title">Nom du Ally</h2>
+                <h2 class="card-title">{{ planet?.name }}</h2>
                 <div class="d-flex flex-column">
                   <h3>Date de capture:</h3>
-                  <span class="border border-2 border-black rounded-3 opacity-50 px-2 text-decoration-underline fs-5 text-center w-75">JJ/MM/AAAA</span>
+                  <span class="border border-2 border-black rounded-3 opacity-50 px-2 text-decoration-underline fs-5 text-center w-75">
+                    JJ/MM/AAAA
+                    {{ planet?.discoveryDate  }}
+                  </span>
                 </div>
               </div>
               <div class="d-flex">
                 <div class="d-flex flex-column fs-4">
                   <div class="d-flex">
                     <i class="fas fa-explosion me-2"></i>
-                    <h5>#</h5>
+                    <h5>{{ planet?.position.x }}</h5>
                   </div>
                   <div class="d-flex">
                     <i class="fas fa-gauge-high me-2"></i>
-                    <h5>#</h5>
+                    <h5>{{ planet?.position.y }}</h5>
                   </div>
                   <div class="d-flex">
                     <i class="fas fa-shield-halved me-2"></i>
-                    <h5>#</h5>
+                    <h5>{{ planet?.position.z }}</h5>
                   </div>
                   <div class="d-flex">
                     <i class="fas fa-heart me-2"></i>
@@ -240,18 +244,13 @@
                   <div class="z-1 carousel-inner mx-auto my-2 p-5 text-center">
                     <div class="carousel-item active">
                       <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStMfuAMQJ3blS1M379TuqzpRzcqooBbkYVsQ&usqp=CAU"
-                        class="carousel" alt="Element name">
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStMfuAMQJ3blS1M379TuqzpRzcqooBbkYVsQ&usqp=CAU"
+                      class="carousel" alt="Element name">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item active">
                       <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStMfuAMQJ3blS1M379TuqzpRzcqooBbkYVsQ&usqp=CAU"
-                        class="carousel" alt="Element name">
-                    </div>
-                    <div class="carousel-item">
-                      <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStMfuAMQJ3blS1M379TuqzpRzcqooBbkYVsQ&usqp=CAU"
-                        class="carousel" alt="Element name">
+                      src="https://image.pngaaa.com/700/5273700-middle.png"
+                      class="carousel" alt="Element name">
                     </div>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -282,16 +281,19 @@ import { Planet } from '@/models/Planet';
 
 const planetRepository = new PlanetRepository();
 const planets = ref<Planet[]>([]);
+const planet = ref<Planet>();
 const isLoading = ref(true);
+const idPlanet = ref('')
 
 onMounted(async () => {
   planets.value = await planetRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
+  planet.value = await planetRepository.retrieveOne(idPlanet);
 })
 </script>
 
 <style scoped>
-img.planet {
+img.planetList {
   width: 125px;
   height: auto
 }
