@@ -1,20 +1,35 @@
 <template>
-    <DefaultLayout>
-        <div>
-            <h2>Bienvenue sur </h2>
-            <h1>Andromia Technologies</h1>
-            //TODO: Short description?
+    <InitialLayout>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    <h2 class="justify-content-center">Bienvenue sur</h2>
+                    <h1>Andromia Technologies</h1>
+                    <!--//TODO: Short description?-->
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button class="nav-link">
+                        <router-link class="d-flex align-items-center" :to="{ name: 'login' }">
+                            Se connecter
+                        </router-link>
+                    </button>
+                    <br>
+                    <button class="nav-link">
+                        <router-link class="d-flex align-items-center" :to="{ name: 'accountCreation' }">
+                            Créer un compte
+                        </router-link>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="col-12">
-            <button>Se connecter</button>
-            <br>
-            <button>Créer un compte</button>
-        </div>
-    </DefaultLayout>
+    </InitialLayout>
 </template>
-//TODO: Use different layout from the default in order to remove the NavBar.
 <script setup lang="ts">
-import DefaultLayout from '../layouts/DefaultLayout.vue';
+import InitialLayout from '../layouts/InitialLayout.vue';
 </script>
 
 //TODO: Make the style for the page.
