@@ -16,9 +16,9 @@ export class AllyRepository {
     }
   }
 
-  public async retrieveOne(href: any) {
+  public async retrieveOne(idAlly: string) {
     try {
-      const res = await this.axios.get('https://api.andromia.science/planets/' + href);
+      const res = await this.axios.get('https://api.andromia.science/allies/' + idAlly);
 
       if (res.status === 200) {
         return res.data;

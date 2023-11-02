@@ -170,24 +170,36 @@
     <div class="col-12" v-else>
       <div class="row row-cols-4 g-2">
         <div class="col my-2" v-for="ally of allies">
-          <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#AllyModal">
             <div class="card-header">
               <h4>{{ ally.name }}</h4>
             </div>
             <div class="card-body">
-              <div  class="border-3 border-bottom rounded-pill">
-               <img :src="ally.asset" class="img-fluid w-75">
+              <div class="border-3 border-bottom rounded-pill">
+                <img :src="ally.asset" class="img-fluid w-75">
               </div>
-              <div class="">
+              <div class="d-flex justify-content-between">
                 <img src="../../assets/books/yellow.png" class="img-fluid w-25 mt-5">
-                <img src="../../assets/affinities/air.svg" class="img-fluid w-50">
+                <img src="../../assets/affinities/air.svg" class="img-fluid w-25">
                 <img src="../../assets/books/blue.png" class="img-fluid w-25 mt-5">
               </div>
-              <div class="mt-5 d-flex justify-content-around">
-                <img src="../../assets/ui/power.png" class="img-fluid" width="50">
-                <img src="../../assets/ui/speed.png" class="img-fluid" width="50">
-                <img src="../../assets/ui/shield.png" class="img-fluid" width="50">
-                <img src="../../assets/ui/life.png" class="img-fluid" width="50">
+              <div class="d-flex justify-content-around border-top mt-3 pt-3">
+                <div class="d-flex flex-column">
+                  <img src="../../assets/ui/power.png" class="img-fluid" width="25">
+                  <p>{{ ally.stats.power }}</p>
+                </div>
+                <div class="d-flex flex-column">
+                  <img src="../../assets/ui/speed.png" class="img-fluid" width="25">
+                  <p>{{ ally.stats.speed }}</p>
+                </div>
+                <div class="d-flex flex-column">
+                  <img src="../../assets/ui/shield.png" class="img-fluid" width="25">
+                  <p>{{ ally.stats.shield }}</p>
+                </div>
+                <div class="d-flex flex-column">
+                  <img src="../../assets/ui/life.png" class="img-fluid" width="25">
+                  <p>{{ ally.stats.life }}</p>
+                </div>
               </div>
             </div>
             <div class="card-footer">
@@ -200,13 +212,12 @@
   </DefaultLayout>
 
   <!-- Modal for the details of one Ally -->
-  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal fade" id="AllyModal" tabindex="-1" aria-labelledby="AllyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
       <div class="modal-content">
         <div class="card h-100 p-2">
           <div class="d-flex">
-            <img :src="ally?.icon" class="img-fluid img-thumbnail m-1" alt="{{ ally.name }}"
-              title="{{ ally.name }}">
+            <img :src="ally?.asset" class="img-fluid img-thumbnail m-1" alt="{{ ally.name }}" title="{{ ally.name }}">
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <h2 class="card-title">{{ ally?.name }}</h2>
@@ -215,44 +226,42 @@
                   <span
                     class="border border-2 border-black rounded-3 opacity-50 px-2 text-decoration-underline fs-5 text-center w-75">
                     JJ/MM/AAAA
-                    {{ ally?.discoveryDate }}
+                    {{ ally?.createdAt }}
                   </span>
                 </div>
               </div>
               <div class="d-flex">
                 <div class="d-flex flex-column fs-4">
                   <div class="d-flex">
-                    <i class="fas fa-explosion me-2"></i>
-                    <h5>{{ ally?.position.x }}</h5>
+                    <img src="../../assets/ui/power.png" class="img-fluid w-25">
+                    <h5 class="ms-2">{{ ally?.stats.power }}</h5>
                   </div>
                   <div class="d-flex">
-                    <i class="fas fa-gauge-high me-2"></i>
-                    <h5>{{ ally?.position.y }}</h5>
+                    <img src="../../assets/ui/speed.png" class="img-fluid w-25">
+                    <h5 class="ms-2">{{ ally?.stats.speed }}</h5>
                   </div>
                   <div class="d-flex">
-                    <i class="fas fa-shield-halved me-2"></i>
-                    <h5>{{ ally?.position.z }}</h5>
+                    <img src="../../assets/ui/shield.png" class="img-fluid w-25">
+                    <h5 class="ms-2">{{ ally?.stats.shield }}</h5>
                   </div>
                   <div class="d-flex">
-                    <i class="fas fa-heart me-2"></i>
-                    <h5>#</h5>
+                    <img src="../../assets/ui/life.png" class="img-fluid w-25">
+                    <h5 class="ms-2">{{ ally?.stats.life }}</h5>
                   </div>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center mx-auto" style="font-size: 6em">
-                  <i class="fa-solid fa-hat-wizard mb-2"></i>
-                  <div class="d-flex justify-content-around">
-                    <i class="fa-solid fa-book-medical" style="margin-right: 1em"></i>
-                    <i class="fa-solid fa-book" style="margin-left: 1em"></i>
-                  </div>
+                <div class="d-flex justify-content-between">
+                  <img src="../../assets/books/yellow.png" class="img-fluid w-25 mt-5">
+                  <img src="../../assets/affinities/air.svg" class="img-fluid w-25">
+                  <img src="../../assets/books/blue.png" class="img-fluid w-25 mt-5">
                 </div>
               </div>
-              <div id="carouselExampleIndicators" class="carousel slide">
+              <div id="carouselAllyIndicators" class="carousel slide">
                 <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                  <button type="button" data-bs-target="#carouselAllyIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                  <button type="button" data-bs-target="#carouselAllyIndicators" data-bs-slide-to="1"
                     aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                  <button type="button" data-bs-target="#carouselAllyIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 </div>
                 <div class="bg-dark-subtle bg-gradient rounded-5 z-0">
@@ -266,12 +275,12 @@
                       <img src="https://image.pngaaa.com/700/5273700-middle.png" class="carousel" alt="Element name">
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselAllyIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselAllyIndicators"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -283,7 +292,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -294,14 +303,14 @@ import { Ally } from '@/models/Ally';
 
 const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>([]);
-//const ally = ref<Ally>();
+const ally = ref<Ally>();
 const isLoading = ref(true);
-//const idAlly = ref('')
+const idAlly = '19319a28-6757-4998-9d98-46298be55dcd';
 
 onMounted(async () => {
   allies.value = await allyRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
-  //ally.value = await allyRepository.retrieveOne(idAlly);
+  ally.value = await allyRepository.retrieveOne(idAlly);
 })
 </script>
 
