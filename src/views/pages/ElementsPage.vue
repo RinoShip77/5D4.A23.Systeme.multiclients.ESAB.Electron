@@ -43,14 +43,13 @@
     </div>
     <div class="col-12" v-else>
       <div class="row row-cols-5 g-2">
-        <div class="col my-2" v-for="(planet, index) of planets" :key="index">
+        <div class="col my-2" v-for="ally of allies">
           <div class="card">
             <div class="text-center">
-              <h4>{{ planet.name }}</h4>
-              <h7>{{ index }}</h7>
+              <h4>{{ ally.name }}</h4>
             </div>
             <div class="text-center card-body">
-              <img :src="planet.icon">
+              <img :src="ally.icon">
             </div>
           </div>
         </div>
@@ -62,15 +61,15 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { PlanetRepository } from '@/repositories/PlanetRepository';
-import { Planet } from '@/models/Planet';
+import { AllyRepository } from '@/repositories/AllyRepository';
+import { Ally } from '@/models/Ally';
 
-const planetRepository = new PlanetRepository();
-const planets = ref<Planet[]>([]);
+const allyRepository = new AllyRepository();
+const allies = ref<Ally[]>([]);
 const isLoading = ref(true);
 
 onMounted(async () => {
-  planets.value = await planetRepository.retrieveAll();
+  allies.value = await allyRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
 })
 </script>

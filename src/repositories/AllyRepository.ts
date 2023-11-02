@@ -1,26 +1,26 @@
 import { inject } from "vue";
 import { AxiosStatic } from 'axios';
 
-export class PlanetRepository {
+export class AllyRepository {
   axios = inject('axios') as AxiosStatic;
 
   public async retrieveAll() {
     try {
-      const res = await this.axios.get('https://api.andromia.science/planets');
+      const res = await this.axios.get('http://localhost:3001/allies');
 
-      if(res.status === 200) {
+      if (res.status === 200) {
         return res.data;
       }
     } catch (err) {
       throw err;
     }
   }
-  
-  public async retrieveOne(idPlanet: any) {
-    try {
-      const res = await this.axios.get('https://api.andromia.science/planets/' + idPlanet);
 
-      if(res.status === 200) {
+  public async retrieveOne(href: any) {
+    try {
+      const res = await this.axios.get('https://api.andromia.science/planets/' + href);
+
+      if (res.status === 200) {
         return res.data;
       }
     } catch (err) {
