@@ -18,7 +18,7 @@ export class AllyRepository {
 
   public async retrieveOne(idAlly: string) {
     try {
-      const res = await this.axios.get('https://api.andromia.science/allies/' + idAlly);
+      const res = await this.axios.get('http://localhost:3001/allies/' + idAlly);
 
       if (res.status === 200) {
         return res.data;

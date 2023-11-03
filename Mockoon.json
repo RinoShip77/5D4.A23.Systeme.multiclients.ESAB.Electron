@@ -1,0 +1,632 @@
+{
+  "uuid": "69314ea5-d288-4e15-9b30-ece37ac1fde7",
+  "lastMigration": 29,
+  "name": "ESA23 (copy)",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "2f46825c-906c-4e17-badd-99f32c753c03",
+      "type": "http",
+      "documentation": "Permet de créer un compte",
+      "method": "post",
+      "endpoint": "explorers",
+      "responses": [
+        {
+          "uuid": "c790f7e3-6991-4ad0-afce-3667e1463bc3",
+          "body": "{\n  \"name\": \"Test\",\n  \"surname\": \"Test\",\n  \"username\": \"X\",\n  \"email\": \"abc@abc.ca\",\n  \"dateNaissance\": \"JJ/MM/YYYY\",\n  \"jwt\": \"token\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "La représentation d'un compte d'un explorateur venant d'être créer",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "650d9369-012e-4e05-bb91-74710d915546",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "ab82a333-5d9d-486b-a9b9-948ae04742fb",
+      "type": "http",
+      "documentation": "Permet de se connecter",
+      "method": "post",
+      "endpoint": "connexion",
+      "responses": [
+        {
+          "uuid": "018131f5-de27-40c5-accc-2f09e1d6555f",
+          "body": "{\n  \"message\":\"Connexion réussie\",\n  \"jwt\":\"token\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Connexion réussie",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8a50eeaf-7724-413b-9680-2f3887e71427",
+          "body": "{\n  \"message\":\"Informations invalides\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Erreur d'authentification",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "cb9072db-410d-463c-8090-ed96ec3e5daa",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "84cbab51-0cfd-4c47-9a42-5ff29b898fdc",
+      "type": "http",
+      "documentation": "Permet de se déconnecter",
+      "method": "post",
+      "endpoint": "deconnexion",
+      "responses": [
+        {
+          "uuid": "dd5171ba-7318-421a-9db3-107255ea6b0f",
+          "body": "{\n  \"message\":\"deconnéxion réussie\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "34b122b9-1843-4b68-90c8-defe3570813a",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c0a160a4-4dd8-4ae1-9611-e38eefd49d9c",
+      "type": "http",
+      "documentation": "Afficher la collection des Allies",
+      "method": "get",
+      "endpoint": "allies",
+      "responses": [
+        {
+          "uuid": "8f5ffa64-4b3e-4bac-a445-073458786c23",
+          "body": "[\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    },\n    {\n      \"stats\": {\n      \"life\": 21,\n      \"speed\": 9,\n      \"power\": 10,\n      \"shield\": 8\n    },\n    \"crypto\": {\n      \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n      \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n    },\n    \"books\": [\n      \"blue\",\n      \"purple\"\n    ],\n    \"kernel\": [\n      \"Ye\",\n      \"Ye\",\n      \"Ja\",\n      \"A\",\n      \"B\"\n    ],\n    \"archiveIndex\": 24,\n    \"name\": \"Viking\",\n    \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n    \"affinity\": \"space\",\n    \"essence\": 161,\n    \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n    \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n    \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n    \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n    \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n    }\n  ]  ",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Récupération réussie de la collection de Allies",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "07faede6-3ab3-49c7-97c4-92f1de5706f2",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "790af556-1f4e-4091-bc3a-fd5d78919b8e",
+      "type": "http",
+      "documentation": "Permet d'afficher les détails d'un ally",
+      "method": "get",
+      "endpoint": "allies/1",
+      "responses": [
+        {
+          "uuid": "b2415499-c59e-496d-8bde-21614d06805b",
+          "body": "{\n  \"stats\": {\n    \"life\": 21,\n    \"speed\": 9,\n    \"power\": 10,\n    \"shield\": 8\n  },\n  \"crypto\": {\n    \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n    \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n  },\n  \"books\": [\n    \"blue\",\n    \"purple\"\n  ],\n  \"kernel\": [\n    \"Ye\",\n    \"Ye\",\n    \"Ja\",\n    \"A\",\n    \"B\"\n  ],\n  \"archiveIndex\": 24,\n  \"name\": \"Viking\",\n  \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n  \"affinity\": \"space\",\n  \"essence\": 161,\n  \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n  \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n  \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n  \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n  \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "7270beee-cd42-4b61-b849-f877d541b94f",
+          "body": "{\n  \"message\": \"Auncun ally retrouvé avec le id\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Ally non retrouvé",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "62491f3e-67cf-4a05-a83f-89413637dddf",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "4ee7746a-cf1d-4259-ada7-d6ac3227a445",
+      "type": "http",
+      "documentation": "Permet d'afficher l'inventaire d'elements d'un explorateur",
+      "method": "get",
+      "endpoint": "elements",
+      "responses": [
+        {
+          "uuid": "87775f72-455f-4802-aa3e-f54407ab5176",
+          "body": "[\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  },\n  {\n    \"nom\": \"Élément 1\",\n    \"description\": \"Description de l'Élément 1\"\n  },\n  {\n    \"nom\": \"Élément 2\",\n    \"description\": \"Description de l'Élément 2\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Afficher l'inventaire",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "2be08d39-9126-4803-aee7-a195e7270ef8",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "62e5e7ff-6962-4bcd-bc14-30b32e6216c8",
+      "type": "http",
+      "documentation": "Récupération des informations d'un explorateur",
+      "method": "get",
+      "endpoint": "explorers/:id",
+      "responses": [
+        {
+          "uuid": "319af7ed-8292-4a7c-acbd-72ab88309a42",
+          "body": "{\n  \"name\": \"test\",\n  \"surname\": \"test\",\n  \"username\": \"X\"\n  \"email\": \"abc@abc.com\",\n  \"inventory\": \n  {\n    \"inox\" : 0,\n    \"elements\":\n    [\n      {\n        \"name\" : \"\",\n        \"quantity\" : 0\n      }, \n      {\n        \n      }\n      //...\n    ]\n  },\n  \"allies\": \n  {\n    \"inox\" : 0,\n    \"elements\":\n    [\n      {\n        \"name\" : \"\",\n        \"quantity\" : 0\n      }, \n      {\n        \n      }\n      //...\n    ]\n  },\n  \"explorations\": \n  {\n    \"inox\" : 0,\n    \"elements\":\n    [\n      {\n        \"name\" : \"\",\n        \"quantity\" : 0\n      }, \n      {\n        \n      }\n      //...\n    ]\n  },\n  \"localisation\": \"Coordonnées GPS de la localisation\"  \n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Afficher l'information d'un explorateur",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "a117be88-53cf-40db-a320-b3e3f65a9668",
+          "body": "{\n  \"message\":\"Explorateur non retrouvé avec ce id\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Explorateur non retrouvé",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "77dadedf-a4b2-460c-be70-7b865241ca4c",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "9a6e39a8-fac5-43eb-9efb-800bfd81d212",
+      "type": "http",
+      "documentation": "Permet de voyager entre deux location (envoyer la key récupéré après le scan du code QR à la route de l'API de Yannick)",
+      "method": "post",
+      "endpoint": "explorations",
+      "responses": [
+        {
+          "uuid": "6a561f99-1306-45e6-9a8e-661868630e2f",
+          "body": "{\n\n    \"explorationDate\": \"2023-10-17T19:02:30.104Z\",\n\n    \"destination\": \"Apollo\",\n\n    \"affinity\": \"earth\",\n\n    \"vault\": {\n\n        \"inox\": 14,\n\n        \"elements\": [\n\n            {\n\n                \"element\": \"Ye\",\n\n                \"quantity\": 3\n\n            },\n\n            {\n\n                \"element\": \"E\",\n\n                \"quantity\": 5\n\n            },\n\n            {\n\n                \"element\": \"A\",\n\n                \"quantity\": 4\n\n            },\n\n            {\n\n                \"element\": \"Z\",\n\n                \"quantity\": 1\n\n            },\n\n            {\n\n                \"element\": \"Wu\",\n\n                \"quantity\": 9\n\n            }\n\n        ]\n\n    },\n\n    \"ally\": {\n\n        \"stats\": {\n\n            \"life\": 30,\n\n            \"speed\": 19,\n\n            \"power\": 9,\n\n            \"shield\": 3\n\n        },\n\n        \"crypto\": {\n\n            \"hash\": \"85c9d4977f3da576f1e19deaec2697a7592acdd5867909a7a4b4611de21d67da\",\n\n            \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMDQyNTkwM2ItM2E0OC00ODE1LTk1NzYtYjk1OWU2NjU5MmFlIiwiaGFzaCI6Ijg1YzlkNDk3N2YzZGE1NzZmMWUxOWRlYWVjMjY5N2E3NTkyYWNkZDU4Njc5MDlhN2E0YjQ2MTFkZTIxZDY3ZGEifQ.j-KTXO7cQIc9x1NK_L-czdQZz37q6g5guV6lsdocAj3w5u7PrWArwn5XN4gh1K7U08-wubxrpf7DnHyEmFFm4Q\"\n\n        },\n\n        \"books\": [\n\n            \"red\",\n\n            \"yellow\"\n\n        ],\n\n        \"kernel\": [\n\n            \"Ye\",\n\n            \"K\",\n\n            \"Wu\",\n\n            \"No\",\n\n            \"Xu\"\n\n        ],\n\n        \"archiveIndex\": 23,\n\n        \"name\": \"Vampire\",\n\n        \"uuid\": \"0425903b-3a48-4815-9576-b959e66592ae\",\n\n        \"affinity\": \"life\",\n\n        \"essence\": 94,\n\n        \"asset\": \"https://assets.andromia.science/allies/vampire.png\",\n\n        \"createdAt\": \"2023-10-17T19:02:30.109Z\",\n\n        \"updatedAt\": \"2023-10-17T19:02:30.109Z\",\n\n        \"href\": \"https://api.andromia.science/allies/0425903b-3a48-4815-9576-b959e66592ae\",\n\n        \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n\n    },\n    \n    \"chance\": 10,\n    \"bonus\": [\n      \"elements\": [\n              {\n                \"element\": \"Ye\",\n\n                \"quantity\": 3\n              }], \"inox\": 7]\n\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Voyage réussie",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "5fd24452-b2be-4103-809c-4f6f5f565469",
+          "body": "{\n  \"message\":\"Accès refusé\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Accès refusé",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "28781c40-857c-445c-8870-7847cc0c0bac",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2ce2de59-7599-4162-acc1-e255ab36a460",
+      "type": "http",
+      "documentation": "Retrouver et afficher les explorations d'un explorateur",
+      "method": "get",
+      "endpoint": "explorations",
+      "responses": [
+        {
+          "uuid": "727d9361-b377-4114-b79f-f5f855d130b3",
+          "body": "{\n  \"explorations\": [\n    {\n      \"explorationDate\": \"2023-10-15\",\n      \"destination\": \"asdsad\",\n      \"affinity\": \"tasdas\",\n      \"vault\" : \n      {\n        \"inox\" : 0,\n        \"elements\": [\n          {\n            \"element\" : \"\",\n            \"quantity\": 0,\n          },\n          {\n            \n          }\n        ]\n      },\n      \"ally\" : \n      {\n        \"stats\": {\n        \"life\": 21,\n        \"speed\": 9,\n        \"power\": 10,\n        \"shield\": 8\n        },\n        \"crypto\": {\n          \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n          \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n        },\n        \"books\": [\n          \"blue\",\n          \"purple\"\n        ],\n        \"kernel\": [\n          \"Ye\",\n          \"Ye\",\n          \"Ja\",\n          \"A\",\n          \"B\"\n        ],\n        \"archiveIndex\": 24,\n        \"name\": \"Viking\",\n        \"uuid\": \"19319a28-6757-4998-9d98-46298be55dcd\",\n        \"affinity\": \"space\",\n        \"essence\": 161,\n        \"asset\": \"https://assets.andromia.science/allies/viking.png\",\n        \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n        \"updatedAt\": \"2023-10-17T21:58:15.057Z\",\n        \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n        \"expireAt\": \"2023-10-24T00:00:00.000Z\"\n      }\n    },\n    {\n      \n    },\n    // ...\n  ]  \n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Explorations retrouvés",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8858407d-8693-47e6-a28f-91a9d4ad1619",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "f27a4b05-811c-4390-b2e3-393a958593ff",
+      "type": "http",
+      "documentation": "Récupération des users à partir d'un paramètre passé (trié par inox, nombre d'exploration, nombre de allies, etc.)",
+      "method": "get",
+      "endpoint": "leaderboard",
+      "responses": [
+        {
+          "uuid": "70a075fa-f346-4f72-bf1c-4a9e3e472106",
+          "body": "{\n  \"inox\": [{\"name\":\"myName\", \"value\": 7}],\n  \"allies\": [{\"name\":\"myName\", \"value\": 7}],\n  \"explorations\": [{\"name\":\"myName\", \"value\": 7}],\n  \"me\": { \n    \"inox\": {\"name\":\"myName\", \"value\": 7},\n    \"allies\": {\"name\":\"myName\", \"value\": 7},\n    \"explorations\": {\"name\":\"myName\", \"value\": 7}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Récupération réussi",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "5650ec49-3d79-4746-86ba-da22a93ece24",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "2f46825c-906c-4e17-badd-99f32c753c03"
+    },
+    {
+      "type": "route",
+      "uuid": "ab82a333-5d9d-486b-a9b9-948ae04742fb"
+    },
+    {
+      "type": "route",
+      "uuid": "84cbab51-0cfd-4c47-9a42-5ff29b898fdc"
+    },
+    {
+      "type": "route",
+      "uuid": "c0a160a4-4dd8-4ae1-9611-e38eefd49d9c"
+    },
+    {
+      "type": "route",
+      "uuid": "790af556-1f4e-4091-bc3a-fd5d78919b8e"
+    },
+    {
+      "type": "route",
+      "uuid": "4ee7746a-cf1d-4259-ada7-d6ac3227a445"
+    },
+    {
+      "type": "route",
+      "uuid": "62e5e7ff-6962-4bcd-bc14-30b32e6216c8"
+    },
+    {
+      "type": "route",
+      "uuid": "9a6e39a8-fac5-43eb-9efb-800bfd81d212"
+    },
+    {
+      "type": "route",
+      "uuid": "2ce2de59-7599-4162-acc1-e255ab36a460"
+    },
+    {
+      "type": "route",
+      "uuid": "f27a4b05-811c-4390-b2e3-393a958593ff"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}

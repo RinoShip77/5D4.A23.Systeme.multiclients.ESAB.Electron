@@ -14,9 +14,9 @@ const router = createRouter({
       component: () => import('@/views/pages/ElementsPage.vue')
     },
     {
-      path: '/scoreboard',
-      name: 'scoreboard',
-      component: () => import('@/views/pages/ScoreboardPage.vue')
+      path: '/leaderboard',
+      name: 'leaderboard',
+      component: () => import('@/views/pages/LeaderboardPage.vue')
     }
   ]
 });

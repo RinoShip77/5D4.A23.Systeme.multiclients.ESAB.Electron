@@ -199,9 +199,15 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
+import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
+import { Leaderboard } from '@/models/Leaderboard';
+
+const leaderboardRepository = new LeaderboardRepository();
+const leaderboard = ref<Leaderboard>();
 const isLoading = ref(true);
 
 onMounted(async () => {
+  leaderboard.value = await leaderboardRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
 })
 </script>

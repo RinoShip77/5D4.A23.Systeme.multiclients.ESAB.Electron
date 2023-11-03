@@ -11,7 +11,7 @@
       </button>
       <button class="nav-link" id="v-pills-scoreboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-scoreboard"
         type="button" role="tab" aria-controls="v-pills-scoreboard" aria-selected="false">
-        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'scoreboard' }">Tableau des scores</router-link>
+        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'leaderboard' }">Tableau des scores</router-link>
       </button>
     </div>
     <div class="tab-content border border-3 rounded-3 p-3 overflow-auto shadow-lg" style="width: 120rem; height: 45rem" id="v-pills-tabContent">

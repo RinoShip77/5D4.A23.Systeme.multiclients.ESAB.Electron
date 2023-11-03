@@ -212,6 +212,7 @@
   </DefaultLayout>
 
   <!-- Modal for the details of one Ally -->
+  <!-- TODO: Complete the modal -->
   <div class="modal fade" id="AllyModal" tabindex="-1" aria-labelledby="AllyModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
       <div class="modal-content">
@@ -305,7 +306,7 @@ const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>([]);
 const ally = ref<Ally>();
 const isLoading = ref(true);
-const idAlly = '19319a28-6757-4998-9d98-46298be55dcd';
+const idAlly = '1';
 
 onMounted(async () => {
   allies.value = await allyRepository.retrieveAll();

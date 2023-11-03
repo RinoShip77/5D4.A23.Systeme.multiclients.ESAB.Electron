@@ -43,13 +43,13 @@
     </div>
     <div class="col-12" v-else>
       <div class="row row-cols-5 g-2">
-        <div class="col my-2" v-for="ally of allies">
+        <div class="col my-2" v-for="element of elements">
           <div class="card">
             <div class="text-center">
-              <h4>{{ ally.name }}</h4>
+              <h4>{{ element.name }}</h4>
             </div>
             <div class="text-center card-body">
-              <img :src="ally.icon">
+              <img :src="element.icon">
             </div>
           </div>
         </div>
@@ -61,15 +61,15 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { AllyRepository } from '@/repositories/AllyRepository';
-import { Ally } from '@/models/Ally';
+import { ElementRepository } from '@/repositories/ElementRepository';
+import { Element } from '@/models/Element';
 
-const allyRepository = new AllyRepository();
-const allies = ref<Ally[]>([]);
+const elementRepository = new ElementRepository();
+const elements = ref<Element[]>([]);
 const isLoading = ref(true);
 
 onMounted(async () => {
-  allies.value = await allyRepository.retrieveAll();
+  elements.value = await elementRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
 })
 </script>
