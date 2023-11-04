@@ -41,26 +41,24 @@
         </g>
       </svg>
     </div>
-    <div class="col-12" v-else>
-      <div class="row row-cols-5 g-2">
+    <div class="col-12 mt-5" v-else>
+      <div class="row row-cols-6 g-4">
         <div class="col my-2" v-for="element of elements">
-          <div class="card">
-            <div class="card-header">
+          <div class="card border-3 border-secondary-subtle shadow-lg">
+            <div class="card-header bg-body-secondary">
               <h4>{{ element.name }}</h4>
             </div>
+            <p class="fw-bold text-decoration-underline">{{ element.symbol }}</p>
             <div class="card-body">
-              <p>{{ element.symbol }}</p>
-              <div class="border-secondary-subtle">
-                <img :src="element.url" class="img-fluid">
-              </div>
-              <div class="d-flex justify-content-between">
-                <div class="d-flex justify-content-around">
-                  <div class="d-flex">
-                    <p>{{ element.stock }}</p>
-                  </div>
-                  <div class="d-flex">
-                    <p>{{ element.price }}</p>
-                  </div>
+              <img :src="element.url" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
+              <div class="d-flex justify-content-around mt-3">
+                <div class="d-flex align-items-center" title="Quantity in stock">
+                  <h4>{{ element.stock }}</h4>
+                  <i class="fas fa-cart-flatbed-suitcase ms-2 fs-4"></i>
+                </div>
+                <div class="d-flex align-items-center" title="Current price">
+                  <h4>{{ element.price }}</h4>
+                  <i class="fas fa-circle-dollar-to-slot ms-2 fs-4"></i>
                 </div>
               </div>
             </div>

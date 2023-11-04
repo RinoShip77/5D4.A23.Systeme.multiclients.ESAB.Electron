@@ -167,18 +167,17 @@
         </circle>
       </svg>
     </div>
-    <div class="col-12" v-else>
-      <div class="row row-cols-6 g-2">
+    <div class="col-12 mt-5" v-else>
+      <div class="row row-cols-6 g-4">
         <div class="col my-2" v-for="ally of allies">
-          <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally.uuid)">
-            <div class="card-header">
+          <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
+            data-bs-target="#allyModal" @click="openModal(ally.uuid)">
+            <div class="card-header bg-body-secondary">
               <h4>{{ ally.name }}</h4>
             </div>
             <div class="card-body">
-              <div class="border-secondary-subtle border-5 border-bottom rounded-5">
-                <img :src="ally.asset" class="img-fluid">
-              </div>
-              <div class="d-flex justify-content-between">
+              <img :src="ally.asset" class="img-fluid bg-light rounded-circle shadow-lg">
+              <div class="d-flex justify-content-between mt-3">
                 <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4">
                 <img :src="`/src/assets/affinities/${ally.affinity}.svg`" class="img-fluid w-25 h-25">
                 <img :src="`/src/assets/books/${ally.books[1]}.png`" class="img-fluid w-25 mt-4">
@@ -210,25 +209,25 @@
 
   <!-- Modal for the details of one Ally -->
   <!-- TODO: Complete the modal -->
-  <div class="modal fade" id="allyModal" tabindex="-1" aria-labelledby="allyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md">
+  <div class="modal fade" id="allyModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="card h-100 p-2">
-          <div class="d-flex">
-            <img :src="ally?.asset" class="img-fluid img-thumbnail m-1" alt="{{ ally.name }}" title="{{ ally.name }}">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h2 class="card-title">{{ ally?.name }}</h2>
-                <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <img :src="ally?.asset" alt="{{ ally.name }}" title="{{ ally.name }}"
+              class="img-fluid img-thumbnail w-50 m-1">
+            <div class="d-flex flex-column m-1">
+              <div class="d-flex justify-content-between mx-5 my-2 mt-3">
+                <h2 class="text-decoration-underline fw-bold">{{ ally?.name }}</h2>
+                <div class="d-flex flex-column text-center">
                   <h3>Date de capture:</h3>
                   <span
-                    class="border border-2 border-black rounded-3 opacity-50 px-2 text-decoration-underline fs-5 text-center w-75">
-                    JJ/MM/AAAA
-                    {{ ally?.createdAt }}
+                    class="border border-2 border-black rounded-3 opacity-50 px-2 text-decoration-underline fs-5 text-center">
+                    {{ ally?.createdAt.toString().split('T')[0] }}
                   </span>
                 </div>
               </div>
-              <div class="d-flex">
+              <div class="d-flex mx-3 my-3">
                 <div class="d-flex flex-column fs-4">
                   <div class="d-flex">
                     <img src="@/assets/ui/power.png" class="img-fluid w-25">
@@ -248,40 +247,32 @@
                   </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <img src="@/assets/books/yellow.png" class="img-fluid w-25 mt-5">
-                  <img src="@/assets/affinities/air.svg" class="img-fluid w-25">
-                  <img src="@/assets/books/blue.png" class="img-fluid w-25 mt-5">
+                  <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-25 mt-5">
+                  <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-25 mb-5">
+                  <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-25 mt-5">
                 </div>
               </div>
-              <div id="carouselAllyIndicators" class="carousel slide">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselAllyIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselAllyIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselAllyIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                </div>
+              <div id="carouselAllyIndicators" class="carousel slide mt-3">
                 <div class="bg-dark-subtle bg-gradient rounded-5 z-0">
                   <div class="z-1 carousel-inner mx-auto my-2 p-5 text-center">
-                    <div class="carousel-item active">
-                      <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStMfuAMQJ3blS1M379TuqzpRzcqooBbkYVsQ&usqp=CAU"
-                        class="carousel" alt="Element name">
+                    <div class="carousel-item active text-center">
+                      <img :src="`/src/assets/elements/element_${ally?.kernel[0]}.png`" class="carousel">
+                      <h3>{{ ally?.kernel[0] }}</h3>
                     </div>
-                    <div class="carousel-item">
-                      <img src="https://image.pngaaa.com/700/5273700-middle.png" class="carousel" alt="Element name">
+                    <div class="carousel-item text-center" v-for="kernel of ally?.kernel.slice(1)">
+                      <img :src="`/src/assets/elements/element_${kernel}.png`" class="carousel">
+                      <h3>{{ kernel }}</h3>
                     </div>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselAllyIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <span class="visually-hidden">Précédent</span>
                   </button>
                   <button class="carousel-control-next" type="button" data-bs-target="#carouselAllyIndicators"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                    <span class="visually-hidden">Suivant</span>
                   </button>
                 </div>
               </div>
