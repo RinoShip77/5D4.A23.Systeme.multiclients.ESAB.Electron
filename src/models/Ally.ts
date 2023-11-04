@@ -1,4 +1,5 @@
 export interface Ally {
+  uuid: string,
   name: string,
   asset: string,
   stats: {

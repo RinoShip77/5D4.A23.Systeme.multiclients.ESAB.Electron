@@ -168,42 +168,39 @@
       </svg>
     </div>
     <div class="col-12" v-else>
-      <div class="row row-cols-4 g-2">
+      <div class="row row-cols-6 g-2">
         <div class="col my-2" v-for="ally of allies">
-          <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#AllyModal">
+          <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally.uuid)">
             <div class="card-header">
               <h4>{{ ally.name }}</h4>
             </div>
             <div class="card-body">
-              <div class="border-3 border-bottom rounded-pill">
-                <img :src="ally.asset" class="img-fluid w-75">
+              <div class="border-secondary-subtle border-5 border-bottom rounded-5">
+                <img :src="ally.asset" class="img-fluid">
               </div>
               <div class="d-flex justify-content-between">
-                <img src="../../assets/books/yellow.png" class="img-fluid w-25 mt-5">
-                <img src="../../assets/affinities/air.svg" class="img-fluid w-25">
-                <img src="../../assets/books/blue.png" class="img-fluid w-25 mt-5">
+                <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4">
+                <img :src="`/src/assets/affinities/${ally.affinity}.svg`" class="img-fluid w-25 h-25">
+                <img :src="`/src/assets/books/${ally.books[1]}.png`" class="img-fluid w-25 mt-4">
               </div>
               <div class="d-flex justify-content-around border-top mt-3 pt-3">
                 <div class="d-flex flex-column">
-                  <img src="../../assets/ui/power.png" class="img-fluid" width="25">
+                  <img src="@/assets/ui/power.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.power }}</p>
                 </div>
                 <div class="d-flex flex-column">
-                  <img src="../../assets/ui/speed.png" class="img-fluid" width="25">
+                  <img src="@/assets/ui/speed.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.speed }}</p>
                 </div>
                 <div class="d-flex flex-column">
-                  <img src="../../assets/ui/shield.png" class="img-fluid" width="25">
+                  <img src="@/assets/ui/shield.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.shield }}</p>
                 </div>
                 <div class="d-flex flex-column">
-                  <img src="../../assets/ui/life.png" class="img-fluid" width="25">
+                  <img src="@/assets/ui/life.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.life }}</p>
                 </div>
               </div>
-            </div>
-            <div class="card-footer">
-              <h6>{{ ally.archiveIndex }}</h6>
             </div>
           </div>
         </div>
@@ -213,7 +210,7 @@
 
   <!-- Modal for the details of one Ally -->
   <!-- TODO: Complete the modal -->
-  <div class="modal fade" id="AllyModal" tabindex="-1" aria-labelledby="AllyModalLabel" aria-hidden="true">
+  <div class="modal fade" id="allyModal" tabindex="-1" aria-labelledby="allyModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
       <div class="modal-content">
         <div class="card h-100 p-2">
@@ -234,26 +231,26 @@
               <div class="d-flex">
                 <div class="d-flex flex-column fs-4">
                   <div class="d-flex">
-                    <img src="../../assets/ui/power.png" class="img-fluid w-25">
+                    <img src="@/assets/ui/power.png" class="img-fluid w-25">
                     <h5 class="ms-2">{{ ally?.stats.power }}</h5>
                   </div>
                   <div class="d-flex">
-                    <img src="../../assets/ui/speed.png" class="img-fluid w-25">
+                    <img src="@/assets/ui/speed.png" class="img-fluid w-25">
                     <h5 class="ms-2">{{ ally?.stats.speed }}</h5>
                   </div>
                   <div class="d-flex">
-                    <img src="../../assets/ui/shield.png" class="img-fluid w-25">
+                    <img src="@/assets/ui/shield.png" class="img-fluid w-25">
                     <h5 class="ms-2">{{ ally?.stats.shield }}</h5>
                   </div>
                   <div class="d-flex">
-                    <img src="../../assets/ui/life.png" class="img-fluid w-25">
+                    <img src="@/assets/ui/life.png" class="img-fluid w-25">
                     <h5 class="ms-2">{{ ally?.stats.life }}</h5>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <img src="../../assets/books/yellow.png" class="img-fluid w-25 mt-5">
-                  <img src="../../assets/affinities/air.svg" class="img-fluid w-25">
-                  <img src="../../assets/books/blue.png" class="img-fluid w-25 mt-5">
+                  <img src="@/assets/books/yellow.png" class="img-fluid w-25 mt-5">
+                  <img src="@/assets/affinities/air.svg" class="img-fluid w-25">
+                  <img src="@/assets/books/blue.png" class="img-fluid w-25 mt-5">
                 </div>
               </div>
               <div id="carouselAllyIndicators" class="carousel slide">
@@ -272,7 +269,7 @@
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStMfuAMQJ3blS1M379TuqzpRzcqooBbkYVsQ&usqp=CAU"
                         class="carousel" alt="Element name">
                     </div>
-                    <div class="carousel-item active">
+                    <div class="carousel-item">
                       <img src="https://image.pngaaa.com/700/5273700-middle.png" class="carousel" alt="Element name">
                     </div>
                   </div>
@@ -306,13 +303,15 @@ const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>([]);
 const ally = ref<Ally>();
 const isLoading = ref(true);
-const idAlly = '1';
 
 onMounted(async () => {
-  allies.value = await allyRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
-  ally.value = await allyRepository.retrieveOne(idAlly);
+  allies.value = await allyRepository.retrieveAll();
 })
+
+async function openModal(idAlly: string) {
+  ally.value = await allyRepository.retrieveOne(idAlly);
+}
 </script>
 
 <style scoped>

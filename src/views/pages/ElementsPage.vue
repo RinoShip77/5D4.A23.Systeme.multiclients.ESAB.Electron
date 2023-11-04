@@ -45,11 +45,24 @@
       <div class="row row-cols-5 g-2">
         <div class="col my-2" v-for="element of elements">
           <div class="card">
-            <div class="text-center">
+            <div class="card-header">
               <h4>{{ element.name }}</h4>
             </div>
-            <div class="text-center card-body">
-              <img :src="element.icon">
+            <div class="card-body">
+              <p>{{ element.symbol }}</p>
+              <div class="border-secondary-subtle">
+                <img :src="element.url" class="img-fluid">
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-around">
+                  <div class="d-flex">
+                    <p>{{ element.stock }}</p>
+                  </div>
+                  <div class="d-flex">
+                    <p>{{ element.price }}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

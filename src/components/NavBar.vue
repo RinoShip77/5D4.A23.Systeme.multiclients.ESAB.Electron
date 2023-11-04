@@ -28,12 +28,15 @@
                 </div>
               </div>
             </div>
-            <div class="bg-light d-flex rounded-5 px-5 py-3">
-              <div class="d-flex align-items-center me-4">
-                <span class="placeholder">Inox total</span>
-                <i class="fas fa-sack-dollar ms-2 fs-1"></i>
+            <div class="d-flex justify-content-between align-items-center bg-light rounded-4 px-5 py-2">
+              <div class="d-flex flex-column text-center mt-2 me-2">
+                <i class="fas fa-sack-dollar fs-1"></i>
+                <div title="Inox total">
+                  <span class="placeholder">Inox total</span>
+                  <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="50">
+                </div>
               </div>
-              <div class="d-flex text-center flex-column ms-4">
+              <div class="d-flex flex-column text-center ms-2">
                 <i class="fas fa-map-location-dot fs-1"></i>
                 <span class="placeholder mt-2">Location</span>
               </div>
