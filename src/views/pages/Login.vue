@@ -13,6 +13,7 @@
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
 
                         </form>
+                        <router-link :to="{ name: 'allies' }">Tricher</router-link>
                         <div class="my-5 text-center">
                             <p>Vous êtes un citoyen et voulez être un explorateur?<br>
                                 <router-link :to="{ name: 'accountCreation' }">Créer un compte</router-link>
@@ -29,6 +30,15 @@
 
 <script setup lang="ts">
 import InitialLayout from '../layouts/InitialLayout.vue';
+import { ref } from 'vue';
+
+const username = ref("");
+const passwd = ref("");
+
+
+function login() {
+
+}
 </script>
 
 //TODO: Make the style for the page.
