@@ -211,11 +211,11 @@
   <!-- TODO: Complete the modal -->
   <div class="modal fade" id="allyModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content">
-        <div class="card h-100 p-2">
+      <div class="modal-content bg-transparent border-0">
+        <div class="card h-100 p-2 rounded-5">
           <div class="d-flex justify-content-between">
             <img :src="ally?.asset" alt="{{ ally.name }}" title="{{ ally.name }}"
-              class="img-fluid img-thumbnail w-50 m-1">
+              class="img-fluid img-thumbnail rounded-5 w-50 m-1">
             <div class="d-flex flex-column m-1">
               <div class="d-flex justify-content-between mx-5 my-2 mt-3">
                 <h2 class="text-decoration-underline fw-bold">{{ ally?.name }}</h2>
