@@ -5,6 +5,18 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'homepage',
+      component: () => import('@/views/pages/HomePage.vue')
+    }, {
+      path: '/createAccount',
+      name: 'accountCreation',
+      component: () => import('@/views/pages/AccountCreation.vue')
+    }, {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/pages/Login.vue')
+    }, {
+      path: '/',
       name: 'allies',
       component: () => import('@/views/pages/AlliesPage.vue')
     },
@@ -14,8 +26,8 @@ const router = createRouter({
       component: () => import('@/views/pages/ElementsPage.vue')
     },
     {
-      path: '/leaderboard',
-      name: 'leaderboard',
+      path: '/scoreboard',
+      name: 'scoreboard',
       component: () => import('@/views/pages/LeaderboardPage.vue')
     }
   ]
