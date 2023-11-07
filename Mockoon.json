@@ -219,7 +219,7 @@
       "type": "http",
       "documentation": "Permet d'afficher les détails d'un ally",
       "method": "get",
-      "endpoint": "allies/1",
+      "endpoint": "allies/:id",
       "responses": [
         {
           "uuid": "b2415499-c59e-496d-8bde-21614d06805b",

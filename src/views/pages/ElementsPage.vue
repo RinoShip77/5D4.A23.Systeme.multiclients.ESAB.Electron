@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline">Mes Elements</h1>
+    <h1 class="my-3 text-decoration-underline title">Mes Elements</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -42,7 +42,7 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
-      <div class="row row-cols-6 g-4">
+      <div class="row row-cols-6 g-4 content">
         <div class="col my-2" v-for="element of elements">
           <div class="card border-3 border-secondary-subtle shadow-lg">
             <div class="card-header bg-body-secondary">
@@ -51,14 +51,14 @@
             <p class="fw-bold text-decoration-underline">{{ element.symbol }}</p>
             <div class="card-body">
               <img :src="element.url" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
-              <div class="d-flex justify-content-around mt-3">
+              <div class="d-flex justify-content-between mt-3">
                 <div class="d-flex align-items-center" title="Quantity in stock">
-                  <h4>{{ element.stock }}</h4>
-                  <i class="fas fa-cart-flatbed-suitcase ms-2 fs-4"></i>
+                  <h5>{{ element.stock }}</h5>
+                  <i class="fas fa-cart-flatbed-suitcase ms-2 fs-5"></i>
                 </div>
                 <div class="d-flex align-items-center" title="Current price">
-                  <h4>{{ element.price }}</h4>
-                  <i class="fas fa-circle-dollar-to-slot ms-2 fs-4"></i>
+                  <h5>{{ element.price }}</h5>
+                  <i class="fas fa-circle-dollar-to-slot ms-2 fs-5"></i>
                 </div>
               </div>
             </div>
@@ -86,6 +86,16 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
+
+.title {
+  font-family: 'Oswald', sans-serif;
+}
+
+.content {
+  font-family: 'Ubuntu', sans-serif;
+}
+
 img {
   width: 125px;
   height: auto
