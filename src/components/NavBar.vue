@@ -16,7 +16,7 @@
               <!-- <div class="display-3">
                 <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
               </div> -->
-              <router-link class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold" :to="{ name: 'login'}">
+              <router-link class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold" :to="{ name: 'allies'}">
                 Se déconnecter
               </router-link>
               <div class="nav-link mx-2">

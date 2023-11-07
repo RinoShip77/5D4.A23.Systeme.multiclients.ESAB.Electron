@@ -14,7 +14,7 @@
         <router-link class="navbar-brand" :to="{ name: 'leaderboard' }">Tableau des scores</router-link>
       </button>
     </div>
-    <div class="tab-content border border-3 rounded-3 p-3 overflow-auto shadow-lg" style="width: 120rem; height: 45rem" id="v-pills-tabContent">
+    <div class="tab-content border border-3 rounded-3 p-3 overflow-auto shadow-lg" style="width: 120rem; height: 50rem" id="v-pills-tabContent">
       <div class="tab-pane fade show active text-center" id="v-pills-allies" role="tabpanel" aria-labelledby="v-pills-allies-tab" tabindex="0">
         <slot></slot>
       </div>
