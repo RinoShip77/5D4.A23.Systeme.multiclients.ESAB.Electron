@@ -4,7 +4,7 @@
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
           <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid" width="100">
-          <span class="placeholder col-10 ms-2">Title</span>
+          <h1 class="ms-2">Andromia Technologies</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
