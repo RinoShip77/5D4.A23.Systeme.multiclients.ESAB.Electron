@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline title">Tableau des scores</h1>
+    <h1 class="my-3 text-decoration-underline">Tableau des scores</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(255, 255, 255, 0); display: block;" width="200px" height="200px"
@@ -30,7 +30,7 @@
       </svg>
     </div>
     <div class="col-12" v-else>
-      <div class="table-responsive content">
+      <div class="table-responsive">
         <table class="table">
           <thead class="table-light">
             <th scope="col">#</th>
@@ -212,14 +212,4 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
-</style>
+<style scoped></style>

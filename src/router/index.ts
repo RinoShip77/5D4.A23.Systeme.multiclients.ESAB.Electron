@@ -16,7 +16,7 @@ const router = createRouter({
       name: 'login',
       component: () => import('@/views/pages/Login.vue')
     }, {
-      path: '/',
+      path: '/allies',
       name: 'allies',
       component: () => import('@/views/pages/AlliesPage.vue')
     },
