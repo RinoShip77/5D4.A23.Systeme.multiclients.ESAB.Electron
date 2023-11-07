@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md bg-secondary bg-gradient">
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
-          <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid" width="100">
+          <img src="../../public/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid" width="100">
           <h1 class="ms-2">Andromia Technologies</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
