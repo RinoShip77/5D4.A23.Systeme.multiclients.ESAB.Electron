@@ -4,7 +4,7 @@
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
           <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid" width="100">
-          <span class="placeholder col-10 ms-2">Title</span>
+          <h1 class="ms-2">Andromia Technologies</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,9 +16,9 @@
               <!-- <div class="display-3">
                 <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
               </div> -->
-              <button class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold">
+              <router-link class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold" :to="{ name: 'login'}">
                 Se déconnecter
-              </button>
+              </router-link>
               <div class="nav-link mx-2">
                 <img src="https://ui-avatars.com/api/?name=Firstname+Lastname&rounded=true&size=80">
                 <div style="margin-top: -1em; margin-left: 3.5em">

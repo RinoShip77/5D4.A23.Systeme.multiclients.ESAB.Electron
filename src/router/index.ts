@@ -5,6 +5,21 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+<<<<<<< Updated upstream
+=======
+      name: 'homepage',
+      component: () => import('@/views/pages/HomePage.vue')
+    }, {
+      path: '/createAccount',
+      name: 'accountCreation',
+      component: () => import('@/views/pages/AccountCreation.vue')
+    }, {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/pages/Login.vue')
+    }, {
+      path: '/allies',
+>>>>>>> Stashed changes
       name: 'allies',
       component: () => import('@/views/pages/AlliesPage.vue')
     },
