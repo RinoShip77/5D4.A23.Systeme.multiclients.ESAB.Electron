@@ -5,8 +5,6 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-<<<<<<< Updated upstream
-=======
       name: 'homepage',
       component: () => import('@/views/pages/HomePage.vue')
     }, {
@@ -19,7 +17,6 @@ const router = createRouter({
       component: () => import('@/views/pages/Login.vue')
     }, {
       path: '/allies',
->>>>>>> Stashed changes
       name: 'allies',
       component: () => import('@/views/pages/AlliesPage.vue')
     },
