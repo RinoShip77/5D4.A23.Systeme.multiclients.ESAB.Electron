@@ -16,9 +16,9 @@
               <!-- <div class="display-3">
                 <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
                </div> -->
-              <button class="btn btn-danger rounded-3 mt-1 px-5 fs-4 text-uppercase fw-bold">
-                <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'homepage' }">Se déconnecter</router-link>
-              </button>
+              <router-link class="btn btn-danger rounded-3 mt-1 px-5 text-uppercase fw-bold" :to="{ name: 'homepage' }">
+                Se déconnecter
+              </router-link>
               <div class="nav-link mx-2">
                 <img src="https://ui-avatars.com/api/?name=Firstname+Lastname&rounded=true&size=80">
                 <div style="margin-top: -1em; margin-left: 3.5em">
@@ -28,14 +28,17 @@
                 </div>
               </div>
             </div>
-            <div class="bg-light d-flex rounded-5 px-5 py-3">
-              <div class="d-flex align-items-center me-4">
-                <span class="placeholder">Inox total</span>
-                <i class="fas fa-sack-dollar ms-2 fs-1"></i>
+            <div class="d-flex justify-content-between align-items-center bg-light rounded-4 px-5 py-2">
+              <div class="d-flex flex-column text-center mt-2 me-2">
+                <i class="fas fa-sack-dollar fs-1"></i>
+                <div title="Inox total">
+                  <span class="stats">99,99</span>
+                  <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="50">
+                </div>
               </div>
-              <div class="d-flex text-center flex-column ms-4">
+              <div class="d-flex flex-column text-center ms-2">
                 <i class="fas fa-map-location-dot fs-1"></i>
-                <span class="placeholder mt-2">Location</span>
+                <span class="stats mt-2">50</span>
               </div>
             </div>
           </div>
@@ -46,7 +49,18 @@
 </template>
 
 <script setup lang="ts">
-
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Kenia&family=Play:wght@700&display=swap');
+
+.title {
+  font-family: 'Play', sans-serif;
+  margin-left: .25em;
+}
+
+.stats {
+  font-family: 'Kenia', sans-serif;
+  font-size: 1.5em;
+}
+</style>
