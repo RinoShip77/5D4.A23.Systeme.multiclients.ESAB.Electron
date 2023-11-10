@@ -38,6 +38,8 @@ const userRepository = new UserRepository();
 const username = ref<string>("");
 const password = ref<string>("");
 
+var navigationAllowed = false;
+
 async function login() {
     //TODO: Sprint 2: Corriger l'erreure suivante: La première tentative de connexion échoue toujours après avoir démarré l'application.
     // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
@@ -46,13 +48,18 @@ async function login() {
     //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
         const response = await userRepository.login(username.value, password.value);
-        console.log('Connexion réussie!', response);
-        //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur connecté.
+        if (response != null) {
+            console.log('Connexion réussie!', response);
+            //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur connecté.
 
-        //Navigation
-        router.push({ name: 'homepage' });
+            navigationAllowed = true;
+        }
     } catch (err) {
         console.error('Erreur de connexion', err);
+    }
+    //Navigation
+    if (navigationAllowed) {
+        router.push({ name: 'homepage' });
     }
 }
 </script>

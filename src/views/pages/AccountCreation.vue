@@ -46,7 +46,7 @@ const username = ref<string>("");
 const password = ref<string>("");
 const repeatPassword = ref<string>("");
 
-
+var navigationAllowed = false;
 
 async function createAccount() {
     //TODO: Sprint 2: Corriger l'erreure suivante: La première tentative de création échoue toujours après avoir démarré l'application.
@@ -57,16 +57,22 @@ async function createAccount() {
     try {
         if (password.value === repeatPassword.value) {
             const response = await userRepository.CreateAccount(email.value, username.value, password.value,);
-            console.log('Compte créé avec succès!', response);
-            //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur créé.
+            if (response != null) {
+                console.log('Compte créé avec succès!', response);
 
-            //Navigation
-            router.push({ name: 'homepage' });
+                //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur créé.
+
+                navigationAllowed = true;
+            }
         } else (
             console.log("Les mots de passe ne sont pas les mêmes:" + password.value + ' != ' + repeatPassword.value)
         )
     } catch (err) {
         console.error('Erreur lors de la création du compte', err);
+    }
+    //Navigation
+    if (navigationAllowed) {
+        router.push({ name: 'homepage' });
     }
 }
 
