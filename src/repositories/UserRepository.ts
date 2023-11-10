@@ -5,31 +5,40 @@ export class UserRepository {
     axios = inject('axios') as AxiosStatic;
 
     public async login(user: string, password: string) {
-
-        const data = {
-            username: user,
-            password: password,
-        };
-
-        return this.axios.post('http://localhost:3001/connexion', data);
-    }
-    /*public async CreateAccount() {
-
-        const data = {
-            username: user,
-            password: password,
-            email: email,
-
-        };
-
         try {
-            const res = await this.axios.post('http://localhost:3001/explorers', data);
+            const data = {
+                username: user,
+                password: password
+            };
 
-            if (res.status === 201) {
-                return res;
+            const response = await this.axios.post('http://localhost:3001/connexion', data);
+            if (response.status === 200) {
+                return response.data
             }
         } catch (err) {
-            throw err;
+            console.error('Erreur de connexion', err);
         }
-    }*/
+
+
+    }
+    public async CreateAccount(email: string, user: string, password: string) {
+
+        try {
+            const data = {
+                email: email,
+                username: user,
+                password: password
+            };
+            const response = await this.axios.post('http://localhost:3001/explorers', data);
+            if (response.status === 201) {
+                return response.data
+            }
+        } catch (err) {
+            console.error('Erreur de connexion', err);
+        }
+
+
+
+
+    }
 }

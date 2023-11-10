@@ -6,16 +6,18 @@
                 <h2 class="text-center mx-2 my-2 mt-5">Création de compte</h2>
                 <div class="d-flex justify-content-center">
                     <div class="col-4 mx-2 my-2">
-                        <form class="form" action="" method="post">
+                        <form class="form">
                             <label for="email" class="form-label">Adresse courrielle</label>
-                            <input type="email" class="form-control" name="email" required>
+                            <input v-model="email" type="email" class="form-control" name="email" required>
                             <label for="username" class="form-label">Nom d'utilisateur</label>
-                            <input type="text" class="form-control" name="username" required>
+                            <input v-model="username" type="text" class="form-control" name="username" required>
                             <label for="password" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" name="password" required>
+                            <input v-model="password" type="password" class="form-control" name="password" required>
                             <label for="repeatpassword" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" name="repeatpassword" required>
-                            <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
+                            <input v-model="repeatPassword" type="password" class="form-control" name="repeatpassword"
+                                required>
+                            <button class="form-control btn btn-primary my-4" @click="createAccount">Créer un
+                                compte</button>
 
                         </form>
                         <div class="my-5 text-center">
@@ -34,6 +36,42 @@
 
 <script setup lang="ts">
 import InitialLayout from '../layouts/InitialLayout.vue';
+import { ref } from 'vue';
+import { UserRepository } from '@/repositories/UserRepository';
+import router from "@/router";
+
+const userRepository = new UserRepository();
+const email = ref<string>("");
+const username = ref<string>("");
+const password = ref<string>("");
+const repeatPassword = ref<string>("");
+
+
+
+async function createAccount() {
+    //TODO: Sprint 2: Corriger l'erreure suivante: La première tentative de création échoue toujours après avoir démarré l'application.
+    // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
+    // Cette erreure se produit aussi quand l'on navigue de la page de connexion a celle de création de compte et vice-versa.
+
+    //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
+    try {
+        if (password.value === repeatPassword.value) {
+            const response = await userRepository.CreateAccount(email.value, username.value, password.value,);
+            console.log('Compte créé avec succès!', response);
+            //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur créé.
+
+            //Navigation
+            router.push({ name: 'homepage' });
+        } else (
+            console.log("Les mots de passe ne sont pas les mêmes:" + password.value + ' != ' + repeatPassword.value)
+        )
+    } catch (err) {
+        console.error('Erreur lors de la création du compte', err);
+    }
+}
+
+
+
 </script>
 
 //TODO: Make the style for the page.

@@ -5,7 +5,7 @@
                 <h1 class="text-center mx-2 my-2 mt-5">Andromia Technologies</h1>
                 <div class="d-flex justify-content-center">
                     <div class="col-4 mx-2 my-2">
-                        <form class="form" @submit="login()" method="post">
+                        <form class="form" @submit="login()">
                             <label for="username" class="form-label">Nom d'utilisateur</label>
                             <input v-model="username" class="form-control" id="username" required>
                             <label for="password" class="form-label">Mot de passe</label>
@@ -39,19 +39,21 @@ const username = ref<string>("");
 const password = ref<string>("");
 
 async function login() {
-    userRepository.login(username.value, password.value).then((response) => {
+    //TODO: Sprint 2: Corriger l'erreure suivante: La première tentative de connexion échoue toujours après avoir démarré l'application.
+    // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
+    // Cette erreure se produit aussi quand l'on navigue de la page de connexion a celle de création de compte et vice-versa.
+
+    //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
+    try {
+        const response = await userRepository.login(username.value, password.value);
         console.log('Connexion réussie!', response);
-        //TODO: ajouter token au user
+        //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur connecté.
 
         //Navigation
-        router.push('/');
-    }).catch((err) => {
+        router.push({ name: 'homepage' });
+    } catch (err) {
         console.error('Erreur de connexion', err);
-        router.push('/login');
-    })
-
-
-
+    }
 }
 </script>
 
