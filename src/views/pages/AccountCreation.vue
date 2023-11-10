@@ -49,7 +49,7 @@ const repeatPassword = ref<string>("");
 var navigationAllowed = false;
 
 async function createAccount() {
-    //TODO: Sprint 2: Corriger l'erreure suivante: La première tentative de création échoue toujours après avoir démarré l'application.
+    //TODO: Sprint 2: Corriger l'erreur suivante: La première tentative de création échoue toujours après avoir démarré l'application.
     // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
     // Cette erreure se produit aussi quand l'on navigue de la page de connexion a celle de création de compte et vice-versa.
 
