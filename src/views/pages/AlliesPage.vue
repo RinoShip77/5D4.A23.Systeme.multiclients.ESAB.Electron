@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline title">Mes Allies</h1>
+    <h1 class="my-3 text-decoration-underline">Mes Allies</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -168,7 +168,7 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
-      <div class="row row-cols-6 g-4 content">
+      <div class="row row-cols-6 g-4">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
             data-bs-target="#allyModal" @click="openModal(ally.uuid)">
@@ -209,7 +209,7 @@
 
   <!-- Modal for the details of one Ally -->
   <!-- TODO: Complete the modal -->
-  <div class="modal fade content" id="allyModal" tabindex="-1">
+  <div class="modal fade" id="allyModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content bg-transparent border-0">
         <div class="card h-100 p-2 rounded-5">
@@ -306,15 +306,6 @@ async function openModal(idAlly: string) {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
 img.carousel {
   width: 100px;
   height: auto
