@@ -41,4 +41,15 @@ export class UserRepository {
 
 
     }
+
+    public async disconnect() {
+        try {
+            const response = await this.axios.post('http://localhost:3001/deconnexion');
+            if (response.status === 200) {
+                return response.data
+            }
+        } catch (err) {
+            console.error('Erreur de connexion', err);
+        }
+    }
 }

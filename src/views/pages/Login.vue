@@ -13,7 +13,7 @@
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
 
                         </form>
-                        <router-link :to="{ name: 'homepage' }">Tricher</router-link>
+                        <router-link :to="{ name: 'allies' }">Tricher</router-link>
                         <div class="my-5 text-center">
                             <p>Vous êtes un citoyen et voulez être un explorateur?<br>
                                 <router-link :to="{ name: 'accountCreation' }">Créer un compte</router-link>
@@ -59,7 +59,7 @@ async function login() {
     }
     //Navigation
     if (navigationAllowed) {
-        router.push({ name: 'homepage' });
+        router.push({ name: 'allies' });
     }
 }
 </script>

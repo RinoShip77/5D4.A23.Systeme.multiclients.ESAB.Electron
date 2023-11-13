@@ -17,9 +17,9 @@
               <!-- <div class="display-3">
                 <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
               </div> -->
-              <router-link class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold" :to="{ name: 'login' }">
+              <button class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold" @click="disconnect()">
                  Se déconnecter
-                </router-link>
+              </button>
               <div class="nav-link mx-2">
                 <img src="https://ui-avatars.com/api/?name=Firstname+Lastname&rounded=true&size=80">
                 <div style="margin-top: -1em; margin-left: 3.5em">
@@ -50,6 +50,25 @@
 </template>
 
 <script setup lang="ts">
+import { UserRepository } from '@/repositories/UserRepository';
+import router from "@/router";
+
+const userRepository = new UserRepository();
+
+async function disconnect() {
+    try {
+        const response = await userRepository.disconnect();
+
+        if (response != null) {
+            console.log(response);
+            //TODO: Retirer le token JWT à l'utilisateur connecté.
+            
+            router.push({ name: 'login' })
+        }
+    } catch (err) {
+        alert('Erreur de connexion :\n' + err);
+    }
+}
 </script>
 
 <style scoped>

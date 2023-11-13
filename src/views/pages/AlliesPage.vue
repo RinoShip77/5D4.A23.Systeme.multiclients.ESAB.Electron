@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline">Mes Allies</h1>
+    <h1 class="my-3 text-decoration-underline title">Mes Allies</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -168,7 +168,7 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
-      <div class="row row-cols-6 g-4">
+      <div class="row row-cols-6 g-4 content">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
             data-bs-target="#allyModal" @click="openModal(ally.uuid)">
@@ -215,8 +215,8 @@
         <div class="card h-100 p-2 rounded-5">
           <div class="d-flex justify-content-between">
             <img :src="ally?.asset" alt="{{ ally.name }}" title="{{ ally.name }}"
-              class="img-fluid img-thumbnail rounded-5 w-50 m-1">
-            <div class="d-flex flex-column m-1">
+              class="img-fluid img-thumbnail rounded-5 m-1" width="475">
+            <div class="d-flex flex-column m-1 content">
               <div class="d-flex justify-content-between mx-5 my-2 mt-3">
                 <h2 class="text-decoration-underline fw-bold">{{ ally?.name }}</h2>
                 <div class="d-flex flex-column text-center">
@@ -252,28 +252,10 @@
                   <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-25 mt-5">
                 </div>
               </div>
-              <div id="carouselAllyIndicators" class="carousel slide mt-3">
-                <div class="bg-dark-subtle bg-gradient rounded-5 z-0">
-                  <div class="z-1 carousel-inner mx-auto my-2 p-5 text-center">
-                    <div class="carousel-item active text-center">
-                      <img :src="`/src/assets/elements/element_${ally?.kernel[0]}.png`" class="carousel">
-                      <h3>{{ ally?.kernel[0] }}</h3>
-                    </div>
-                    <div class="carousel-item text-center" v-for="kernel of ally?.kernel.slice(1)">
-                      <img :src="`/src/assets/elements/element_${kernel}.png`" class="carousel">
-                      <h3>{{ kernel }}</h3>
-                    </div>
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselAllyIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Précédent</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselAllyIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Suivant</span>
-                  </button>
+              <div class="d-flex mx-auto mt-3 bg-body-tertiary rounded-5">
+                <div class="d-flex flex-column text-center" v-for="kernel of ally?.kernel">
+                  <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid">
+                  <h4>{{ kernel }}</h4>
                 </div>
               </div>
             </div>
@@ -306,8 +288,13 @@ async function openModal(idAlly: string) {
 </script>
 
 <style scoped>
-img.carousel {
-  width: 100px;
-  height: auto
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
+
+.title {
+  font-family: 'Oswald', sans-serif;
+}
+
+.content {
+  font-family: 'Ubuntu', sans-serif;
 }
 </style>
