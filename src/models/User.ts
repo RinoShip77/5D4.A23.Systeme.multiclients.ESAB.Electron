@@ -3,7 +3,9 @@ export interface User {
     email: string,
     username: string,
     password: string,
-    inventory: JSON[],
+    inventory: any,
     allies: JSON[],
-    explorations: JSON[]
+    explorations: JSON[],
+    name: string,
+    surname: string
 }

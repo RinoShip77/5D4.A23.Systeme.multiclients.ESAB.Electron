@@ -21,7 +21,7 @@
                  Se déconnecter
               </button>
               <div class="nav-link mx-2">
-                <img src="https://ui-avatars.com/api/?name=Firstname+Lastname&rounded=true&size=80">
+                <img :src="`https://ui-avatars.com/api/?name=${user?.name}+${user?.surname}&rounded=true&size=80`">
                 <div style="margin-top: -1em; margin-left: 3.5em">
                   <span class="badge bg-success rounded-circle p-2">
                     <span class="visually-hidden">Connecté</span>
@@ -33,7 +33,7 @@
               <div class="d-flex flex-column text-center mt-2 me-2">
                 <i class="fas fa-sack-dollar fs-1"></i>
                 <div title="Inox total">
-                  <span>99,99</span>
+                  <span>{{ user?.inventory.inox }}</span>
                   <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="50">
                 </div>
               </div>
@@ -50,10 +50,18 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { UserRepository } from '@/repositories/UserRepository';
+import { User } from '@/models/User';
 import router from "@/router";
 
 const userRepository = new UserRepository();
+const user = ref<User>();
+
+onMounted(async () => {
+  let idUser: string = '1'; //localStorage.getItem('idUser');
+  user.value = await userRepository.retrieveOne(idUser);
+})
 
 async function disconnect() {
     try {

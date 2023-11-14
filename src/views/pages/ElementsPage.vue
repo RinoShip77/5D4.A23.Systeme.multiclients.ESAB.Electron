@@ -45,7 +45,7 @@
       <div class="row row-cols-6 g-4 content">
         <div class="col my-2" v-for="element of elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
-            <div class="card-header bg-body">
+            <div class="card-header bg-body-secondary">
               <h4>{{ element.name }}</h4>
             </div>
             <p class="fw-bold text-decoration-underline">{{ element.symbol }}</p>

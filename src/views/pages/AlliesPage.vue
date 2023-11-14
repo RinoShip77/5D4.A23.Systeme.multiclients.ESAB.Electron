@@ -208,7 +208,6 @@
   </DefaultLayout>
 
   <!-- Modal for the details of one Ally -->
-  <!-- TODO: Complete the modal -->
   <div class="modal fade" id="allyModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content bg-transparent border-0">
