@@ -30,6 +30,14 @@
       </svg>
     </div>
     <div class="col-12" v-else>
+      <div v-if="canRetry">
+        <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
+          Impossible de récupérer les données
+        </div>
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveLeaderboard()">
+          <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
+        </button>
+      </div>
       <div class="table-responsive mt-5 content">
         <table class="table">
           <thead class="table-body-tertiary">
@@ -205,11 +213,21 @@ import { Leaderboard } from '@/models/Leaderboard';
 const leaderboardRepository = new LeaderboardRepository();
 const leaderboard = ref<Leaderboard>();
 const isLoading = ref(true);
+const canRetry = ref(false);
 
 onMounted(async () => {
-  leaderboard.value = await leaderboardRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
+  retrieveLeaderboard();
 })
+
+async function retrieveLeaderboard() {
+  try {
+    leaderboard.value = await leaderboardRepository.retrieveAll();
+    canRetry.value = false;
+  } catch (error) {
+    canRetry.value = true;
+  }
+}
 </script>
 
 <style scoped>

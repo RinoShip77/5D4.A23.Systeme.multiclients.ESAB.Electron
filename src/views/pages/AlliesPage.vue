@@ -168,7 +168,15 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
-      <div class="row row-cols-6 g-4 content">
+      <div v-if="canRetry">
+        <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
+          Impossible de récupérer les données
+        </div>
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveAllies()">
+          <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
+        </button>
+      </div>
+      <div class="row row-cols-6 g-4 mt-5 content">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
             data-bs-target="#allyModal" @click="openModal(ally.uuid)">
@@ -275,11 +283,21 @@ const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>([]);
 const ally = ref<Ally>();
 const isLoading = ref(true);
+const canRetry = ref(false);
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
-  allies.value = await allyRepository.retrieveAll();
+  retrieveAllies();
 })
+
+async function retrieveAllies() {
+  try {
+    allies.value = await allyRepository.retrieveAll();
+    canRetry.value = false;
+  } catch (error) {
+    canRetry.value = true;
+  }
+}
 
 async function openModal(idAlly: string) {
   ally.value = await allyRepository.retrieveOne(idAlly);

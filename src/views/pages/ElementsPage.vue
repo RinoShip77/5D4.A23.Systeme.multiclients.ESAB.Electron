@@ -42,6 +42,14 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
+      <div v-if="canRetry">
+        <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
+          Impossible de récupérer les données
+        </div>
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveElements()">
+          <i class="fas fa-arrows-rotate" style="font-size: 6em"></i>
+        </button>
+      </div>
       <div class="row row-cols-6 g-4 content">
         <div class="col my-2" v-for="element of elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
@@ -68,11 +76,21 @@ import { Element } from '@/models/Element';
 const elementRepository = new ElementRepository();
 const elements = ref<Element[]>([]);
 const isLoading = ref(true);
+const canRetry = ref(false);
 
 onMounted(async () => {
-  elements.value = await elementRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
+  retrieveElements();
 })
+
+async function retrieveElements() {
+  try {
+    elements.value = await elementRepository.retrieveAll();
+    canRetry.value = false;
+  } catch (error) {
+    canRetry.value = true;
+  }
+}
 </script>
 
 <style scoped>
