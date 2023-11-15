@@ -1,35 +1,39 @@
 <template>
-  <div class="d-flex align-items-start mx-5 mt-5">
-    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <button class="nav-link active" id="v-pills-allies-tab" data-bs-toggle="pill" data-bs-target="#v-pills-allies"
-        type="button" role="tab" aria-controls="v-pills-allies" aria-selected="false">
-        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">Allies</router-link>
-      </button>
-      <button class="nav-link" id="v-pills-elements-tab" data-bs-toggle="pill" data-bs-target="#v-pills-elements"
-        type="button" role="tab" aria-controls="v-pills-elements" aria-selected="false">
-        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'elements' }">Elements</router-link>
-      </button>
-      <button class="nav-link" id="v-pills-scoreboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-scoreboard"
-        type="button" role="tab" aria-controls="v-pills-scoreboard" aria-selected="false">
-        <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'leaderboard' }">Tableau des scores</router-link>
-      </button>
-    </div>
-    <div class="tab-content border border-3 rounded-3 p-3 overflow-auto shadow-lg" style="width: 120rem; height: 45rem" id="v-pills-tabContent">
-      <div class="tab-pane fade show active text-center" id="v-pills-allies" role="tabpanel" aria-labelledby="v-pills-allies-tab" tabindex="0">
-        <slot></slot>
-      </div>
-      <div class="tab-pane fade text-center" id="v-pills-elements" role="tabpanel" aria-labelledby="v-pills-elements-tab" tabindex="0">
-        <slot></slot>
-      </div>
-      <div class="tab-pane fade text-center" id="v-pills-scoreboard" role="tabpanel" aria-labelledby="v-pills-scoreboard" tabindex="0">
-        <slot></slot>
-      </div>
+  <div class="d-flex">
+    <aside class="bg-primary rounded-end mt-3 me-5 ps-3 pt-5 shadow-lg d-flex flex-column" style="width: 30rem">
+      <router-link :to="{ name: 'allies' }">
+        Allies
+      </router-link>
+      <router-link :to="{ name: 'elements' }">
+        Elements
+      </router-link>
+      <router-link :to="{ name: 'leaderboard' }">
+        Leaderboard
+      </router-link>
+    </aside>
+    <div class="border border-3 rounded-2 p-5 overflow-auto shadow-lg mx-3 my-5 text-center" style="width: 120rem; height: 45rem">
+      <slot class="m-5"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
 </script>
 
-<style scoped></style>
+<style scoped>
+aside a {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  padding: 1em;
+  text-decoration: none;
+}
+
+aside a:hover {
+  color: #016ECD;
+  background: white;
+  background-color: white;
+  border-top-left-radius: 1.5em;
+  border-bottom-left-radius: 1.5em;
+}
+</style>

@@ -30,7 +30,7 @@
       </svg>
     </div>
     <div class="col-12" v-else>
-      <div class="table-responsive content">
+      <div class="table-responsive mt-5 content">
         <table class="table">
           <thead class="table-body-tertiary">
             <th scope="col">#</th>

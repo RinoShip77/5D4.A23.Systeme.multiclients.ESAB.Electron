@@ -59,7 +59,6 @@ export class UserRepository {
             const res = await this.axios.get('http://localhost:3001/explorers/' + idUser);
 
             if (res.status === 200) {
-                console.log(res.data)
                 return res.data;
             }
         } catch (err) {

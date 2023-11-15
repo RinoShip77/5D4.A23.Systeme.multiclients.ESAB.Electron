@@ -17,11 +17,11 @@
               <!-- <div class="display-3">
                 <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
               </div> -->
-              <button class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase fw-bold" @click="disconnect()">
+              <button class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase text-nowrap fw-bold" @click="disconnect()">
                  Se déconnecter
               </button>
               <div class="nav-link mx-2">
-                <img :src="`https://ui-avatars.com/api/?name=${user?.name}+${user?.surname}&rounded=true&size=80`">
+                <img :src="`https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&rounded=true&size=80`">
                 <div style="margin-top: -1em; margin-left: 3.5em">
                   <span class="badge bg-success rounded-circle p-2">
                     <span class="visually-hidden">Connecté</span>
@@ -29,17 +29,20 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex justify-content-between align-items-center bg-light rounded-4 px-5 py-2 stats">
-              <div class="d-flex flex-column text-center mt-2 me-2">
+            <div class="d-flex justify-content-between align-items-center bg-body w-100 rounded-4 px-5 py-2 stats">
+              <div class="d-flex flex-column text-center mt-2 me-3">
                 <i class="fas fa-sack-dollar fs-1"></i>
-                <div title="Inox total">
-                  <span>{{ user?.inventory.inox }}</span>
-                  <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="50">
+                <div class="d-flex align-items-center">
+                  <span class="mt-1 fs-4">{{ user?.inventory.inox }}</span>
+                  <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="60">
                 </div>
               </div>
-              <div class="d-flex flex-column text-center ms-2">
+              <div class="d-flex flex-column text-center ms-3">
                 <i class="fas fa-map-location-dot fs-1"></i>
-                <span class="mt-2">50</span>
+                <div class="d-flex justify-content-around mt-2">
+                  <span class="me-2">{{ user?.location.lat }}</span>
+                  <span class="ms-2">{{ user?.location.long }}</span>
+                </div>
               </div>
             </div>
           </div>

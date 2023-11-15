@@ -51,16 +51,6 @@
             <p class="fw-bold text-decoration-underline">{{ element.symbol }}</p>
             <div class="card-body">
               <img :src="element.url" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
-              <div class="d-flex justify-content-around mt-3">
-                <div class="d-flex align-items-center" title="Quantity in stock">
-                  <span class="fs-4">{{ element.stock }}</span>
-                  <i class="fas fa-cart-flatbed-suitcase ms-2"></i>
-                </div>
-                <div class="d-flex align-items-center" title="Current price">
-                  <span class="fs-4">{{ element.price }}</span>
-                  <i class="fas fa-circle-dollar-to-slot ms-2"></i>
-                </div>
-              </div>
             </div>
           </div>
         </div>
