@@ -72,7 +72,7 @@ async function createAccount() {
     }
     //Navigation
     if (navigationAllowed) {
-        router.push({ name: 'homepage' });
+        router.push({ name: 'allies' });
     }
 }
 

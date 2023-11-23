@@ -1,8 +1,11 @@
 import { inject } from "vue";
 import { AxiosStatic } from 'axios';
 
+
 export class UserRepository {
     axios = inject('axios') as AxiosStatic;
+    BaseUrl = 'http://localhost:27017';
+
 
     public async login(user: string, password: string) {
         try {
@@ -10,8 +13,9 @@ export class UserRepository {
                 username: user,
                 password: password
             };
+            const url = `${this.BaseUrl}/explorers/actions/login`;
 
-            const response = await this.axios.post('http://localhost:3001/connexion', data);
+            const response = await this.axios.post(url, data);
             if (response.status === 200) {
                 return response.data
             }
@@ -29,7 +33,9 @@ export class UserRepository {
                 username: user,
                 password: password
             };
-            const response = await this.axios.post('http://localhost:3001/explorers', data);
+            const url = `${this.BaseUrl}/`;
+
+            const response = await this.axios.post(URL + '/explorers', data);
             if (response.status === 201) {
                 return response.data
             }
@@ -44,7 +50,9 @@ export class UserRepository {
 
     public async disconnect() {
         try {
-            const response = await this.axios.post('http://localhost:3001/deconnexion');
+            const url = `${this.BaseUrl}/`;
+
+            const response = await this.axios.post(URL + '/deconnexion');
             if (response.status === 200) {
                 return response.data
             }
