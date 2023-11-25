@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex">
-    <aside class="bg-primary rounded-end-5 mt-3 me-5 ps-3 pt-5 shadow-lg d-flex flex-column" style="width: 30rem">
+    <aside class="bg-info rounded-end-5 mt-3 me-5 ps-3 pt-5 shadow-lg d-flex flex-column" style="width: 30rem">
       <router-link :to="{ name: 'allies' }">
         Allies
       </router-link>

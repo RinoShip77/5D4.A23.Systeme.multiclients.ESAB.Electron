@@ -8,5 +8,6 @@ export interface User {
     inventory: any,
     allies: JSON[],
     explorations: JSON[],
-    location: any
+    location: any,
+    id: any
 }

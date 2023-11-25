@@ -42,9 +42,9 @@ export class UserRepository {
 
     }
 
-    public async disconnect() {
+    public async logout(token: string | null) {
         try {
-            const response = await this.axios.post('http://localhost:3001/deconnexion');
+            const response = await this.axios.post('http://localhost:27017/explorers/actions/logout', { 'Authorization': token });
             
             if (response.status === 200) {
                 return response.data
@@ -54,9 +54,9 @@ export class UserRepository {
         }
     }
 
-    public async retrieveOne(idUser: string) {
+    public async retrieveOne(idUser: string, token: string) {
         try {
-            const res = await this.axios.get('http://localhost:3001/explorers/' + idUser);
+            const res = await this.axios.get(`http://localhost:27017/explorers/${idUser}`, { headers: { 'Authorization': token } } );
 
             if (res.status === 200) {
                 return res.data;

@@ -1,4 +1,6 @@
+import { User } from "./User";
+
 export interface Leaderboard {
-  name: string,
-  icon: string
+  board: User[];
+  me: User
 }

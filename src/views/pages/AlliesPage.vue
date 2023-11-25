@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline title">Mes Allies</h1>
+    <h1 class="display-3 mb-5 text-decoration-underline title">Mes Allies</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -176,10 +176,10 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="row row-cols-6 g-4 mt-5 content">
+      <div class="row row-cols-6 content">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
-            data-bs-target="#allyModal" @click="openModal(ally.uuid)">
+            data-bs-target="#allyModal" @click="openModal(ally)">
             <div class="card-header bg-body-secondary">
               <h4>{{ ally.name }}</h4>
             </div>
@@ -292,15 +292,17 @@ onMounted(async () => {
 
 async function retrieveAllies() {
   try {
-    allies.value = await allyRepository.retrieveAll();
+    let idExplorer = '1'; // sessionStorage.getItem('idExplorer');
+
+    allies.value = await allyRepository.retrieveAll(idExplorer);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
   }
 }
 
-async function openModal(idAlly: string) {
-  ally.value = await allyRepository.retrieveOne(idAlly);
+async function openModal(recievedAlly: Ally) {
+  ally.value = recievedAlly;
 }
 </script>
 

@@ -6,7 +6,7 @@ export class LeaderboardRepository {
 
   public async retrieveAll() {
     try {
-      const res = await this.axios.get('http://localhost:3001/leaderboards');
+      const res = await this.axios.get('http://localhost:27017/leaderboards');
 
       if (res.status === 200) {
         return res.data;

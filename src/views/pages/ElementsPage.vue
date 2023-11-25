@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline title">Mes Elements</h1>
+    <h1 class="display-3 mb-5 text-decoration-underline title">Mes Elements</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -50,8 +50,8 @@
           <i class="fas fa-arrows-rotate" style="font-size: 6em"></i>
         </button>
       </div>
-      <div class="row row-cols-6 g-4 content">
-        <div class="col my-2" v-for="element of elements">
+      <div class="row row-cols-6 content">
+        <div class="col my-2" v-for="element of explorer?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
             <div class="card-header bg-body-secondary">
               <h4>{{ element.name }}</h4>
@@ -70,13 +70,15 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { ElementRepository } from '@/repositories/ElementRepository';
-import { Element } from '@/models/Element';
+import { UserRepository } from '@/repositories/UserRepository';
+import { User } from '@/models/User';
 
-const elementRepository = new ElementRepository();
-const elements = ref<Element[]>([]);
+const explorerRepository = new UserRepository();
+const explorer = ref<User>();
 const isLoading = ref(true);
 const canRetry = ref(false);
+const token = '1'; // sessionStorage.getItem('token');
+const idExplorer = '1'; //sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -85,7 +87,7 @@ onMounted(async () => {
 
 async function retrieveElements() {
   try {
-    elements.value = await elementRepository.retrieveAll();
+    explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
