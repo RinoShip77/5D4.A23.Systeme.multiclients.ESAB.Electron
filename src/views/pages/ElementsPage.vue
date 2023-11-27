@@ -51,14 +51,15 @@
         </button>
       </div>
       <div class="row row-cols-6 content">
-        <div class="col my-2" v-for="element of explorer?.inventory.elements">
+        <div class="col my-2" v-for="element of User?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
             <div class="card-header bg-body-secondary">
               <h4>{{ element.element }}</h4>
             </div>
             <p class="fw-bold mt-1 text-decoration-underline">{{ element.quantity }}</p>
             <div class="card-body">
-              <img :src="`/src/assets/elements/element_${element.element}.png`" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
+              <img :src="`/src/assets/elements/element_${element.element}.png`"
+                class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
             </div>
           </div>
         </div>
@@ -73,12 +74,12 @@ import { onMounted, ref } from 'vue';
 import { UserRepository } from '@/repositories/UserRepository';
 import { User } from '@/models/User';
 
-const explorerRepository = new UserRepository();
-const explorer = ref<User>();
+const userRepository = new UserRepository();
+const user = ref<User>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 const token = '1'; // sessionStorage.getItem('token');
-const idExplorer = '1'; //sessionStorage.getItem('idExplorer');
+const idUser = '1'; //sessionStorage.getItem('idUser');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -87,7 +88,7 @@ onMounted(async () => {
 
 async function retrieveElements() {
   try {
-    explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
+    user.value = await userRepository.retrieveOne(idUser, token);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
@@ -110,4 +111,4 @@ img {
   width: 125px;
   height: auto
 }
-</style>
+</style>@/models/User@/repositories/UserRepository@/repositories/UserRepository@/models/User

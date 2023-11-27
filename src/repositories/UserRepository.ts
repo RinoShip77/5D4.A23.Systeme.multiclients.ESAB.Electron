@@ -4,14 +4,14 @@ import { AxiosStatic } from 'axios';
 export class UserRepository {
     axios = inject('axios') as AxiosStatic;
 
-    public async login(user: string, password: string) {
+    public async login(User: string, password: string) {
         try {
             const data = {
-                username: user,
+                Username: User,
                 password: password
             };
 
-            const response = await this.axios.post('http://localhost:3001/connexion', data);
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers/actions/login`, data);
             if (response.status === 200) {
                 return response.data
             }
@@ -21,15 +21,15 @@ export class UserRepository {
 
 
     }
-    public async CreateAccount(email: string, user: string, password: string) {
+    public async CreateAccount(email: string, User: string, password: string) {
 
         try {
             const data = {
                 email: email,
-                username: user,
+                Username: User,
                 password: password
             };
-            const response = await this.axios.post('http://localhost:3001/explorers', data);
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers`, data);
             if (response.status === 201) {
                 return response.data
             }
@@ -44,8 +44,8 @@ export class UserRepository {
 
     public async logout(token: string | null) {
         try {
-            const response = await this.axios.post('http://localhost:27017/explorers/actions/logout', { 'Authorization': token });
-            
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers/actions/logout`, { 'Authorization': token });
+
             if (response.status === 200) {
                 return response.data
             }
@@ -54,9 +54,9 @@ export class UserRepository {
         }
     }
 
-    public async retrieveOne(idUser: string, token: string) {
+    public async retrieveOne(username: string, token: string) {
         try {
-            const res = await this.axios.get(`http://localhost:27017/explorers/${idUser}`, { headers: { 'Authorization': token } } );
+            const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}explorers/${username}`, { headers: { 'Authorization': token } });
 
             if (res.status === 200) {
                 return res.data;

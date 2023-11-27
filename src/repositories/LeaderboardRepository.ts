@@ -6,7 +6,7 @@ export class LeaderboardRepository {
 
   public async retrieveAll() {
     try {
-      const res = await this.axios.get('http://localhost:27017/leaderboards');
+      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}leaderboards`);
 
       if (res.status === 200) {
         return res.data;

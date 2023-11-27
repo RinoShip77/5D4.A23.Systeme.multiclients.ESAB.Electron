@@ -49,7 +49,7 @@ aside a:not(:hover) {
   border-top-left-radius: 1.5em;
   border-bottom-left-radius: 1.5em;
   animation-name: animationOff;
-  animation-duration: .25s
+  animation-duration: .5s
 }
 
 @keyframes animationOn {

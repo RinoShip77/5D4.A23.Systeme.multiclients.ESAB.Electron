@@ -22,8 +22,7 @@
                 Se déconnecter
               </button>
               <div class="nav-link mx-2">
-                <img
-                  :src="`https://ui-avatars.com/api/?name=${explorer?.firstName}+${explorer?.lastName}&rounded=true&size=80`">
+                <img :src="`https://ui-avatars.com/api/?name=${user?.name}+${user?.surname}&rounded=true&size=80`">
                 <div style="margin-top: -1em; margin-left: 3.5em">
                   <span class="badge bg-success rounded-circle p-2">
                     <span class="visually-hidden">Connecté</span>
@@ -31,19 +30,19 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex justify-content-between align-items-center bg-body w-100 rounded-4 ms-2 px-5 py-2 shadow-lg stats">
+            <div
+              class="d-flex justify-content-between align-items-center bg-body w-100 rounded-4 ms-2 px-5 py-2 shadow-lg stats">
               <div class="d-flex flex-column text-center mt-2 me-3">
                 <i class="fas fa-sack-dollar display-3"></i>
                 <div class="d-flex align-items-center">
-                  <span>{{ explorer?.inventory.inox }}</span>
+                  <span>{{ user?.inventory.inox }}</span>
                   <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="60">
                 </div>
               </div>
               <div class="d-flex flex-column text-center ms-3">
                 <i class="fas fa-map-location-dot display-3"></i>
                 <div class="d-flex justify-content-around mt-2">
-                  <span class="me-2">{{ explorer?.location.lat }}</span>
-                  <span class="ms-2">{{ explorer?.location.long }}</span>
+                  <span class="fs-2 text-nowrap">{{ user?.location }}</span>
                 </div>
               </div>
             </div>
@@ -60,18 +59,18 @@ import { UserRepository } from '@/repositories/UserRepository';
 import { User } from '@/models/User';
 import router from "@/router";
 
-const explorerRepository = new UserRepository();
-const explorer = ref<User>();
+const userRepository = new UserRepository();
+const user = ref<User>();
 const token = '1'; // sessionStorage.getItem('token');
-const idExplorer = '1'; //sessionStorage.getItem('idExplorer');
+const username = 'Bobbes'; //sessionStorage.getItem('idUser');
 
 onMounted(async () => {
-  explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
+  user.value = await userRepository.retrieveOne(username, token);
 })
 
 async function disconnect() {
   try {
-    const response = await explorerRepository.logout(token);
+    const response = await userRepository.logout(token);
 
     if (response != null) {
       router.push({ name: 'login' })
@@ -94,5 +93,4 @@ async function disconnect() {
   font-family: 'Play', sans-serif;
   font-size: 1.5em;
 }
-
-</style>
+</style>@/repositories/UserRepository@/models/User
