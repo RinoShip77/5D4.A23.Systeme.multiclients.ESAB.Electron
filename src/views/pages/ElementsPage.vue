@@ -54,11 +54,11 @@
         <div class="col my-2" v-for="element of explorer?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
             <div class="card-header bg-body-secondary">
-              <h4>{{ element.name }}</h4>
+              <h4>{{ element.element }}</h4>
             </div>
-            <p class="fw-bold text-decoration-underline">{{ element.symbol }}</p>
+            <p class="fw-bold mt-1 text-decoration-underline">{{ element.quantity }}</p>
             <div class="card-body">
-              <img :src="element.url" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
+              <img :src="`/src/assets/elements/element_${element.element}.png`" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
             </div>
           </div>
         </div>
