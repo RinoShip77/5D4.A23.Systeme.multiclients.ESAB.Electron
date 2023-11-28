@@ -43,6 +43,7 @@ import InitialLayout from '../layouts/InitialLayout.vue';
 import { ref } from 'vue';
 import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import router from "@/router";
+import { disposeEmitNodes } from 'typescript';
 
 const userRepository = new ExplorerRepository();
 const email = ref<string>("");
@@ -67,6 +68,14 @@ async function createAccount() {
                 console.log('Compte créé avec succès!', response);
 
                 //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur créé.
+                sessionStorage.setItem('token', response.tokens.accessToken);
+                sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
+                //Ajouter le user id pour les requetes d'allies et etc...
+
+                const secondResponse = await userRepository.retrieveOne(response.explorer.username, response.tokens.accessToken);
+                sessionStorage.setItem('idExplorer', secondResponse.id);
+                console.log(secondResponse);
+
 
                 navigationAllowed = true;
             }
