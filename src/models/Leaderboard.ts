@@ -1,4 +1,6 @@
+import { Explorer } from "./Explorer";
+
 export interface Leaderboard {
-  name: string,
-  icon: string
+  board: Explorer[];
+  me: Explorer
 }

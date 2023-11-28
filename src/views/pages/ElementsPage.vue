@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline title">Mes Elements</h1>
+    <h1 class="display-3 mb-5 text-decoration-underline title">Mes Elements</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -42,25 +42,24 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
-      <div class="row row-cols-6 g-4 content">
-        <div class="col my-2" v-for="element of elements">
+      <div v-if="canRetry">
+        <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
+          Impossible de récupérer les données
+        </div>
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveElements()">
+          <i class="fas fa-arrows-rotate" style="font-size: 6em"></i>
+        </button>
+      </div>
+      <div class="row row-cols-6 content">
+        <div class="col my-2" v-for="element of Explorer?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
-            <div class="card-header bg-body">
-              <h4>{{ element.name }}</h4>
+            <div class="card-header bg-body-secondary">
+              <h4>{{ element.element }}</h4>
             </div>
-            <p class="fw-bold text-decoration-underline">{{ element.symbol }}</p>
+            <p class="fw-bold mt-1 text-decoration-underline">{{ element.quantity }}</p>
             <div class="card-body">
-              <img :src="element.url" class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
-              <div class="d-flex justify-content-around mt-3">
-                <div class="d-flex align-items-center" title="Quantity in stock">
-                  <span class="fs-4">{{ element.stock }}</span>
-                  <i class="fas fa-cart-flatbed-suitcase ms-2"></i>
-                </div>
-                <div class="d-flex align-items-center" title="Current price">
-                  <span class="fs-4">{{ element.price }}</span>
-                  <i class="fas fa-circle-dollar-to-slot ms-2"></i>
-                </div>
-              </div>
+              <img :src="`/src/assets/elements/element_${element.element}.png`"
+                class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
             </div>
           </div>
         </div>
@@ -72,17 +71,29 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { ElementRepository } from '@/repositories/ElementRepository';
-import { Element } from '@/models/Element';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
+import { Explorer } from '@/models/Explorer';
 
-const elementRepository = new ElementRepository();
-const elements = ref<Element[]>([]);
+const userRepository = new ExplorerRepository();
+const user = ref<Explorer>();
 const isLoading = ref(true);
+const canRetry = ref(false);
+const token = '1'; // sessionStorage.getItem('token');
+const idExplorer = '1'; //sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
-  elements.value = await elementRepository.retrieveAll();
   setTimeout(() => { isLoading.value = false; }, 1000);
+  retrieveElements();
 })
+
+async function retrieveElements() {
+  try {
+    user.value = await userRepository.retrieveOne(idExplorer, token);
+    canRetry.value = false;
+  } catch (error) {
+    canRetry.value = true;
+  }
+}
 </script>
 
 <style scoped>
@@ -100,4 +111,4 @@ img {
   width: 125px;
   height: auto
 }
-</style>
+</style>@/models/Explorer@/repositories/ExplorerRepository@/repositories/ExplorerRepository@/models/Explorer@/models/Explorer@/repositories/ExplorerRepository

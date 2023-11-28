@@ -1,4 +1,4 @@
-<template>
+<template class="d-flex">
   <NavBar></NavBar>
 
   <NavTabs>

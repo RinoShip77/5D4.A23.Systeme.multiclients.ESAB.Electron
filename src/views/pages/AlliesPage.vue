@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="my-3 text-decoration-underline title">Mes Allies</h1>
+    <h1 class="display-3 mb-5 text-decoration-underline title">Mes Allies</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -168,10 +168,18 @@
       </svg>
     </div>
     <div class="col-12 mt-5" v-else>
-      <div class="row row-cols-6 g-4 content">
+      <div v-if="canRetry">
+        <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
+          Impossible de récupérer les données
+        </div>
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveAllies()">
+          <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
+        </button>
+      </div>
+      <div class="row row-cols-6 content">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
-            data-bs-target="#allyModal" @click="openModal(ally.uuid)">
+            data-bs-target="#allyModal" @click="openModal(ally)">
             <div class="card-header bg-body-secondary">
               <h4>{{ ally.name }}</h4>
             </div>
@@ -208,7 +216,6 @@
   </DefaultLayout>
 
   <!-- Modal for the details of one Ally -->
-  <!-- TODO: Complete the modal -->
   <div class="modal fade" id="allyModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content bg-transparent border-0">
@@ -276,14 +283,26 @@ const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>([]);
 const ally = ref<Ally>();
 const isLoading = ref(true);
+const canRetry = ref(false);
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
-  allies.value = await allyRepository.retrieveAll();
+  retrieveAllies();
 })
 
-async function openModal(idAlly: string) {
-  ally.value = await allyRepository.retrieveOne(idAlly);
+async function retrieveAllies() {
+  try {
+    let idExplorer = '1'; // sessionStorage.getItem('idExplorer');
+
+    allies.value = await allyRepository.retrieveAll(idExplorer);
+    canRetry.value = false;
+  } catch (error) {
+    canRetry.value = true;
+  }
+}
+
+async function openModal(recievedAlly: Ally) {
+  ally.value = recievedAlly;
 }
 </script>
 

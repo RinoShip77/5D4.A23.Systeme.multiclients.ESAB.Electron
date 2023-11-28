@@ -37,10 +37,10 @@
 <script setup lang="ts">
 import InitialLayout from '../layouts/InitialLayout.vue';
 import { ref } from 'vue';
-import { UserRepository } from '@/repositories/UserRepository';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import router from "@/router";
 
-const userRepository = new UserRepository();
+const userRepository = new ExplorerRepository();
 const email = ref<string>("");
 const username = ref<string>("");
 const password = ref<string>("");
@@ -87,4 +87,4 @@ button {
     height: auto;
     margin: auto;
 }
-</style>
+</style>@/repositories/ExplorerRepository@/repositories/ExplorerRepository
