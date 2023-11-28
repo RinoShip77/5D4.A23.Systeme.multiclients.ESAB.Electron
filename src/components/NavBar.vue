@@ -5,7 +5,7 @@
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
           <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid"
             width="100">
-          <h1 class="ms-2 title">Andromia Technologies</h1>
+          <h1 class="ms-2 title">Andromia</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,7 @@
               <!-- <div class="display-3">
                 <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
               </div> -->
-              <button class="btn btn-danger rounded-3 mt-1 px-5 fs-5 text-uppercase text-nowrap fw-bold"
+              <button class="btn btn-danger rounded-3 mt-1 px-4 fs-5 text-uppercase text-nowrap fw-bold"
                 @click="disconnect()">
                 Se déconnecter
               </button>
@@ -87,7 +87,8 @@ async function disconnect() {
 
 .title {
   font-family: 'Kenia', sans-serif;
-  font-size: 3em;
+  font-size: 5em;
+  letter-spacing: -5px
 }
 
 .stats {
