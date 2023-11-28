@@ -1,6 +1,6 @@
-import { User } from "./User";
+import { Explorer } from "./Explorer";
 
 export interface Leaderboard {
-  board: User[];
-  me: User
+  board: Explorer[];
+  me: Explorer
 }

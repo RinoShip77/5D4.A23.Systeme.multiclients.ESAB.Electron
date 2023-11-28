@@ -51,7 +51,7 @@
         </button>
       </div>
       <div class="row row-cols-6 content">
-        <div class="col my-2" v-for="element of User?.inventory.elements">
+        <div class="col my-2" v-for="element of Explorer?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
             <div class="card-header bg-body-secondary">
               <h4>{{ element.element }}</h4>
@@ -71,15 +71,15 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { UserRepository } from '@/repositories/UserRepository';
-import { User } from '@/models/User';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
+import { Explorer } from '@/models/Explorer';
 
-const userRepository = new UserRepository();
-const user = ref<User>();
+const userRepository = new ExplorerRepository();
+const user = ref<Explorer>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 const token = '1'; // sessionStorage.getItem('token');
-const idUser = '1'; //sessionStorage.getItem('idUser');
+const idExplorer = '1'; //sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -88,7 +88,7 @@ onMounted(async () => {
 
 async function retrieveElements() {
   try {
-    user.value = await userRepository.retrieveOne(idUser, token);
+    user.value = await userRepository.retrieveOne(idExplorer, token);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
@@ -111,4 +111,4 @@ img {
   width: 125px;
   height: auto
 }
-</style>@/models/User@/repositories/UserRepository@/repositories/UserRepository@/models/User
+</style>@/models/Explorer@/repositories/ExplorerRepository@/repositories/ExplorerRepository@/models/Explorer@/models/Explorer@/repositories/ExplorerRepository

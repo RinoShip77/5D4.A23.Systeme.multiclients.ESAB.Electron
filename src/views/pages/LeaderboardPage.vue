@@ -49,12 +49,12 @@
             </th>
           </thead>
           <tbody class="table-group-divider">
-            <tr v-for="(User, index) of leaderboard?.board" :key="index">
+            <tr v-for="(Explorer, index) of leaderboard?.board" :key="index">
               <th scope="row">{{ index }}</th>
-              <td>{{ User.email }}</td>
-              <td v-if="order === 'inox'">{{ User.inventory.inox }}</td>
-              <td v-if="order === 'ally'">{{ getAllies(User.uuid) }}</td>
-              <td v-if="order === 'elements'">{{ User.inventory.elements.length }}</td>
+              <td>{{ Explorer.email }}</td>
+              <td v-if="order === 'inox'">{{ Explorer.inventory.inox }}</td>
+              <td v-if="order === 'ally'">{{ getAllies(Explorer.uuid) }}</td>
+              <td v-if="order === 'elements'">{{ Explorer.inventory.elements.length }}</td>
             </tr>
           </tbody>
         </table>
@@ -116,8 +116,8 @@ async function retrieveLeaderboard() {
   }
 }
 
-async function getAllies(idUser: string) {
-  let allies = await allyRepository.retrieveAll(idUser);
+async function getAllies(idExplorer: string) {
+  let allies = await allyRepository.retrieveAll(idExplorer);
 
   setTimeout(() => {
 

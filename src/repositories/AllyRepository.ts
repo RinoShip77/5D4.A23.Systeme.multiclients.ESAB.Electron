@@ -4,9 +4,9 @@ import { AxiosStatic } from 'axios';
 export class AllyRepository {
   axios = inject('axios') as AxiosStatic;
 
-  public async retrieveAll(idUser: string | null) {
+  public async retrieveAll(idExplorer: string | null) {
     try {
-      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}${idUser}/allies`);
+      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}${idExplorer}/allies`);
 
       if (res.status === 200) {
         return res.data;

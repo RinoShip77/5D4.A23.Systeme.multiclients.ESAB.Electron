@@ -1,9 +1,9 @@
-// export interface User {
+// export interface Explorer {
 //     uuid: string,
 //     firstName: string,
 //     lastName: string,
 //     email: string,
-//     Username: string,
+//     Explorername: string,
 //     password: string,
 //     inventory: any,
 //     allies: JSON[],
@@ -16,10 +16,10 @@ import { Ally } from "./Ally";
 import { Element } from "./Element";
 import { Exploration } from "./Exploration";
 
-export interface User {
+export interface Explorer {
     uuid: string,
     email: string,
-    Username: string,
+    username: string,
     name: string,
     surname: string,
     passwordHash: string,

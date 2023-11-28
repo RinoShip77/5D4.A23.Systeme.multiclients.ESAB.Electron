@@ -22,7 +22,8 @@
                 Se déconnecter
               </button>
               <div class="nav-link mx-2">
-                <img :src="`https://ui-avatars.com/api/?name=${user?.name}+${user?.surname}&rounded=true&size=80`">
+                <img
+                  :src="`https://ui-avatars.com/api/?name=${explorer?.name}+${explorer?.surname}&rounded=true&size=80`">
                 <div style="margin-top: -1em; margin-left: 3.5em">
                   <span class="badge bg-success rounded-circle p-2">
                     <span class="visually-hidden">Connecté</span>
@@ -35,14 +36,14 @@
               <div class="d-flex flex-column text-center mt-2 me-3">
                 <i class="fas fa-sack-dollar display-3"></i>
                 <div class="d-flex align-items-center">
-                  <span>{{ user?.inventory.inox }}</span>
+                  <span>{{ explorer?.inventory.inox }}</span>
                   <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="60">
                 </div>
               </div>
               <div class="d-flex flex-column text-center ms-3">
                 <i class="fas fa-map-location-dot display-3"></i>
                 <div class="d-flex justify-content-around mt-2">
-                  <span class="fs-2 text-nowrap">{{ user?.location }}</span>
+                  <span class="fs-2 text-nowrap">{{ explorer?.location }}</span>
                 </div>
               </div>
             </div>
@@ -55,22 +56,22 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { UserRepository } from '@/repositories/UserRepository';
-import { User } from '@/models/User';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
+import { Explorer } from '@/models/Explorer';
 import router from "@/router";
 
-const userRepository = new UserRepository();
-const user = ref<User>();
+const explorerRepository = new ExplorerRepository();
+const explorer = ref<Explorer>();
 const token = '1'; // sessionStorage.getItem('token');
-const username = 'Bobbes'; //sessionStorage.getItem('idUser');
+const username = 'Bobbes'; //sessionStorage.getItem('username');
 
 onMounted(async () => {
-  user.value = await userRepository.retrieveOne(username, token);
+  explorer.value = await explorerRepository.retrieveOne(username, token);
 })
 
 async function disconnect() {
   try {
-    const response = await userRepository.logout(token);
+    const response = await explorerRepository.logout(token);
 
     if (response != null) {
       router.push({ name: 'login' })
@@ -93,4 +94,4 @@ async function disconnect() {
   font-family: 'Play', sans-serif;
   font-size: 1.5em;
 }
-</style>@/repositories/UserRepository@/models/User
+</style>@/repositories/ExplorerRepository@/models/Explorer@/models/Explorer@/repositories/ExplorerRepository

@@ -1,13 +1,13 @@
 import { inject } from "vue";
 import { AxiosStatic } from 'axios';
 
-export class UserRepository {
+export class ExplorerRepository {
     axios = inject('axios') as AxiosStatic;
 
-    public async login(User: string, password: string) {
+    public async login(Explorer: string, password: string) {
         try {
             const data = {
-                Username: User,
+                Explorername: Explorer,
                 password: password
             };
 
@@ -21,12 +21,12 @@ export class UserRepository {
 
 
     }
-    public async CreateAccount(email: string, User: string, password: string) {
+    public async CreateAccount(email: string, Explorer: string, password: string) {
 
         try {
             const data = {
                 email: email,
-                Username: User,
+                Explorername: Explorer,
                 password: password
             };
             const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers`, data);

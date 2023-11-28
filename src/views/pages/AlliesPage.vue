@@ -292,9 +292,9 @@ onMounted(async () => {
 
 async function retrieveAllies() {
   try {
-    let idUser = '1'; // sessionStorage.getItem('idUser');
+    let idExplorer = '1'; // sessionStorage.getItem('idExplorer');
 
-    allies.value = await allyRepository.retrieveAll(idUser);
+    allies.value = await allyRepository.retrieveAll(idExplorer);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
