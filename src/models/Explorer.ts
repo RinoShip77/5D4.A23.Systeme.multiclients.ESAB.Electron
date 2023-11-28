@@ -1,17 +1,3 @@
-// export interface Explorer {
-//     uuid: string,
-//     firstName: string,
-//     lastName: string,
-//     email: string,
-//     Explorername: string,
-//     password: string,
-//     inventory: any,
-//     allies: JSON[],
-//     explorations: JSON[],
-//     location: any,
-//     id: any
-// }
-
 import { Ally } from "./Ally";
 import { Element } from "./Element";
 import { Exploration } from "./Exploration";
