@@ -51,7 +51,7 @@ export class ExplorerRepository {
 
     public async logout(token: string | null) {
         try {
-            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers/actions/logout`, { 'Authorization': token });
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers/actions/logout`, { 'Authorization': `Bearer ${token}` });
 
             if (response.status === 200) {
                 return response.data
