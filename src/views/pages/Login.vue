@@ -6,8 +6,8 @@
                 <div class="d-flex justify-content-center">
                     <div class="col-4 mx-2 my-2">
                         <form class="form" @submit="login()">
-                            <label for="username" class="form-label">Nom d'utilisateur</label>
-                            <input v-model="username" class="form-control" id="username" required>
+                            <label for="email" class="form-label">Adresse Courrielle</label>
+                            <input v-model="email" class="form-control" id="email" required>
                             <label for="password" class="form-label">Mot de passe</label>
                             <input v-model="password" type="password" class="form-control" id="password" required>
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
@@ -35,7 +35,7 @@ import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import router from "@/router";
 
 const userRepository = new ExplorerRepository();
-const username = ref<string>("");
+const email = ref<string>("");
 const password = ref<string>("");
 
 var navigationAllowed = false;
@@ -47,20 +47,22 @@ async function login() {
 
     //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
-        const response = await userRepository.login(username.value, password.value);
+        const response = await userRepository.login(email.value, password.value);
         if (response != null) {
             console.log('Connexion réussie!', response);
             //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur connecté.
 
             navigationAllowed = true;
         }
+        //Navigation
+        if (navigationAllowed) {
+            router.push({ name: 'allies' });
+        }
     } catch (err) {
         console.error('Erreur de connexion', err);
     }
-    //Navigation
-    if (navigationAllowed) {
-        router.push({ name: 'allies' });
-    }
+
+
 }
 </script>
 

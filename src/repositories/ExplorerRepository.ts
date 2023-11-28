@@ -4,10 +4,10 @@ import { AxiosStatic } from 'axios';
 export class ExplorerRepository {
     axios = inject('axios') as AxiosStatic;
 
-    public async login(Explorer: string, password: string) {
+    public async login(Email: string, password: string) {
         try {
             const data = {
-                Explorername: Explorer,
+                email: Email,
                 password: password
             };
 
