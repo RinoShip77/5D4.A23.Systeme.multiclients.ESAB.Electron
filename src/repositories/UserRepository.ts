@@ -4,7 +4,6 @@ import { AxiosStatic } from 'axios';
 
 export class UserRepository {
     axios = inject('axios') as AxiosStatic;
-    BaseUrl = 'http://localhost:27017';
 
 
     public async login(user: string, password: string) {
@@ -13,7 +12,7 @@ export class UserRepository {
                 username: user,
                 password: password
             };
-            const url = `${this.BaseUrl}/explorers/actions/login`;
+            const url = `${import.meta.env.VITE_BASE_URL}explorers/actions/login`;
 
             const response = await this.axios.post(url, data);
             if (response.status === 200) {
@@ -33,14 +32,13 @@ export class UserRepository {
                 username: user,
                 password: password
             };
-            const url = `${this.BaseUrl}/`;
 
-            const response = await this.axios.post(URL + '/explorers', data);
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers`, data);
             if (response.status === 201) {
                 return response.data
             }
         } catch (err) {
-            console.error('Erreur de connexion', err);
+            console.error('Erreur lors de la création du compte', err);
         }
 
 
@@ -50,14 +48,13 @@ export class UserRepository {
 
     public async disconnect() {
         try {
-            const url = `${this.BaseUrl}/`;
 
-            const response = await this.axios.post(URL + '/deconnexion');
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}deconnexion`);
             if (response.status === 200) {
                 return response.data
             }
         } catch (err) {
-            console.error('Erreur de connexion', err);
+            console.error('Erreur lors de la déconnexion', err);
         }
     }
 }
