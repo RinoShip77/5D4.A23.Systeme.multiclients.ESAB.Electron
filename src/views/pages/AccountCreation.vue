@@ -11,9 +11,13 @@
                             <input v-model="email" type="email" class="form-control" name="email" required>
                             <label for="username" class="form-label">Nom d'utilisateur</label>
                             <input v-model="username" type="text" class="form-control" name="username" required>
+                            <label for="name" class="form-label">Prénom</label>
+                            <input v-model="name" type="text" class="form-control" name="name" required>
+                            <label for="surname" class="form-label">Nom</label>
+                            <input v-model="surname" type="text" class="form-control" name="surname" required>
                             <label for="password" class="form-label">Mot de passe</label>
                             <input v-model="password" type="password" class="form-control" name="password" required>
-                            <label for="repeatpassword" class="form-label">Mot de passe</label>
+                            <label for="repeatpassword" class="form-label">Veuillez reinscrire votre mot de passe</label>
                             <input v-model="repeatPassword" type="password" class="form-control" name="repeatpassword"
                                 required>
                             <button class="form-control btn btn-primary my-4" @click="createAccount">Créer un
@@ -43,6 +47,8 @@ import router from "@/router";
 const userRepository = new ExplorerRepository();
 const email = ref<string>("");
 const username = ref<string>("");
+const name = ref<string>("");
+const surname = ref<string>("");
 const password = ref<string>("");
 const repeatPassword = ref<string>("");
 
@@ -56,7 +62,7 @@ async function createAccount() {
     //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
         if (password.value === repeatPassword.value) {
-            const response = await userRepository.CreateAccount(email.value, username.value, password.value,);
+            const response = await userRepository.CreateAccount(email.value, username.value, password.value, name.value, surname.value);
             if (response != null) {
                 console.log('Compte créé avec succès!', response);
 

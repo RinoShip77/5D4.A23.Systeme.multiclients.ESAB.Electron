@@ -21,20 +21,27 @@ export class ExplorerRepository {
 
 
     }
-    public async CreateAccount(email: string, Explorer: string, password: string) {
+    public async CreateAccount(email: string, Explorer: string, password: string, name: string, surname: string) {
 
         try {
             const data = {
+                username: Explorer,
                 email: email,
-                Explorername: Explorer,
-                password: password
+                name: name,
+                surname: surname,
+                password: password,
+                inventory: {
+                    inox: 0,
+                    elements: []
+                }
+
             };
             const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers`, data);
             if (response.status === 201) {
                 return response.data
             }
         } catch (err) {
-            console.error('Erreur de connexion', err);
+            console.error('Erreur lors de la création du compte', err);
         }
 
 
@@ -50,7 +57,7 @@ export class ExplorerRepository {
                 return response.data
             }
         } catch (err) {
-            console.error('Erreur de connexion', err);
+            console.error('Erreur de deconnexion', err);
         }
     }
 
