@@ -43,7 +43,6 @@ import InitialLayout from '../layouts/InitialLayout.vue';
 import { ref } from 'vue';
 import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import router from "@/router";
-import { disposeEmitNodes } from 'typescript';
 
 const userRepository = new ExplorerRepository();
 const email = ref<string>("");
