@@ -50,7 +50,7 @@
           <i class="fas fa-arrows-rotate" style="font-size: 6em"></i>
         </button>
       </div>
-      <div class="row row-cols-6 content">
+      <div class="row row-cols-6 content" v-else-if="explorer?.inventory.elements.length !== 0">
         <div class="col my-2" v-for="element of explorer?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
             <div class="card-header bg-body-secondary">
@@ -63,6 +63,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div v-else>
+        <p class="fst-italic fw-bold fs-3">Aucun élément</p>
       </div>
     </div>
   </DefaultLayout>
@@ -79,7 +82,7 @@ const explorer = ref<Explorer>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 const token = '1'; // sessionStorage.getItem('token');
-const username = '1'; //sessionStorage.getItem('username');
+const idExplorer = '65666daaafbc5985391bf07f'; //sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -88,7 +91,7 @@ onMounted(async () => {
 
 async function retrieveElements() {
   try {
-    explorer.value = await explorerRepository.retrieveOne(username, token);
+    explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;

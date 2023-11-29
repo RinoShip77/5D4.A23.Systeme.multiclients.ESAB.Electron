@@ -176,7 +176,7 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="row row-cols-5 content">
+      <div class="row row-cols-5 content" v-else-if="allies.length !== 0">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
             data-bs-target="#allyModal" @click="openModal(ally)"> <!-- style="background-image:  url('/src/assets/card_background.png')" -->
@@ -211,6 +211,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div v-else>
+        <p class="fst-italic fw-bold fs-3">Aucun élément</p>
       </div>
     </div>
   </DefaultLayout>
@@ -284,6 +287,7 @@ const allies = ref<Ally[]>([]);
 const ally = ref<Ally>();
 const isLoading = ref(true);
 const canRetry = ref(false);
+const idExplorer = '65666daaafbc5985391bf07f'; // sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -292,8 +296,6 @@ onMounted(async () => {
 
 async function retrieveAllies() {
   try {
-    let idExplorer = '1'; // sessionStorage.getItem('idExplorer');
-
     allies.value = await allyRepository.retrieveAll(idExplorer);
     canRetry.value = false;
   } catch (error) {
