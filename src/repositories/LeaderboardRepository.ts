@@ -4,9 +4,9 @@ import { AxiosStatic } from 'axios';
 export class LeaderboardRepository {
   axios = inject('axios') as AxiosStatic;
 
-  public async retrieveAll() {
+  public async retrieveAll(order: string) {
     try {
-      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}leaderboards`);
+      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}leaderboards`, { params: { order: order } });
 
       if (res.status === 200) {
         return res.data;

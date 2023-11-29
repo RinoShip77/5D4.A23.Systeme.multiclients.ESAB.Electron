@@ -176,7 +176,7 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="row row-cols-5 content" v-else-if="allies.length !== 0">
+      <div class="row row-cols-4 content" v-else-if="allies.length !== 0">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
             data-bs-target="#allyModal" @click="openModal(ally)"> <!-- style="background-image:  url('/src/assets/card_background.png')" -->
