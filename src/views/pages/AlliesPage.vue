@@ -176,10 +176,10 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="row row-cols-6 content">
+      <div class="row row-cols-5 content">
         <div class="col my-2" v-for="ally of allies">
           <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
-            data-bs-target="#allyModal" @click="openModal(ally)">
+            data-bs-target="#allyModal" @click="openModal(ally)"> <!-- style="background-image:  url('/src/assets/card_background.png')" -->
             <div class="card-header bg-body-secondary">
               <h4>{{ ally.name }}</h4>
             </div>

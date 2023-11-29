@@ -75,4 +75,4 @@ async function login() {
 </script>
 
 //TODO: Make the style for the page.
-<style scoped></style>@/repositories/ExplorerRepository
+<style scoped></style>
