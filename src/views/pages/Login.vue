@@ -74,11 +74,15 @@ async function login() {
     } catch (err) {
         console.error('Erreur de connexion', err);
         message = "Identifiants de connexion invalides, veuillez réessayer.";
+        showError = true;
     }
 
 
 }
-function 
+function closeModal() {
+    showError = false;
+    message = "";
+}
 </script>
 
 //TODO: Make the style for the page.
