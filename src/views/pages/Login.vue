@@ -13,14 +13,6 @@
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
 
                         </form>
-
-                        <div class="modal" v-if="showError">
-                            <div class="modal-content">
-                                <p>{{ message }}</p>
-                                <button @click="closeModal">Close</button>
-                            </div>
-                        </div>
-
                         <router-link :to="{ name: 'allies' }">Tricher</router-link>
                         <div class="my-5 text-center">
                             <p>Vous êtes un citoyen et voulez être un explorateur?<br>
@@ -46,9 +38,11 @@ const userRepository = new ExplorerRepository();
 const email = ref<string>("");
 const password = ref<string>("");
 
-var showError = false;
+var showAlert = false;
 var message = "";
 var navigationAllowed = false;
+
+
 
 async function login() {
     //TODO: Sprint 2: Corriger l'erreur suivante: La première tentative de connexion échoue toujours après avoir démarré l'application.
@@ -74,13 +68,13 @@ async function login() {
     } catch (err) {
         console.error('Erreur de connexion', err);
         message = "Identifiants de connexion invalides, veuillez réessayer.";
-        showError = true;
+        showAlert = true;
     }
 
 
 }
-function closeModal() {
-    showError = false;
+function closeAlert() {
+    showAlert = false;
     message = "";
 }
 </script>
