@@ -46,7 +46,7 @@ export class ExplorerRepository {
 
     public async logout(token: string | null) {
         try {
-            const response = await this.axios.delete(`${import.meta.env.VITE_BASE_URL}explorers/actions/logout`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await this.axios.get(`${import.meta.env.VITE_BASE_URL}explorers/actions/logout`, { headers: { 'Authorization': `Bearer ${token}` } });
 
             if (response.status === 200) {
                 return response.data
@@ -56,7 +56,7 @@ export class ExplorerRepository {
         }
     }
 
-    public async retrieveOne(href: string, token: string) {
+    public async retrieveOne(href: string | null, token: string | null) {
         try {
             const res = await this.axios.get(`${href}`, { headers: { 'Authorization': `Bearer ${token}` } });
 
