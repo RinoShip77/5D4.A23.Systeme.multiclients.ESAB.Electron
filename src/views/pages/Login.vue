@@ -13,6 +13,14 @@
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
 
                         </form>
+
+                        <div class="modal" v-if="showError">
+                            <div class="modal-content">
+                                <p>{{ message }}</p>
+                                <button @click="closeModal">Close</button>
+                            </div>
+                        </div>
+
                         <router-link :to="{ name: 'allies' }">Tricher</router-link>
                         <div class="my-5 text-center">
                             <p>Vous êtes un citoyen et voulez être un explorateur?<br>
@@ -38,6 +46,8 @@ const userRepository = new ExplorerRepository();
 const email = ref<string>("");
 const password = ref<string>("");
 
+var showError = false;
+var message = "";
 var navigationAllowed = false;
 
 async function login() {
@@ -50,7 +60,7 @@ async function login() {
         const response = await userRepository.login(email.value, password.value);
         if (response != null) {
             console.log('Connexion réussie!', response);
-            //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur connecté.
+
             sessionStorage.setItem('token', response.tokens.accessToken);
             sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
             sessionStorage.setItem('userHref', response.explorer.href);
@@ -63,9 +73,15 @@ async function login() {
         }
     } catch (err) {
         console.error('Erreur de connexion', err);
+        message = "Identifiants de connexion invalides, veuillez réessayer.";
+        showError = true;
     }
 
 
+}
+function closeModal() {
+    showError = false;
+    message = "";
 }
 </script>
 

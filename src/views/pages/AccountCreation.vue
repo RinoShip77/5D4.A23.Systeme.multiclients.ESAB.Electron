@@ -66,11 +66,9 @@ async function createAccount() {
             if (response != null) {
                 console.log('Compte créé avec succès!', response);
 
-                //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur créé.
                 sessionStorage.setItem('token', response.tokens.accessToken);
                 sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
                 sessionStorage.setItem('userHref', response.explorer.href);
-
 
                 navigationAllowed = true;
             }

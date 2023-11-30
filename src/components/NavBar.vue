@@ -14,7 +14,8 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="d-flex justify-content-around ms-auto">
             <div class="d-flex align-items-center">
-              <button class="btn btn-danger d-flex align-items-center rounded-3 mt-1 px-4 fs-5 text-uppercase text-nowrap fw-bold"
+              <button
+                class="btn btn-danger d-flex align-items-center rounded-3 mt-1 px-4 fs-5 text-uppercase text-nowrap fw-bold"
                 @click="disconnect()">
                 <i class="fas fa-right-from-bracket fs-4 me-3"></i>
                 Se déconnecter
@@ -60,11 +61,11 @@ import router from "@/router";
 
 const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
-const token = '1'; // sessionStorage.getItem('token');
-const username = 'Bobbes'; //sessionStorage.getItem('username');
+const token: string | null = sessionStorage.getItem('token');
+const href: string | null = sessionStorage.getItem('userHref');
 
 onMounted(async () => {
-  explorer.value = await explorerRepository.retrieveOne(username, token);
+  explorer.value = await explorerRepository.retrieveOne(href, token);
 })
 
 async function disconnect() {
@@ -72,6 +73,7 @@ async function disconnect() {
     const response = await explorerRepository.logout(token);
 
     if (response != null) {
+      sessionStorage.clear();
       router.push({ name: 'login' })
     }
   } catch (err) {
