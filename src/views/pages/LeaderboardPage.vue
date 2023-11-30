@@ -48,7 +48,7 @@
         <table class="table table-striped table-hover" v-if="leaderboard">
           <thead class="fs-4 text-body-emphasis">
             <th scope="col">#</th>
-            <th scope="col">Courriel</th>
+            <th scope="col">Non d'utilisateur</th>
             <th scope="col" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
               <span class="text-body-emphasis">Valeur</span>
               <i class="fas fa-sort ms-5 text-body-emphasis"></i>
@@ -57,7 +57,7 @@
           <tbody v-for="(explorer, index) of leaderboard?.board" :key="index">
             <tr v-if="explorer.uuid === leaderboard?.me.uuid" class="table-warning">
               <th scope="row">{{ index + 1 }}</th>
-              <td>{{ explorer.email }}</td>
+              <td>{{ explorer.username }}</td>
               <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
               <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
@@ -65,7 +65,7 @@
             </tr>
             <tr v-else>
               <th scope="row">{{ index + 1 }}</th>
-              <td>{{ explorer.email }}</td>
+              <td>{{ explorer.username }}</td>
               <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
               <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
@@ -126,7 +126,7 @@ onMounted(async () => {
 
 async function retrieveLeaderboard(order: string) {
   try {
-    let href = sessionStorage.getItem('href');
+    let href = sessionStorage.getItem('userHref');
 
     leaderboard.value = await leaderboardRepository.retrieveAll(order, href);
     canRetry.value = false;

@@ -300,7 +300,7 @@ onMounted(async () => {
 async function retrieveAllies() {
   try {
     let token = sessionStorage.getItem('token');
-    let href = sessionStorage.getItem('href');
+    let href = `${import.meta.env.VITE_BASE_URL_MOCKOON}explorers/1`; //sessionStorage.getItem('userHref');
 
     explorer.value = await explorerRepository.retrieveOne(href, token);
     canRetry.value = false;
