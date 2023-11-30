@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Allies</span> - ({{
-      explorer?.allies.length }})</h1>
+    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Allies</span><span v-if="explorer"> - ({{
+      explorer?.allies.length }})</span></h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -280,7 +280,7 @@
 </template>
 
 <script setup lang="ts">
-import DefaultLayout from '../layouts/DefaultLayout.vue';
+import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import { Explorer } from '@/models/Explorer';

@@ -2,8 +2,10 @@
   <DefaultLayout>
     <div class="mb-5">
       <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
-      <span class="text-body-secondary fs-5">Le classement des 25 Explorers selon leur <span class="text-capitalize">{{ order
-      }}</span></span>
+      <span class="text-body-secondary fs-5" v-if="leaderboard">Le classement des 25 Explorers<span
+          v-if="order === 'inox' || order === 'elements' || order === 'allies' || order === 'explorations'"> selon leur
+          <span class="text-capitalize">{{ order
+          }}</span></span></span>
     </div>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -43,7 +45,7 @@
         </button>
       </div>
       <div class="table-responsive content" v-else-if="leaderboard?.board.length !== 0">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" v-if="leaderboard">
           <thead class="fs-4 text-body-emphasis">
             <th scope="col">#</th>
             <th scope="col">Courriel</th>
@@ -106,7 +108,7 @@
 </template>
 
 <script setup lang="ts">
-import DefaultLayout from '../layouts/DefaultLayout.vue';
+import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
 import { Leaderboard } from '@/models/Leaderboard';

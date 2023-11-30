@@ -1,16 +1,13 @@
 <template>
   <div class="d-flex">
     <aside class="bg-info rounded-end-5 mt-3 me-5 ps-3 pt-5 shadow-lg d-flex flex-column" style="width: 30rem">
-      <router-link :class="{ 'text-decoration-underline': alliesIsActive }" :to="{ name: 'allies' }"
-        @click="switchActiveLink('allies')">
+      <router-link :to="{ name: 'allies' }">
         Allies
       </router-link>
-      <router-link :class="{ 'text-decoration-underline': elementsIsActive }" :to="{ name: 'elements' }"
-        @click="switchActiveLink('elements')">
+      <router-link :to="{ name: 'elements' }">
         Elements
       </router-link>
-      <router-link :class="{ 'text-decoration-underline': leaderboardIsActive }" :to="{ name: 'leaderboard' }"
-        @click="switchActiveLink('leaderboard')">
+      <router-link :to="{ name: 'leaderboard' }">
         Leaderboard
       </router-link>
     </aside>
@@ -22,36 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const alliesIsActive = ref(false);
-const elementsIsActive = ref(false);
-const leaderboardIsActive = ref(false);
-
-async function switchActiveLink(link: string) {
-  switch (link) {
-    case 'allies':
-      alliesIsActive.value = true;
-      elementsIsActive.value = false;
-      leaderboardIsActive.value = false;
-      break;
-
-    case 'elements':
-      alliesIsActive.value = false;
-      elementsIsActive.value = true;
-      leaderboardIsActive.value = false;
-      break;
-
-    case 'leaderboard':
-      alliesIsActive.value = false;
-      elementsIsActive.value = false;
-      leaderboardIsActive.value = true;
-      break;
-  }
-  console.log(alliesIsActive.value)
-  console.log(elementsIsActive.value)
-  console.log(leaderboardIsActive.value)
-}
 </script>
 
 <style scoped>
