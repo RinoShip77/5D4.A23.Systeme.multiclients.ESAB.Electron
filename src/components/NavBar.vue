@@ -62,15 +62,27 @@ import router from "@/router";
 const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
 const token: string | null = sessionStorage.getItem('token');
+//const href: string | null = sessionStorage.getItem('userHref');
+
+//TODO: Remove this 'href' and decommant the other (with 'sessionStorage')
+const href = `${import.meta.env.VITE_BASE_URL_MOCKOON}explorers/1`;
 
 onMounted(async () => {
-  //let href: string | null = sessionStorage.getItem('userHref');
-
-  //TODO: Remove this 'href' and decommant the other (with 'sessionStorage')
-  let href = `${import.meta.env.VITE_BASE_URL_MOCKOON}explorers/1`;
-
-  explorer.value = await explorerRepository.retrieveOne(href, token);
+  retrieveExplorer();
+  
+  //TODO: Decomment this line when going in production and delete the second 'setInterval(...)'
+  //setInterval(retrieveExplorer, import.meta.env.VITE_REFRESH_RATE);
+  
+  setInterval(retrieveExplorer, 5000);
 })
+
+async function retrieveExplorer() {
+  explorer.value = await explorerRepository.retrieveOne(href, token);
+  
+  //TODO: Delete the two 'console.log(...)' when going in production
+  console.log('L\'Explorateur a été mis à jour');
+  console.log('');
+}
 
 async function disconnect() {
   try {

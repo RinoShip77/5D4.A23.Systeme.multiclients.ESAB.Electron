@@ -55,7 +55,9 @@
             </th>
           </thead>
           <tbody v-for="(explorer, index) of leaderboard?.board" :key="index">
-            <tr v-if="explorer.uuid === leaderboard?.me.uuid" class="table-warning">
+            <tr
+              v-if="explorer.uuid === leaderboard?.me.uuid && explorer.email === leaderboard?.me.email && explorer.username === leaderboard?.me.username"
+              class="table-warning">
               <th scope="row">{{ index + 1 }}</th>
               <td>{{ explorer.username }}</td>
               <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
