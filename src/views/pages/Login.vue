@@ -53,12 +53,7 @@ async function login() {
             //TODO: Sprint 2: Ajouter le token JWT à l'utilisateur connecté.
             sessionStorage.setItem('token', response.tokens.accessToken);
             sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
-
-
-            const secondResponse = await userRepository.retrieveOne(response.explorer.username, response.tokens.accessToken);
-            sessionStorage.setItem('idExplorer', secondResponse.id);
-            console.log(secondResponse);
-
+            sessionStorage.setItem('userHref', response.explorer.href);
 
             navigationAllowed = true;
         }

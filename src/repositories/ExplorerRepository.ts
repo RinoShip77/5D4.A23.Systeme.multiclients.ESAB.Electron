@@ -61,9 +61,9 @@ export class ExplorerRepository {
         }
     }
 
-    public async retrieveOne(username: string, token: string) {
+    public async retrieveOne(href: string, token: string) {
         try {
-            const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}explorers/${username}`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const res = await this.axios.get(`${href}`, { headers: { 'Authorization': `Bearer ${token}` } });
 
             if (res.status === 200) {
                 return res.data;
