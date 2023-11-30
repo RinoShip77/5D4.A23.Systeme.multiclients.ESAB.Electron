@@ -56,7 +56,7 @@ export class ExplorerRepository {
         }
     }
 
-    public async retrieveOne(href: string, token: string) {
+    public async retrieveOne(href: string | null, token: string | null) {
         try {
             const res = await this.axios.get(`${href}`, { headers: { 'Authorization': `Bearer ${token}` } });
 

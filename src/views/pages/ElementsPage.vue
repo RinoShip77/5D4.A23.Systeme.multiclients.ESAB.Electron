@@ -85,8 +85,6 @@ const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
 const isLoading = ref(true);
 const canRetry = ref(false);
-const token = '1'; // sessionStorage.getItem('token');
-const idExplorer = '654aab9c00e2b7bbe8417c28'; //sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -95,7 +93,10 @@ onMounted(async () => {
 
 async function retrieveElements() {
   try {
-    explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
+    let token = sessionStorage.getItem('token');
+    let href = sessionStorage.getItem('href');
+
+    explorer.value = await explorerRepository.retrieveOne(href, token);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;

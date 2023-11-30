@@ -126,8 +126,9 @@ onMounted(async () => {
 
 async function retrieveLeaderboard(order: string) {
   try {
-    leaderboard.value = await leaderboardRepository.retrieveAll(order);
-    console.log(leaderboard.value?.order)
+    let href = sessionStorage.getItem('href');
+
+    leaderboard.value = await leaderboardRepository.retrieveAll(order, href);
     canRetry.value = false;
 
     //TODO: Remove the switch when the server will respond correctly
