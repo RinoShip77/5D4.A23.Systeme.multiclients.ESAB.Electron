@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 text-decoration-underline title">Mes Elements</h1>
+    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Elements</span> - ({{ explorer?.inventory.elements.length }})</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -50,14 +50,17 @@
           <i class="fas fa-arrows-rotate" style="font-size: 6em"></i>
         </button>
       </div>
-      <div class="row row-cols-6 content" v-else-if="explorer?.inventory.elements.length !== 0">
+      <div class="row row-cols-4 content" v-else-if="explorer?.inventory.elements.length !== 0">
         <div class="col my-2" v-for="element of explorer?.inventory.elements">
           <div class="card border-3 border-body-tertiary shadow-lg">
             <div class="card-header bg-body-secondary">
-              <h4>{{ element.element }}</h4>
+              <h2 class="text-capitalize">{{ element.element }}</h2>
             </div>
-            <p class="fw-bold mt-1 text-decoration-underline">{{ element.quantity }}</p>
-            <div class="card-body">
+            <p class="fw-bold fs-4 mt-1">
+              {{ element.quantity }}
+              <i class="fas fa-boxes-stacked"></i>
+            </p>
+            <div class="card-body mb-3">
               <img :src="`/src/assets/elements/element_${element.element}.png`"
                 class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
             </div>
@@ -65,7 +68,7 @@
         </div>
       </div>
       <div v-else>
-        <p class="fst-italic fw-bold fs-3">Aucun élément</p>
+        <p class="fst-italic fw-bold fs-3">Aucun Element.</p>
       </div>
     </div>
   </DefaultLayout>

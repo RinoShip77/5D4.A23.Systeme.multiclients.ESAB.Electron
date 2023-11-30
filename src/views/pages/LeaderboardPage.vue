@@ -1,6 +1,9 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 text-decoration-underline title">Tableau des scores</h1>
+    <div class="mb-5">
+      <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
+      <span class="text-body-secondary fs-5">Order de trie actuelle : <span class="text-capitalize">{{ order }}</span></span>
+    </div>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(255, 255, 255, 0); display: block;" width="200px" height="200px"
@@ -38,7 +41,7 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="table-responsive content" v-else>
+      <div class="table-responsive content" v-else-if="leaderboard?.board.length !== 0">
         <table class="table table-striped table-hover">
           <thead class="fs-4 text-body-emphasis">
             <th scope="col">#</th>
@@ -65,6 +68,9 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div v-else>
+        <p class="fst-italic fw-bold fs-3">Aucune donnée.</p>
       </div>
     </div>
   </DefaultLayout>

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar navbar-expand-md bg-danger bg-opacity-75">
+    <nav class="navbar navbar-expand-xl bg-danger bg-opacity-75">
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
           <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid"
@@ -12,18 +12,16 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="d-flex ms-auto">
+          <div class="d-flex justify-content-around ms-auto">
             <div class="d-flex align-items-center">
-              <!-- <div class="display-3">
-                <i class="fa-solid fa-caret-left text-danger" style="margin-right: -17px"></i>
-              </div> -->
-              <button class="btn btn-danger rounded-3 mt-1 px-4 fs-5 text-uppercase text-nowrap fw-bold"
+              <button class="btn btn-danger d-flex align-items-center rounded-3 mt-1 px-4 fs-5 text-uppercase text-nowrap fw-bold"
                 @click="disconnect()">
+                <i class="fas fa-right-from-bracket fs-4 me-3"></i>
                 Se déconnecter
               </button>
               <div class="nav-link mx-2">
                 <img
-                  :src="`https://ui-avatars.com/api/?name=${explorer?.name}+${explorer?.surname}&rounded=true&size=80`">
+                  :src="`https://ui-avatars.com/api/?name=${explorer?.name}+${explorer?.surname}&rounded=true&size=96`">
                 <div style="margin-top: -1em; margin-left: 3.5em">
                   <span class="badge bg-success rounded-circle p-2">
                     <span class="visually-hidden">Connecté</span>
@@ -43,7 +41,7 @@
               <div class="d-flex flex-column text-center ms-3">
                 <i class="fas fa-map-location-dot display-3"></i>
                 <div class="d-flex justify-content-around mt-2">
-                  <span class="fs-2 text-nowrap">{{ explorer?.location }}</span>
+                  <span class="fs-2 text-nowrap text-capitalize">{{ explorer?.location }}</span>
                 </div>
               </div>
             </div>
@@ -94,5 +92,6 @@ async function disconnect() {
 .stats {
   font-family: 'Play', sans-serif;
   font-size: 1.5em;
+  max-width: fit-content
 }
 </style>

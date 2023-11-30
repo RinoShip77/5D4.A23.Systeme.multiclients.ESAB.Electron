@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 text-decoration-underline title">Mes Allies</h1>
+    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Allies</span> - ({{ explorer?.allies.length }})</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -176,16 +176,16 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="row row-cols-4 content" v-else-if="allies.length !== 0">
-        <div class="col my-2" v-for="ally of allies">
-          <div class="card border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
+      <div class="row row-cols-4 content" v-else-if="explorer?.allies.length !== 0">
+        <div class="col my-2" v-for="ally of explorer?.allies">
+          <div class="card bg-body-tertiary border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
             data-bs-target="#allyModal" @click="openModal(ally)"> <!-- style="background-image:  url('/src/assets/card_background.png')" -->
             <div class="card-header bg-body-secondary">
-              <h4>{{ ally.name }}</h4>
+              <h4 class="text-capitalize">{{ ally.name }}</h4>
             </div>
             <div class="card-body">
               <img :src="ally.asset" class="img-fluid bg-light rounded-circle shadow-lg">
-              <div class="d-flex justify-content-between mt-3">
+              <div class="d-flex justify-content-between bg-body-secondary mt-3 shadow-sm rounded p-2">
                 <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4">
                 <img :src="`/src/assets/affinities/${ally.affinity}.svg`" class="img-fluid w-25 h-25">
                 <img :src="`/src/assets/books/${ally.books[1]}.png`" class="img-fluid w-25 mt-4">
@@ -213,7 +213,7 @@
         </div>
       </div>
       <div v-else>
-        <p class="fst-italic fw-bold fs-3">Aucun élément</p>
+        <p class="fst-italic fw-bold fs-3">Aucun Ally.</p>
       </div>
     </div>
   </DefaultLayout>
@@ -226,13 +226,13 @@
           <div class="d-flex justify-content-between">
             <img :src="ally?.asset" alt="{{ ally.name }}" title="{{ ally.name }}"
               class="img-fluid img-thumbnail rounded-5 m-1" width="475">
-            <div class="d-flex flex-column m-1 content">
+            <div class="d-flex flex-column m-1 bg-body-secondary rounded-5 content">
               <div class="d-flex justify-content-between mx-5 my-2 mt-3">
-                <h2 class="text-decoration-underline fw-bold">{{ ally?.name }}</h2>
+                <span class="text-capitalize display-5 ms-5 fw-bold">{{ ally?.name }}</span>
                 <div class="d-flex flex-column text-center">
                   <h3>Date de capture:</h3>
                   <span
-                    class="border border-2 border-black rounded-3 opacity-50 px-2 text-decoration-underline fs-5 text-center">
+                    class="border border-2 border-black rounded-3 opacity-75 px-2 fs-5 text-center">
                     {{ ally?.createdAt.toString().split('T')[0] }}
                   </span>
                 </div>
@@ -262,10 +262,10 @@
                   <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-25 mt-5">
                 </div>
               </div>
-              <div class="d-flex mx-auto mt-3 bg-body-tertiary rounded-5">
+              <div class="d-flex mx-auto mt-3 rounded-5">
                 <div class="d-flex flex-column text-center" v-for="kernel of ally?.kernel">
                   <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid">
-                  <h4>{{ kernel }}</h4>
+                  <h4 class="text-capitalize">{{ kernel }}</h4>
                 </div>
               </div>
             </div>
@@ -279,14 +279,16 @@
 <script setup lang="ts">
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { AllyRepository } from '@/repositories/AllyRepository';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
+import { Explorer } from '@/models/Explorer';
 import { Ally } from '@/models/Ally';
 
-const allyRepository = new AllyRepository();
-const allies = ref<Ally[]>([]);
+const explorerRepository = new ExplorerRepository();
+const explorer = ref<Explorer>();
 const ally = ref<Ally>();
 const isLoading = ref(true);
 const canRetry = ref(false);
+const token = '1'; // sessionStorage.getItem('token');
 const idExplorer = '65666daaafbc5985391bf07f'; // sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
@@ -296,7 +298,8 @@ onMounted(async () => {
 
 async function retrieveAllies() {
   try {
-    allies.value = await allyRepository.retrieveAll(idExplorer);
+    explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
+    console.log(explorer.value)
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
