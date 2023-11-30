@@ -6,7 +6,7 @@ export class LeaderboardRepository {
 
   public async retrieveAll(order: string) {
     try {
-      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}leaderboards`, { params: { order: order } });
+      const res = await this.axios.get(`${import.meta.env.VITE_BASE_URL}leaderboard`, { params: { order: order } });
 
       if (res.status === 200) {
         return res.data;

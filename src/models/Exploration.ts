@@ -1,4 +1,3 @@
-import { Ally } from "./Ally"
 import { Element } from "./Element"
 
 export interface Exploration {
@@ -8,6 +7,5 @@ export interface Exploration {
   vault: {
     inox: number,
     elements: Element[]
-  },
-  ally: Ally
+  }
 }

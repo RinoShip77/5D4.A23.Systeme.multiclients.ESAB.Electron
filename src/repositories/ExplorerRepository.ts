@@ -18,11 +18,9 @@ export class ExplorerRepository {
         } catch (err) {
             console.error('Erreur de connexion', err);
         }
-
-
     }
-    public async CreateAccount(email: string, Explorer: string, password: string, name: string, surname: string) {
 
+    public async CreateAccount(email: string, Explorer: string, password: string, name: string, surname: string) {
         try {
             const data = {
                 username: Explorer,
@@ -36,6 +34,7 @@ export class ExplorerRepository {
                 }
 
             };
+
             const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers`, data);
             if (response.status === 201) {
                 return response.data
@@ -43,10 +42,6 @@ export class ExplorerRepository {
         } catch (err) {
             console.error('Erreur lors de la création du compte', err);
         }
-
-
-
-
     }
 
     public async logout(token: string | null) {

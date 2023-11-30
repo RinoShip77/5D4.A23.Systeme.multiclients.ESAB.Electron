@@ -22,7 +22,7 @@
               <div class="nav-link mx-2">
                 <img
                   :src="`https://ui-avatars.com/api/?name=${explorer?.name}+${explorer?.surname}&rounded=true&size=96`">
-                <div style="margin-top: -1em; margin-left: 3.5em">
+                <div style="margin-top: -1.25em; margin-left: 4.5em">
                   <span class="badge bg-success rounded-circle p-2">
                     <span class="visually-hidden">Connecté</span>
                   </span>

@@ -1,6 +1,7 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Allies</span> - ({{ explorer?.allies.length }})</h1>
+    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Allies</span> - ({{
+      explorer?.allies.length }})</h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -178,8 +179,9 @@
       </div>
       <div class="row row-cols-4 content" v-else-if="explorer?.allies.length !== 0">
         <div class="col my-2" v-for="ally of explorer?.allies">
-          <div class="card bg-body-tertiary border-3 border-secondary-subtle shadow-lg" type="button" data-bs-toggle="modal"
-            data-bs-target="#allyModal" @click="openModal(ally)"> <!-- style="background-image:  url('/src/assets/card_background.png')" -->
+          <div class="card bg-body-tertiary border-3 border-secondary-subtle shadow-lg" type="button"
+            data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally)">
+            <!-- style="background-image:  url('/src/assets/card_background.png')" -->
             <div class="card-header bg-body-secondary">
               <h4 class="text-capitalize">{{ ally.name }}</h4>
             </div>
@@ -221,48 +223,49 @@
   <!-- Modal for the details of one Ally -->
   <div class="modal fade" id="allyModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content bg-transparent border-0">
-        <div class="card h-100 p-2 rounded-5">
+      <div class="modal-content bg-transparent border-0 d-flex">
+        <div class="card w-auto p-2 rounded-5">
           <div class="d-flex justify-content-between">
             <img :src="ally?.asset" alt="{{ ally.name }}" title="{{ ally.name }}"
-              class="img-fluid img-thumbnail rounded-5 m-1" width="475">
-            <div class="d-flex flex-column m-1 bg-body-secondary rounded-5 content">
-              <div class="d-flex justify-content-between mx-5 my-2 mt-3">
-                <span class="text-capitalize display-5 ms-5 fw-bold">{{ ally?.name }}</span>
-                <div class="d-flex flex-column text-center">
-                  <h3>Date de capture:</h3>
-                  <span
-                    class="border border-2 border-black rounded-3 opacity-75 px-2 fs-5 text-center">
-                    {{ ally?.createdAt.toString().split('T')[0] }}
-                  </span>
+              class="img-fluid img-thumbnail rounded-5 m-1 w-50">
+            <div class="d-flex flex-column m-1 px-3 bg-body-secondary rounded-5 content">
+              <div class="d-flex flex-column justify-content-between mt-5 mb-4">
+                <div class="d-flex justify-content-around mb-4">
+                  <span class="text-capitalize display-5 fw-bold">{{ ally?.name }}</span>
+                  <div class="d-flex flex-column text-center">
+                    <h3>Date de capture:</h3>
+                    <span class="border border-2 border-black rounded-3 opacity-75 px-2 fs-5 text-nowrap">
+                      {{ ally?.createdAt.toString().split('T')[0] }}
+                    </span>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="d-flex flex-column fs-4">
+                    <div class="d-flex">
+                      <img src="@/assets/ui/power.png" class="img-fluid w-25">
+                      <h5 class="ms-2">{{ ally?.stats.power }}</h5>
+                    </div>
+                    <div class="d-flex">
+                      <img src="@/assets/ui/speed.png" class="img-fluid w-25">
+                      <h5 class="ms-2">{{ ally?.stats.speed }}</h5>
+                    </div>
+                    <div class="d-flex">
+                      <img src="@/assets/ui/shield.png" class="img-fluid w-25">
+                      <h5 class="ms-2">{{ ally?.stats.shield }}</h5>
+                    </div>
+                    <div class="d-flex">
+                      <img src="@/assets/ui/life.png" class="img-fluid w-25">
+                      <h5 class="ms-2">{{ ally?.stats.life }}</h5>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-25 mt-5">
+                    <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-25 mb-5">
+                    <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-25 mt-5">
+                  </div>
                 </div>
               </div>
-              <div class="d-flex mx-3 my-3">
-                <div class="d-flex flex-column fs-4">
-                  <div class="d-flex">
-                    <img src="@/assets/ui/power.png" class="img-fluid w-25">
-                    <h5 class="ms-2">{{ ally?.stats.power }}</h5>
-                  </div>
-                  <div class="d-flex">
-                    <img src="@/assets/ui/speed.png" class="img-fluid w-25">
-                    <h5 class="ms-2">{{ ally?.stats.speed }}</h5>
-                  </div>
-                  <div class="d-flex">
-                    <img src="@/assets/ui/shield.png" class="img-fluid w-25">
-                    <h5 class="ms-2">{{ ally?.stats.shield }}</h5>
-                  </div>
-                  <div class="d-flex">
-                    <img src="@/assets/ui/life.png" class="img-fluid w-25">
-                    <h5 class="ms-2">{{ ally?.stats.life }}</h5>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-25 mt-5">
-                  <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-25 mb-5">
-                  <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-25 mt-5">
-                </div>
-              </div>
-              <div class="d-flex mx-auto mt-3 rounded-5">
+              <div class="d-flex mt-3 rounded-5">
                 <div class="d-flex flex-column text-center" v-for="kernel of ally?.kernel">
                   <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid">
                   <h4 class="text-capitalize">{{ kernel }}</h4>
@@ -289,7 +292,7 @@ const ally = ref<Ally>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 const token = '1'; // sessionStorage.getItem('token');
-const idExplorer = '65666daaafbc5985391bf07f'; // sessionStorage.getItem('idExplorer');
+const idExplorer = '654aab9c00e2b7bbe8417c28'; // sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
   setTimeout(() => { isLoading.value = false; }, 1000);
@@ -299,7 +302,6 @@ onMounted(async () => {
 async function retrieveAllies() {
   try {
     explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
-    console.log(explorer.value)
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;

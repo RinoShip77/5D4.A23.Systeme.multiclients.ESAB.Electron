@@ -2,7 +2,8 @@
   <DefaultLayout>
     <div class="mb-5">
       <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
-      <span class="text-body-secondary fs-5">Order de trie actuelle : <span class="text-capitalize">{{ order }}</span></span>
+      <span class="text-body-secondary fs-5">Le classement des 25 Explorers selon leur <span class="text-capitalize">{{ order
+      }}</span></span>
     </div>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -56,15 +57,17 @@
               <th scope="row">{{ index + 1 }}</th>
               <td>{{ explorer.email }}</td>
               <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
-              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
               <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
+              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
+              <td v-if="order === 'explorations'">{{ explorer.explorations.length }}</td>
             </tr>
             <tr v-else>
               <th scope="row">{{ index + 1 }}</th>
               <td>{{ explorer.email }}</td>
               <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
-              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
               <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
+              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
+              <td v-if="order === 'explorations'">{{ explorer.explorations.length }}</td>
             </tr>
           </tbody>
         </table>
@@ -86,13 +89,15 @@
         <div class="modal-body d-flex justify-content-center align-items-center">
           <select class="form-select form-select-lg w-75 me-4" v-model="order" @change="retrieveLeaderboard(order)">
             <option value="inox">Total d'Inox</option>
-            <option value="allies">Nombre d'Ally</option>
             <option value="elements">Nombre d'Éléments</option>
+            <option value="allies">Nombre d'Allies</option>
+            <option value="explorations">Nombre d'Explorations</option>
           </select>
           <div class="fs-1">
             <i class="fas fa-coins" v-if="order === 'inox'"></i>
-            <i class="fas fa-ghost" v-if="order === 'allies'"></i>
             <i class="fas fa-atom" v-if="order === 'elements'"></i>
+            <i class="fas fa-dragon" v-if="order === 'allies'"></i>
+            <i class="fas fa-route" v-if="order === 'explorations'"></i>
           </div>
         </div>
       </div>
@@ -119,22 +124,26 @@ onMounted(async () => {
 
 async function retrieveLeaderboard(order: string) {
   try {
-    console.log(order);
     leaderboard.value = await leaderboardRepository.retrieveAll(order);
+    console.log(leaderboard.value?.order)
     canRetry.value = false;
 
     //TODO: Remove the switch when the server will respond correctly
     switch (order) {
       case 'inox':
-        leaderboard.value?.board.sort(((a, b) => b.inventory.inox - a.inventory.inox));
-        break;
-
-      case 'allies':
-        leaderboard.value?.board.sort(((a, b) => b.allies.length - a.allies.length));
+        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.inventory.inox - explorer1.inventory.inox));
         break;
 
       case 'elements':
-        leaderboard.value?.board.sort(((a, b) => b.inventory.elements.length - a.inventory.elements.length));
+        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.inventory.elements.length - explorer1.inventory.elements.length));
+        break;
+
+      case 'allies':
+        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.allies.length - explorer1.allies.length));
+        break;
+
+      case 'explorations':
+        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.explorations.length - explorer1.explorations.length));
         break;
     }
   } catch (error) {
