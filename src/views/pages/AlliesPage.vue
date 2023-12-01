@@ -226,12 +226,14 @@
       <div class="modal-content bg-transparent border-0 d-flex">
         <div class="card w-auto p-2 rounded-5">
           <div class="d-flex justify-content-between">
-            <img :src="ally?.asset" alt="{{ ally.name }}" title="{{ ally.name }}"
-              class="img-fluid img-thumbnail rounded-5 m-1 w-50">
-            <div class="d-flex flex-column m-1 px-3 bg-body-secondary rounded-5 content">
-              <div class="d-flex flex-column justify-content-between mt-5 mb-4">
+            <img :src="ally?.asset" class="img-fluid img-thumbnail rounded-5 m-1 w-50">
+            <div class="d-flex flex-column m-1 bg-body-secondary rounded-5 content">
+              <div class="d-flex flex-column justify-content-between mt-3">
                 <div class="d-flex justify-content-around mb-4">
-                  <span class="text-capitalize display-5 fw-bold">{{ ally?.name }}</span>
+                  <div class="d-flex flex-column text-center">
+                    <span class="text-capitalize display-5 fw-bold">{{ ally?.name }}</span>
+                    <span class="opacity-75">Essence : {{ ally?.essence }}</span>
+                  </div>
                   <div class="d-flex flex-column text-center">
                     <h3>Date de capture:</h3>
                     <span class="border border-2 border-black rounded-3 opacity-75 px-2 fs-5 text-nowrap">
@@ -239,36 +241,57 @@
                     </span>
                   </div>
                 </div>
-                <div class="d-flex">
-                  <div class="d-flex flex-column fs-4">
-                    <div class="d-flex">
-                      <img src="@/assets/ui/power.png" class="img-fluid w-25">
-                      <h5 class="ms-2">{{ ally?.stats.power }}</h5>
-                    </div>
-                    <div class="d-flex">
-                      <img src="@/assets/ui/speed.png" class="img-fluid w-25">
-                      <h5 class="ms-2">{{ ally?.stats.speed }}</h5>
-                    </div>
-                    <div class="d-flex">
-                      <img src="@/assets/ui/shield.png" class="img-fluid w-25">
-                      <h5 class="ms-2">{{ ally?.stats.shield }}</h5>
-                    </div>
-                    <div class="d-flex">
-                      <img src="@/assets/ui/life.png" class="img-fluid w-25">
-                      <h5 class="ms-2">{{ ally?.stats.life }}</h5>
+                <div class="d-flex ms-5 mt-2">
+                  <div class="d-flex flex-column">
+                    <h5>Statistiques</h5>
+                    <div class="d-flex flex-column ms-2 fs-4">
+                      <div class="d-flex align-items-center">
+                        <img src="@/assets/ui/power.png" class="img-fluid w-25">
+                        <span class="ms-2">{{ ally?.stats.power }}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <img src="@/assets/ui/speed.png" class="img-fluid w-25">
+                        <span class="ms-2">{{ ally?.stats.speed }}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <img src="@/assets/ui/shield.png" class="img-fluid w-25">
+                        <span class="ms-2">{{ ally?.stats.shield }}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <img src="@/assets/ui/life.png" class="img-fluid w-25">
+                        <span class="ms-2">{{ ally?.stats.life }}</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-between">
-                    <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-25 mt-5">
-                    <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-25 mb-5">
-                    <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-25 mt-5">
+                  <div class="d-flex flex-column text-center">
+                    <h5>Attributs</h5>
+                    <div class="d-flex mt-3">
+                      <div class="d-flex flex-column mt-5">
+                        <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-50 mx-auto" type="button"
+                        title="Premier livre">
+                        <small class="font-monospace fst-italic">Premier livre</small>
+                      </div>
+                      <div class="d-flex flex-column mb-5">
+                        <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-75 mx-auto"
+                        type="button" title="Affinité">
+                        <small class="font-monospace fst-italic">Affinité</small>
+                      </div>
+                      <div class="d-flex flex-column mt-5">
+                        <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-50 mx-auto" type="button"
+                        title="Deuxième livre">
+                        <small class="font-monospace fst-italic">Deuxième livre</small>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="d-flex mt-3 rounded-5">
-                <div class="d-flex flex-column text-center" v-for="kernel of ally?.kernel">
-                  <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid">
-                  <h4 class="text-capitalize">{{ kernel }}</h4>
+              <div class="d-flex flex-column mt-3 rounded-5 text-center" type="button" title="Noyau">
+                <h5>Noyau</h5>
+                <div class="d-flex">
+                  <div class="d-flex flex-column text-center" v-for="kernel of ally?.kernel">
+                    <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid">
+                    <h4 class="text-capitalize">{{ kernel }}</h4>
+                  </div>
                 </div>
               </div>
             </div>
@@ -300,7 +323,7 @@ onMounted(async () => {
 async function retrieveAllies() {
   try {
     let token = sessionStorage.getItem('token');
-    let href = `${import.meta.env.VITE_BASE_URL_MOCKOON}explorers/1`; //sessionStorage.getItem('userHref');
+    let href = sessionStorage.getItem('userHref');
 
     explorer.value = await explorerRepository.retrieveOne(href, token);
     canRetry.value = false;

@@ -62,18 +62,11 @@ import router from "@/router";
 const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
 const token: string | null = sessionStorage.getItem('token');
-//const href: string | null = sessionStorage.getItem('userHref');
-
-//TODO: Remove this 'href' and decommant the other (with 'sessionStorage')
-const href = `${import.meta.env.VITE_BASE_URL_MOCKOON}explorers/1`;
+const href: string | null = sessionStorage.getItem('userHref');
 
 onMounted(async () => {
   retrieveExplorer();
-  
-  //TODO: Decomment this line when going in production and delete the second 'setInterval(...)'
-  //setInterval(retrieveExplorer, import.meta.env.VITE_REFRESH_RATE);
-  
-  setInterval(retrieveExplorer, 5000);
+  setInterval(retrieveExplorer, import.meta.env.VITE_REFRESH_RATE);
 })
 
 async function retrieveExplorer() {

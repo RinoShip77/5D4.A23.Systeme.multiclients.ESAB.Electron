@@ -94,7 +94,7 @@ onMounted(async () => {
 async function retrieveElements() {
   try {
     let token = sessionStorage.getItem('token');
-    let href = `${import.meta.env.VITE_BASE_URL_MOCKOON}explorers/1`; //sessionStorage.getItem('userHref');
+    let href = sessionStorage.getItem('userHref');
 
     explorer.value = await explorerRepository.retrieveOne(href, token);
     canRetry.value = false;
