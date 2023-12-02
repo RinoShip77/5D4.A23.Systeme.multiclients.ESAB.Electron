@@ -1,5 +1,32 @@
 {
-  "name": "andromia-technologies",
+  "name": "kaomia",
+  "productName": "Kaomia",
+  "contributors": [
+    {
+      "name": "Zachary Ethier",
+      "email": "1871862@cstj.qc.ca"
+    },
+    {
+      "name": "Issam Abdelkrim",
+      "email": "1683284@cstj.qc.ca"
+    },
+    {
+      "name": "Vincent Lavoie-Whitlock",
+      "email": "1966857@cstj.qc.ca"
+    },
+    {
+      "name": "Nicola Labelle",
+      "email": "1876227@cstj.qc.ca"
+    },
+    {
+      "name": "Sébastien Moussette",
+      "email": "1742090@cstj.qc.ca"
+    },
+    {
+      "name": "Olivier Bourgault",
+      "email": "1875009@cstj.qc.ca"
+    }
+  ],
   "private": true,
   "version": "0.0.1",
   "scripts": {

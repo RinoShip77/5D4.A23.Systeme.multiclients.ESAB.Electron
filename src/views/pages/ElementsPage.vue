@@ -87,8 +87,12 @@ const isLoading = ref(true);
 const canRetry = ref(false);
 
 onMounted(async () => {
-  setTimeout(() => { isLoading.value = false; }, 1000);
-  retrieveElements();
+  setTimeout(() => {
+    isLoading.value = false;
+    retrieveElements();
+  }, import.meta.env.VITE_LOADING_TIME);
+
+  setInterval(retrieveElements, import.meta.env.VITE_REFRESH_RATE);
 })
 
 async function retrieveElements() {

@@ -3,9 +3,9 @@
     <nav class="navbar navbar-expand-xl bg-danger bg-opacity-75">
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
-          <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid"
+          <img src="@/assets/logo.png" alt="Kaomia" title="Kaomia" class="img-fluid"
             width="100">
-          <h1 class="ms-2 title">Andromia</h1>
+          <h1 class="ms-2 title">Kaomia</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

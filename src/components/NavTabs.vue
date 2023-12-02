@@ -11,7 +11,7 @@
         Leaderboard
       </router-link>
     </aside>
-    <div class="border border-3 rounded-2 p-5 overflow-auto shadow-lg mx-3 my-5 text-center"
+    <div class="border border-3 rounded-2 rounded-start-5 p-5 overflow-auto shadow-lg ms-3 mt-3 text-center"
       style="width: 120rem; height: 45rem">
       <slot class="m-5"></slot>
     </div>

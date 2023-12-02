@@ -3,7 +3,6 @@ import { Element } from "./Element";
 import { Exploration } from "./Exploration";
 
 export interface Explorer {
-    uuid: string,
     email: string,
     username: string,
     name: string,

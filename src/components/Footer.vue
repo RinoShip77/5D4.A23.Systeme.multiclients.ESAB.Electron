@@ -2,7 +2,7 @@
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <div class="col-md-4 d-flex align-items-center">
       <router-link class="d-flex align-items-center text-decoration-none" :to="{ name: 'allies' }">
-        <h4 class="text-body-tertiary title">© 2023 Andromia, Inc</h4>
+        <h4 class="text-body-tertiary title">© 2023 Kaomia, Inc</h4>
       </router-link>
     </div>
 

@@ -40,26 +40,26 @@
         <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
           Impossible de récupérer les données
         </div>
-        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveLeaderboard(order)">
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveLeaderboard()">
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="table-responsive content" v-else-if="leaderboard?.board.length !== 0">
+      <div class="table-responsive content" v-else-if="leaderboard?.length !== 0">
         <table class="table table-striped table-hover" v-if="leaderboard">
           <thead class="fs-4 text-body-emphasis">
             <th scope="col">#</th>
-            <th scope="col">Non d'utilisateur</th>
+            <th scope="col">Nom d'utilisateur</th>
             <th scope="col" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
               <span class="text-body-emphasis">Valeur</span>
               <i class="fas fa-sort ms-5 text-body-emphasis"></i>
             </th>
           </thead>
-          <tbody v-for="(explorer, index) of leaderboard?.board" :key="index">
-            <tr
-              v-if="explorer.uuid === leaderboard?.me.uuid && explorer.email === leaderboard?.me.email && explorer.username === leaderboard?.me.username"
-              class="table-warning">
-              <th scope="row">{{ index + 1 }}</th>
-              <td>{{ explorer.username }}</td>
+          <tbody v-for="(leader, index) of leaderboard" :key="index">
+            <tr class="table-warning fw-bold" v-if="leader.username === explorer?.username">
+              <th scope="row">
+                {{ index + 1 }}
+              </th>
+              <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
               <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
@@ -67,11 +67,11 @@
             </tr>
             <tr v-else>
               <th scope="row">{{ index + 1 }}</th>
-              <td>{{ explorer.username }}</td>
-              <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
-              <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
-              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
-              <td v-if="order === 'explorations'">{{ explorer.explorations.length }}</td>
+              <td>{{ leader.username }}</td>
+              <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
+              <td v-if="order === 'elements'">{{ leader.inventory.elements.length }}</td>
+              <td v-if="order === 'allies'">{{ leader.allies.length }}</td>
+              <td v-if="order === 'explorations'">{{ leader.explorations.length }}</td>
             </tr>
           </tbody>
         </table>
@@ -91,7 +91,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-center align-items-center">
-          <select class="form-select form-select-lg w-75 me-4" v-model="order" @change="retrieveLeaderboard(order)">
+          <select class="form-select form-select-lg w-75 me-4" v-model="order" @change="retrieveLeaderboard()">
             <option value="inox">Total d'Inox</option>
             <option value="elements">Nombre d'Éléments</option>
             <option value="allies">Nombre d'Allies</option>
@@ -113,43 +113,51 @@
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
-import { Leaderboard } from '@/models/Leaderboard';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
+import { Explorer } from '@/models/Explorer';
 
 const leaderboardRepository = new LeaderboardRepository();
-const leaderboard = ref<Leaderboard>();
+const explorerRepository = new ExplorerRepository();
+const leaderboard = ref<Explorer[]>();
+const explorer = ref<Explorer>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 let order = ref('inox');
 
 onMounted(async () => {
-  setTimeout(() => { isLoading.value = false; }, 1000);
-  retrieveLeaderboard('inox');
+  setTimeout(() => {
+    isLoading.value = false;
+    retrieveLeaderboard();
+  }, import.meta.env.VITE_LOADING_TIME);
+
+  setInterval(retrieveLeaderboard, import.meta.env.VITE_REFRESH_RATE);
 })
 
-async function retrieveLeaderboard(order: string) {
+async function retrieveLeaderboard() {
   try {
     let token = sessionStorage.getItem('token');
     let href = sessionStorage.getItem('userHref');
 
-    leaderboard.value = await leaderboardRepository.retrieveAll(order, href, token);
+    leaderboard.value = await leaderboardRepository.retrieveAll(order.value.toString());
+    explorer.value = await explorerRepository.retrieveOne(href, token);
     canRetry.value = false;
 
     //TODO: Remove the switch when the server will respond correctly
-    switch (order) {
+    switch (order.value.toString()) {
       case 'inox':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.inventory.inox - explorer1.inventory.inox));
+        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.inventory.inox - explorer1.inventory.inox));
         break;
 
       case 'elements':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.inventory.elements.length - explorer1.inventory.elements.length));
+        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.inventory.elements.length - explorer1.inventory.elements.length));
         break;
 
       case 'allies':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.allies.length - explorer1.allies.length));
+        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.allies.length - explorer1.allies.length));
         break;
 
       case 'explorations':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.explorations.length - explorer1.explorations.length));
+        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.explorations.length - explorer1.explorations.length));
         break;
     }
   } catch (error) {

@@ -316,8 +316,12 @@ const isLoading = ref(true);
 const canRetry = ref(false);
 
 onMounted(async () => {
-  setTimeout(() => { isLoading.value = false; }, 1000);
-  retrieveAllies();
+  setTimeout(() => {
+    isLoading.value = false;
+    retrieveAllies();
+  }, import.meta.env.VITE_LOADING_TIME);
+  
+  setInterval(retrieveAllies, import.meta.env.VITE_REFRESH_RATE);
 })
 
 async function retrieveAllies() {
