@@ -2,10 +2,12 @@
   <DefaultLayout>
     <div class="mb-5">
       <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
-      <span class="text-body-secondary fs-5" v-if="leaderboard">Le classement des 25 Explorers<span
-          v-if="order === 'inox' || order === 'elements' || order === 'allies' || order === 'explorations'"> selon leur
-          <span class="text-capitalize">{{ order
-          }}</span></span></span>
+      <span class="text-body-secondary fs-5" v-if="leaderboard">
+        Le classement des 25 Explorers selon leur
+        <span class="text-capitalize">
+          {{ order }}
+        </span>
+      </span>
     </div>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -56,7 +58,19 @@
           </thead>
           <tbody v-for="(leader, index) of leaderboard" :key="index">
             <tr class="table-warning fw-bold" v-if="leader.username === explorer?.username">
-              <th scope="row">
+              <th scope="row" v-if="index < lastPosition">
+                <i class="fas fa-circle-up me-1 text-success"></i>
+                <span class="text-success fw-bolder">+</span>
+                <span class="me-1 text-success">{{ lastPosition - index }}</span>
+                {{ index + 1 }}
+              </th>
+              <th scope="row" v-else-if="index > lastPosition">
+                <i class="fas fa-circle-down me-1 text-danger"></i>
+                <span class="text-danger fw-bolder">-</span>
+                <span class="me-1 text-danger">{{ index - lastPosition }}</span>
+                {{ index + 1 }}
+              </th>
+              <th scope="row" v-else>
                 {{ index + 1 }}
               </th>
               <td>{{ leader.username }}</td>
@@ -123,6 +137,7 @@ const explorer = ref<Explorer>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 let order = ref('inox');
+let lastPosition = ref();
 
 onMounted(async () => {
   setTimeout(() => {
@@ -131,6 +146,16 @@ onMounted(async () => {
   }, import.meta.env.VITE_LOADING_TIME);
 
   setInterval(retrieveLeaderboard, import.meta.env.VITE_REFRESH_RATE);
+  setInterval(() => {
+    leaderboard.value?.forEach(leader => {
+      if (leader.username === explorer.value?.username) {
+        if (leaderboard.value?.indexOf(leader) !== undefined) {
+          sessionStorage.setItem('lastPosition', `${leaderboard.value?.indexOf(leader)}`)
+          lastPosition.value = Number(sessionStorage.getItem('lastPosition'));
+        }
+      }
+    });
+  }, import.meta.env.VITE_REFRESH_RATE);
 })
 
 async function retrieveLeaderboard() {

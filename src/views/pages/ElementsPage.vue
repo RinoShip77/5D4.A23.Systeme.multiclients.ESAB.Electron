@@ -1,7 +1,9 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Elements</span><span v-if="explorer"> -
-        ({{ explorer?.inventory.elements.length }})</span></h1>
+    <h1 class="display-3 mb-5 title">
+      <span class="text-decoration-underline">Mes Elements</span>
+      <span v-if="explorer"> - ({{ explorer?.inventory.elements.length }})</span>
+    </h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
