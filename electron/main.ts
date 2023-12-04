@@ -23,7 +23,10 @@ function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.PUBLIC, "logo.png"),
     width: 1600,
-    height: 900, maximizable: false,
+    height: 900,
+    hasShadow: true,
+    autoHideMenuBar: true,
+    roundedCorners: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

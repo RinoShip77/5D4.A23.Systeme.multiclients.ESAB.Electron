@@ -46,18 +46,18 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="table-responsive content" v-else-if="leaderboard?.length !== 0">
-        <table class="table table-striped table-hover" v-if="leaderboard">
-          <thead class="fs-4 text-body-emphasis">
+      <div class="bg-body-secondary rounded-3 content" v-else-if="leaderboard?.length !== 0">
+        <table class="table table-striped table-hover rounded" v-if="leaderboard">
+          <thead class="fs-2">
             <th scope="col">#</th>
             <th scope="col">Nom d'utilisateur</th>
             <th scope="col" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
-              <span class="text-body-emphasis">Valeur</span>
-              <i class="fas fa-sort ms-5 text-body-emphasis"></i>
+              <span class="text-body-emphasis bg-transparent">Valeur</span>
+              <i class="fas fa-sort ms-5 text-body-emphasis bg-transparent"></i>
             </th>
           </thead>
           <tbody v-for="(leader, index) of leaderboard" :key="index">
-            <tr class="table-warning fw-bold" v-if="leader.username === explorer?.username">
+            <tr class="table-warning fw-bold fs-5" v-if="leader.username === explorer?.username">
               <th scope="row" v-if="index < lastPosition">
                 <i class="fas fa-circle-up me-1 text-success"></i>
                 <span class="text-success fw-bolder">+</span>
@@ -81,6 +81,42 @@
             </tr>
             <tr v-else>
               <th scope="row">{{ index + 1 }}</th>
+
+              <!-- * This code is for if we want position to repeat themselfs (ex.: 4, 4, 4, etc. )  -->
+              <!-- <span v-if="leader.inventory.inox === leaderboard[index - 1]?.inventory.inox">
+                <span v-if="index < 1">{{ index + 1 }}</span>
+                <span
+                  v-else-if="(leader.inventory.inox === leaderboard[index - 1]?.inventory.inox) && (leaderboard[index - 1]?.inventory.inox === leaderboard[index - 2]?.inventory.inox)">
+                  {{ index - 1 }}
+                </span>
+                <span v-else>{{ index }}</span>
+              </span>
+              <span v-else-if="leader.inventory.elements.length === leaderboard[index - 1]?.inventory.elements.length">
+                <span v-if="index < 1">{{ index + 1 }}</span>
+                <span
+                  v-else-if="(leader.inventory.elements.length === leaderboard[index - 1]?.inventory.elements.length) && (leaderboard[index - 1]?.inventory.elements.length === leaderboard[index - 2]?.inventory.elements.length)">
+                  {{ index - 1 }}
+                </span>
+                <span v-else>{{ index }}</span>
+              </span>
+              <span v-else-if="leader.allies.length === leaderboard[index - 1]?.allies.length">
+                <span v-if="index < 1">{{ index + 1 }}</span>
+                <span
+                  v-else-if="(leader.allies.length === leaderboard[index - 1]?.allies.length) && (leaderboard[index - 1]?.allies.length === leaderboard[index - 2]?.allies.length)">
+                  {{ index - 1 }}
+                </span>
+                <span v-else>{{ index }}</span>
+              </span>
+              <span v-else-if="leader.explorations.length === leaderboard[index - 1]?.explorations.length">
+                <span v-if="index < 1">{{ index + 1 }}</span>
+                <span
+                  v-else-if="(leader.explorations.length === leaderboard[index - 1]?.explorations.length) && (leaderboard[index - 1]?.explorations.length === leaderboard[index - 2]?.explorations.length)">
+                  {{ index - 1 }}
+                </span>
+                <span v-else>{{ index }}</span>
+              </span>
+              <span v-else>{{ index + 1 }}</span> -->
+
               <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ leader.inventory.elements.length }}</td>
@@ -170,19 +206,43 @@ async function retrieveLeaderboard() {
     //TODO: Remove the switch when the server will respond correctly
     switch (order.value.toString()) {
       case 'inox':
-        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.inventory.inox - explorer1.inventory.inox));
+        leaderboard.value?.sort((explorer1, explorer2) => {
+          if (explorer1.inventory.inox === explorer2.inventory.inox) {
+            return explorer1.username > explorer2.username ? -1 : 1;
+          } else {
+            return explorer1.inventory.inox > explorer2.inventory.inox ? -1 : 1;
+          }
+        });
         break;
 
       case 'elements':
-        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.inventory.elements.length - explorer1.inventory.elements.length));
+        leaderboard.value?.sort((explorer1, explorer2) => {
+          if (explorer1.inventory.elements.length === explorer2.inventory.elements.length) {
+            return explorer1.username > explorer2.username ? -1 : 1;
+          } else {
+            return explorer1.inventory.elements.length > explorer2.inventory.elements.length ? -1 : 1;
+          }
+        });
         break;
 
       case 'allies':
-        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.allies.length - explorer1.allies.length));
+        leaderboard.value?.sort((explorer1, explorer2) => {
+          if (explorer1.allies.length === explorer2.allies.length) {
+            return explorer1.username > explorer2.username ? -1 : 1;
+          } else {
+            return explorer1.allies.length > explorer2.allies.length ? -1 : 1;
+          }
+        });
         break;
 
       case 'explorations':
-        leaderboard.value?.sort(((explorer1, explorer2) => explorer2.explorations.length - explorer1.explorations.length));
+        leaderboard.value?.sort((explorer1, explorer2) => {
+          if (explorer1.explorations.length === explorer2.explorations.length) {
+            return explorer1.username > explorer2.username ? -1 : 1;
+          } else {
+            return explorer1.explorations.length > explorer2.explorations.length ? -1 : 1;
+          }
+        });
         break;
     }
   } catch (error) {
