@@ -2,7 +2,7 @@
   <DefaultLayout>
     <h1 class="display-3 mb-5 title">
       <span class="text-decoration-underline">Mes Allies</span>
-      <span v-if="explorer"> - ({{ explorer?.allies.length }})</span>
+      <span v-if="allies"> - ({{ allies?.length }})</span>
     </h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -179,8 +179,8 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="row row-cols-4 content" v-else-if="explorer?.allies.length !== 0">
-        <div class="col my-2" v-for="ally of explorer?.allies">
+      <div class="row row-cols-4 content" v-else-if="allies?.length !== 0">
+        <div class="col my-2" v-for="ally of allies">
           <div class="card bg-body-tertiary border-3 border-secondary-subtle shadow-lg" type="button"
             data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally)">
             <!-- style="background-image:  url('/src/assets/card_background.png')" -->
@@ -307,12 +307,11 @@
 <script setup lang="ts">
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { ExplorerRepository } from '@/repositories/ExplorerRepository';
-import { Explorer } from '@/models/Explorer';
+import { AllyRepository } from '@/repositories/AllyRepository';
 import { Ally } from '@/models/Ally';
 
-const explorerRepository = new ExplorerRepository();
-const explorer = ref<Explorer>();
+const allyRepository = new AllyRepository();
+const allies = ref<Ally[]>();
 const ally = ref<Ally>();
 const isLoading = ref(true);
 const canRetry = ref(false);
@@ -331,7 +330,7 @@ async function retrieveAllies() {
     let token = sessionStorage.getItem('token');
     let href = sessionStorage.getItem('userHref');
 
-    explorer.value = await explorerRepository.retrieveOne(href, token);
+    allies.value = await allyRepository.retrieveAll(href, token);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
