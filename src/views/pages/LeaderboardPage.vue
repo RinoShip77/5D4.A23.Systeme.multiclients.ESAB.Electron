@@ -3,7 +3,7 @@
     <div class="mb-5">
       <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
       <span class="text-body-secondary fs-5" v-if="leaderboard">
-        Le classement des 25 Explorers selon leur
+        Le classement des 25 meilleurs Explorers selon leur
         <span class="text-capitalize">
           {{ order }}
         </span>
@@ -56,7 +56,7 @@
               <i class="fas fa-sort ms-5 text-body-emphasis bg-transparent"></i>
             </th>
           </thead>
-          <tbody v-for="(leader, index) of leaderboard" :key="index">
+          <tbody v-for="(leader, index) of leaderboard.slice(0, 25)" :key="index">
             <tr class="table-warning fw-bold fs-5" v-if="leader.username === explorer?.username">
               <th scope="row" v-if="index < lastPosition">
                 <i class="fas fa-circle-up me-1 text-success"></i>
@@ -80,43 +80,41 @@
               <td v-if="order === 'explorations'">{{ explorer.explorations.length }}</td>
             </tr>
             <tr v-else>
-              <th scope="row">{{ index + 1 }}</th>
-
-              <!-- * This code is for if we want position to repeat themselfs (ex.: 4, 4, 4, etc. )  -->
-              <!-- <span v-if="leader.inventory.inox === leaderboard[index - 1]?.inventory.inox">
-                <span v-if="index < 1">{{ index + 1 }}</span>
-                <span
-                  v-else-if="(leader.inventory.inox === leaderboard[index - 1]?.inventory.inox) && (leaderboard[index - 1]?.inventory.inox === leaderboard[index - 2]?.inventory.inox)">
-                  {{ index - 1 }}
+              <th scope="row">
+                <span v-if="leader.inventory.inox === leaderboard[index - 1]?.inventory.inox">
+                  <span v-if="index < 1">{{ index + 1 }}</span>
+                  <span
+                    v-else-if="leaderboard[index - 1]?.inventory.inox === leaderboard[index - 2]?.inventory.inox">
+                    {{ index - 1 }}
+                  </span>
+                  <span v-else>{{ index }}</span>
                 </span>
-                <span v-else>{{ index }}</span>
-              </span>
-              <span v-else-if="leader.inventory.elements.length === leaderboard[index - 1]?.inventory.elements.length">
-                <span v-if="index < 1">{{ index + 1 }}</span>
-                <span
-                  v-else-if="(leader.inventory.elements.length === leaderboard[index - 1]?.inventory.elements.length) && (leaderboard[index - 1]?.inventory.elements.length === leaderboard[index - 2]?.inventory.elements.length)">
-                  {{ index - 1 }}
+                <span v-else-if="leader.inventory.elements.length === leaderboard[index - 1]?.inventory.elements.length">
+                  <span v-if="index < 1">{{ index + 1 }}</span>
+                  <span
+                    v-else-if="leaderboard[index - 1]?.inventory.elements.length === leaderboard[index - 2]?.inventory.elements.length">
+                    {{ index - 1 }}
+                  </span>
+                  <span v-else>{{ index }}</span>
                 </span>
-                <span v-else>{{ index }}</span>
-              </span>
-              <span v-else-if="leader.allies.length === leaderboard[index - 1]?.allies.length">
-                <span v-if="index < 1">{{ index + 1 }}</span>
-                <span
-                  v-else-if="(leader.allies.length === leaderboard[index - 1]?.allies.length) && (leaderboard[index - 1]?.allies.length === leaderboard[index - 2]?.allies.length)">
-                  {{ index - 1 }}
+                <span v-else-if="leader.allies.length === leaderboard[index - 1]?.allies.length">
+                  <span v-if="index < 1">{{ index + 1 }}</span>
+                  <span
+                    v-else-if="leaderboard[index - 1]?.allies.length === leaderboard[index - 2]?.allies.length">
+                    {{ index - 1 }}
+                  </span>
+                  <span v-else>{{ index }}</span>
                 </span>
-                <span v-else>{{ index }}</span>
-              </span>
-              <span v-else-if="leader.explorations.length === leaderboard[index - 1]?.explorations.length">
-                <span v-if="index < 1">{{ index + 1 }}</span>
-                <span
-                  v-else-if="(leader.explorations.length === leaderboard[index - 1]?.explorations.length) && (leaderboard[index - 1]?.explorations.length === leaderboard[index - 2]?.explorations.length)">
-                  {{ index - 1 }}
+                <span v-else-if="leader.explorations.length === leaderboard[index - 1]?.explorations.length">
+                  <span v-if="index < 1">{{ index + 1 }}</span>
+                  <span
+                    v-else-if="leaderboard[index - 1]?.explorations.length === leaderboard[index - 2]?.explorations.length">
+                    {{ index - 1 }}
+                  </span>
+                  <span v-else>{{ index }}</span>
                 </span>
-                <span v-else>{{ index }}</span>
-              </span>
-              <span v-else>{{ index + 1 }}</span> -->
-
+                <span v-else>{{ index + 1 }}</span>
+              </th>
               <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ leader.inventory.elements.length }}</td>
@@ -164,12 +162,15 @@ import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
 import { ExplorerRepository } from '@/repositories/ExplorerRepository';
+import { ExplorationRepository } from '@/repositories/ExplorationRepository';
 import { Explorer } from '@/models/Explorer';
 
 const leaderboardRepository = new LeaderboardRepository();
 const explorerRepository = new ExplorerRepository();
+const explorationRepository = new ExplorationRepository();
 const leaderboard = ref<Explorer[]>();
 const explorer = ref<Explorer>();
+const explorations = ref<number[]>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 let order = ref('inox');
@@ -201,6 +202,7 @@ async function retrieveLeaderboard() {
 
     leaderboard.value = await leaderboardRepository.retrieveAll(order.value.toString());
     explorer.value = await explorerRepository.retrieveOne(href, token);
+    explorations.value = await explorationRepository.retrieveAll(href, token);
     canRetry.value = false;
 
     //TODO: Remove the switch when the server will respond correctly
