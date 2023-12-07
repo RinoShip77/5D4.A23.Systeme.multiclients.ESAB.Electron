@@ -3,18 +3,18 @@ import { Element } from "./Element";
 import { Exploration } from "./Exploration";
 
 export interface Explorer {
-    email: string,
-    username: string,
-    name: string,
-    surname: string,
-    passwordHash: string,
     inventory: {
         inox: number,
         elements: Element[]
     },
     location: string,
-    allies: Ally[],
-    explorations: Exploration[],
+    email: string,
+    username: string,
+    name: string,
+    surname: string,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    href: string,
+    allies: Ally[],
+    explorations: Exploration[]
 }

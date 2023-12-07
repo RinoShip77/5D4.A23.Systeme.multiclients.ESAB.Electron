@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "06c05512-fae4-4192-b51d-79562939478e",
-          "body": "[\n  {{#repeat 30}}\n    {\n      \"uuid\": \"654a8a5194e5b836d2ac064c\",\n      \"email\": \"{{email}}\",\n      \"username\": \"{{int 0 75}}{{firstName}}{{int 0 75}}\",\n      \"name\": \"{{firstName}}\",\n      \"surname\": \"{{lastName}}\",\n      \"passwordHash\": \"$argon2id$v=19$m=65536,t=3,p=4$fxhbVDSB9wSV23zwyiJh7Q$KDqP+H6v29HNrUuUo8VWhg8uSN4NVPFATrL07D9uTG8\",\n      \"inventory\": {\n        \"inox\": {{int 0 30}},\n        \"elements\": [\n          {{#repeat 0 10}}\n            {\n              \"element\": \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\",\n              \"quantity\": {{int 0 100}}\n            }\n          {{/repeat}}\n        ]\n      },\n      \"location\": \"{{oneOf (array 'Cordisphère' 'Irphong' 'Yartar')}}\",\n      \"allies\": [\n        {{#repeat 0 10}}\n          {\n            \"name\": \"{{oneOf (array 'viking' 'orc' 'archer' 'king')}}\",\n            \"affinity\": \"{{oneOf (array 'air' 'darkness' 'earth' 'energy' 'fire' 'life' 'light' 'logic' 'music' 'space' 'toxic' 'water')}}\",\n            \"essence\": {{int 0 500}},\n            \"stats\": {\n              \"life\": {{int 0 50}},\n              \"speed\": {{int 0 50}},\n              \"power\": {{int 0 50}},\n              \"shield\": {{int 0 50}}\n            },\n            \"crypto\": {\n              \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n              \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n            },\n            \"books\": [\n              {{#repeat 2}}\n                \"{{oneOf (array 'black' 'blue' 'green' 'pink' 'purple' 'red' 'white' 'yellow')}}\"\n              {{/repeat}}\n            ],\n            \"kernel\": [\n              {{#repeat 5}}\n                  \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\"\n              {{/repeat}}\n            ],\n            \"uuid\": \"{{guid}}\",\n            \"archiveIndex\": 24,\n            \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n            \"asset\": \"{{oneOf (array 'https://assets.andromia.science/allies/viking.png' 'https://assets.andromia.science/allies/orc.png' 'https://assets.andromia.science/allies/archer.png' 'https://assets.andromia.science/allies/king.png')}}\",\n            \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n            \"updatedAt\": \"2023-12-01T08:00:00.057Z\",\n            \"expireAt\": \"2024-10-24T00:00:00.000Z\"\n          }\n        {{/repeat}}\n      ],\n      \"explorations\": [\n        {{#repeat 0 10}}\n          {\n            \"explorationDate\": \"2023-10-17T21:58:15.057Z\",\n            \"destination\": \"{{oneOf (array 'Cordisphère' 'Irphong' 'Yartar')}}\",\n            \"affinity\": \"{{oneOf (array 'air' 'darkness' 'earth' 'energy' 'fire' 'life' 'light' 'logic' 'music' 'space' 'toxic' 'water')}}\",\n            \"vault\": {\n              \"inox\": 63,\n              \"elements\": [\n                {{#repeat 0 25}}\n                  {\n                    \"element\": \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\",\n                    \"quantity\": {{int 0 100}}\n                  }\n                {{/repeat}}\n              ]\n            }\n          }\n        {{/repeat}}\n      ],\n      \"createdAt\": \"2023-11-07T19:04:49.779Z\",\n      \"updatedAt\": \"2023-11-07T19:04:49.779Z\"\n    }\n  {{/repeat}},\n  {\n    \"uuid\": \"655fa2519fcaf20eded81c02\",\n    \"email\": \"BB17@email.uk\",\n    \"username\": \"Bob2\",\n    \"name\": \"Jacob\",\n    \"surname\": \"Parker\",\n    \"passwordHash\": \"$argon2id$v=19$m=65536,t=3,p=4$fxhbVDSB9wSV23zwyiJh7Q$KDqP+H6v29HNrUuUo8VWhg8uSN4NVPFATrL07D9uTG8\",\n    \"inventory\": {\n      \"inox\": 27,\n      \"elements\": [\n        {{#repeat 5}}\n          {\n            \"element\": \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\",\n            \"quantity\": {{int 0 100}}\n          }\n        {{/repeat}}\n      ]\n    },\n    \"location\": \"{{oneOf (array 'Cordisphère' 'Irphong' 'Yartar')}}\",\n    \"allies\": [\n      {{#repeat 2}}\n        {\n          \"name\": \"{{oneOf (array 'viking' 'orc' 'archer' 'king')}}\",\n          \"affinity\": \"{{oneOf (array 'air' 'darkness' 'earth' 'energy' 'fire' 'life' 'light' 'logic' 'music' 'space' 'toxic' 'water')}}\",\n          \"essence\": {{int 0 500}},\n          \"stats\": {\n            \"life\": {{int 0 50}},\n            \"speed\": {{int 0 50}},\n            \"power\": {{int 0 50}},\n            \"shield\": {{int 0 50}}\n          },\n          \"crypto\": {\n            \"hash\": \"f549e0d2dcda029d10ae62f5179e73774fcd9fccf2779f7e106529a8945a25ab\",\n            \"signature\": \"eyJhbGciOiJFUzI1NiIsImtpZCI6ImNOdWtWQ1MyVHNIRWs1bjBobGd4MHdiay1La1psQkFIWHpLZk56dzdva28ifQ.eyJ1dWlkIjoiMTkzMTlhMjgtNjc1Ny00OTk4LTlkOTgtNDYyOThiZTU1ZGNkIiwiaGFzaCI6ImY1NDllMGQyZGNkYTAyOWQxMGFlNjJmNTE3OWU3Mzc3NGZjZDlmY2NmMjc3OWY3ZTEwNjUyOWE4OTQ1YTI1YWIifQ.fZVLXKU4eaXhBfXHuU_z8gYqxm9uxunLKnVb_rvK4lfIe32GngUBogJfa3g7696vcgrUCJ3i1oDtjjUGi4jCEw\"\n          },\n          \"books\": [\n            {{#repeat 2}}\n              \"{{oneOf (array 'black' 'blue' 'green' 'pink' 'purple' 'red' 'white' 'yellow')}}\"\n            {{/repeat}}\n          ],\n          \"kernel\": [\n            {{#repeat 5}}\n              \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\"\n            {{/repeat}}\n          ],\n          \"uuid\": \"{{guid}}\",\n          \"archiveIndex\": 24,\n          \"href\": \"https://api.andromia.science/allies/19319a28-6757-4998-9d98-46298be55dcd\",\n          \"asset\": \"{{oneOf (array 'https://assets.andromia.science/allies/viking.png' 'https://assets.andromia.science/allies/orc.png' 'https://assets.andromia.science/allies/archer.png' 'https://assets.andromia.science/allies/king.png')}}\",\n          \"createdAt\": \"2023-10-17T21:58:15.057Z\",\n          \"updatedAt\": \"2023-12-01T08:00:00.057Z\",\n          \"expireAt\": \"2024-10-24T00:00:00.000Z\"\n        }\n      {{/repeat}}\n    ],\n    \"explorations\": [\n      {{#repeat 3}}\n        {\n          \"explorationDate\": \"2023-10-17T21:58:15.057Z\",\n          \"destination\": \"{{oneOf (array 'Cordisphère' 'Irphong' 'Yartar')}}\",\n          \"affinity\": \"{{oneOf (array 'air' 'darkness' 'earth' 'energy' 'fire' 'life' 'light' 'logic' 'music' 'space' 'toxic' 'water')}}\",\n          \"vault\": {\n            \"inox\": 34,\n            \"elements\": [\n              {{#repeat 18}}\n                {\n                  \"element\": \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\",\n                  \"quantity\": {{int 0 100}}\n                }\n              {{/repeat}}\n            ]\n          }\n        }\n      {{/repeat}}\n    ],\n    \"createdAt\": \"2023-11-07T19:04:49.779Z\",\n    \"updatedAt\": \"2023-11-07T19:04:49.779Z\"\n  }\n]",
+          "body": "{\n  \"board\": [\n    {{#repeat 24}}\n      {\n        \"inventory\": {\n          \"inox\": {{int 0 50}},\n          \"elements\": [\n            {{#repeat 0 10}}\n              {\n                \"element\": \"{{oneOf (array 'a' 'b' 'e' 'ex' 'fr' 'g' 'i' 'ja' 'k' 'l' 'no' 'q' 'sm' 've' 'wu' 'xu' 'ye' 'z')}}\",\n                \"quantity\": {{int 0 10}}\n              }\n            {{/repeat}}\n          ]\n        },\n        \"location\": \"{{oneOf (array 'Cordisphère' 'Irphong' 'Yartar')}}\",\n        \"email\": \"{{email}}\",\n        \"username\": \"{{int 0 75}}{{firstName}}{{int 0 75}}\",\n        \"name\": \"{{firstName}}\",\n        \"surname\": \"{{lastName}}\",\n        \"createdAt\": \"2023-11-07T19:04:49.779Z\",\n        \"updatedAt\": \"2023-11-07T19:04:49.779Z\",\n        \"href\": \"{{oneOf (array 'http://localhost:5000/explorers/654aab9c00e2b7bbe8417c28' 'http://localhost:5000/explorers/656f963e4b6b3b50d96fc862')}}\"\n      }\n    {{/repeat}},\n    {\n      \"inventory\": {\n        \"inox\": 27,\n        \"elements\": [\n          {\n            \"_id\": \"6571bffae00e253d14722f7c\",\n            \"element\": \"Ye\",\n            \"quantity\": 3,\n            \"id\": \"6571bffae00e253d14722f7c\"\n          },\n          {\n            \"_id\": \"6571bffae00e253d14722f7d\",\n            \"element\": \"E\",\n            \"quantity\": 5,\n            \"id\": \"6571bffae00e253d14722f7d\"\n          },\n          {\n            \"_id\": \"6571bffae00e253d14722f7e\",\n            \"element\": \"A\",\n            \"quantity\": 4,\n            \"id\": \"6571bffae00e253d14722f7e\"\n          },\n          {\n            \"_id\": \"6571bffae00e253d14722f7f\",\n            \"element\": \"Z\",\n            \"quantity\": 1,\n            \"id\": \"6571bffae00e253d14722f7f\"\n          },\n          {\n            \"_id\": \"6571bffae00e253d14722f80\",\n            \"element\": \"Wu\",\n            \"quantity\": 9,\n            \"id\": \"6571bffae00e253d14722f80\"\n          }\n        ]\n      },\n      \"location\": \"inoxis\",\n      \"email\": \"bob.gratton@email.ca\",\n      \"username\": \"Bob2\",\n      \"name\": \"Bob\",\n      \"surname\": \"Gratton\",\n      \"createdAt\": \"2023-12-05T18:39:33.880Z\",\n      \"updatedAt\": \"2023-12-05T18:39:33.880Z\",\n      \"href\": \"http://localhost:5000/explorers/656f6e65049d62338bfbb912\"\n    }\n  ],\n  \"me\": {\n    \"inventory\": {\n      \"inox\": 27,\n      \"elements\": [\n        {\n          \"_id\": \"6571bffae00e253d14722f7c\",\n          \"element\": \"Ye\",\n          \"quantity\": 3,\n          \"id\": \"6571bffae00e253d14722f7c\"\n        },\n        {\n          \"_id\": \"6571bffae00e253d14722f7d\",\n          \"element\": \"E\",\n          \"quantity\": 5,\n          \"id\": \"6571bffae00e253d14722f7d\"\n        },\n        {\n          \"_id\": \"6571bffae00e253d14722f7e\",\n          \"element\": \"A\",\n          \"quantity\": 4,\n          \"id\": \"6571bffae00e253d14722f7e\"\n        },\n        {\n          \"_id\": \"6571bffae00e253d14722f7f\",\n          \"element\": \"Z\",\n          \"quantity\": 1,\n          \"id\": \"6571bffae00e253d14722f7f\"\n        },\n        {\n          \"_id\": \"6571bffae00e253d14722f80\",\n          \"element\": \"Wu\",\n          \"quantity\": 9,\n          \"id\": \"6571bffae00e253d14722f80\"\n        }\n      ]\n    },\n    \"location\": \"inoxis\",\n    \"email\": \"bob.gratton@email.ca\",\n    \"username\": \"Bob2\",\n    \"name\": \"Bob\",\n    \"surname\": \"Gratton\",\n    \"createdAt\": \"2023-12-05T18:39:33.880Z\",\n    \"updatedAt\": \"2023-12-05T18:39:33.880Z\",\n    \"href\": \"http://localhost:5000/explorers/656f6e65049d62338bfbb912\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Récupération réussi",
@@ -28,32 +28,25 @@
           "sendFileAsBody": false,
           "rules": [
             {
+              "target": "header",
+              "modifier": "Authorization ",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
               "target": "params",
-              "modifier": "order",
-              "value": "inox",
-              "invert": false,
-              "operator": "equals"
+              "modifier": "href",
+              "value": "",
+              "invert": true,
+              "operator": "null"
             },
             {
               "target": "params",
               "modifier": "order",
-              "value": "allies",
-              "invert": false,
-              "operator": "equals"
-            },
-            {
-              "target": "params",
-              "modifier": "order",
-              "value": "elements",
-              "invert": false,
-              "operator": "equals"
-            },
-            {
-              "target": "params",
-              "modifier": "order",
-              "value": "explorations",
-              "invert": false,
-              "operator": "equals"
+              "value": "",
+              "invert": true,
+              "operator": "null"
             }
           ],
           "rulesOperator": "AND",
@@ -84,9 +77,42 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "b1318497-d4e7-4c20-8fe3-5e400ee37560",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "explorers/:idExplorer",
+      "responses": [
+        {
+          "uuid": "c2bd0c4c-c50d-4396-9a75-7d4d899f92cb",
+          "body": "{\r\n    \"inventory\": {\r\n        \"inox\": 27,\r\n        \"elements\": [\r\n            {\r\n                \"_id\": \"6571bffae00e253d14722f7c\",\r\n                \"element\": \"Ye\",\r\n                \"quantity\": 3,\r\n                \"id\": \"6571bffae00e253d14722f7c\"\r\n            },\r\n            {\r\n                \"_id\": \"6571bffae00e253d14722f7d\",\r\n                \"element\": \"E\",\r\n                \"quantity\": 5,\r\n                \"id\": \"6571bffae00e253d14722f7d\"\r\n            },\r\n            {\r\n                \"_id\": \"6571bffae00e253d14722f7e\",\r\n                \"element\": \"A\",\r\n                \"quantity\": 4,\r\n                \"id\": \"6571bffae00e253d14722f7e\"\r\n            },\r\n            {\r\n                \"_id\": \"6571bffae00e253d14722f7f\",\r\n                \"element\": \"Z\",\r\n                \"quantity\": 1,\r\n                \"id\": \"6571bffae00e253d14722f7f\"\r\n            },\r\n            {\r\n                \"_id\": \"6571bffae00e253d14722f80\",\r\n                \"element\": \"Wu\",\r\n                \"quantity\": 9,\r\n                \"id\": \"6571bffae00e253d14722f80\"\r\n            }\r\n        ]\r\n    },\r\n    \"location\": \"inoxis\",\r\n    \"email\": \"bob.gratton@email.ca\",\r\n    \"username\": \"Bob2\",\r\n    \"name\": \"Bob\",\r\n    \"surname\": \"Gratton\",\r\n    \"createdAt\": \"2023-12-05T18:39:33.880Z\",\r\n    \"updatedAt\": \"2023-12-05T18:39:33.880Z\",\r\n    \"href\": \"http://localhost:5000/explorers/656f6e65049d62338bfbb912\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "b1318497-d4e7-4c20-8fe3-5e400ee37560"
+    },
     {
       "type": "route",
       "uuid": "2a38bdd3-7703-4e0c-b1e3-969ca08832ad"
