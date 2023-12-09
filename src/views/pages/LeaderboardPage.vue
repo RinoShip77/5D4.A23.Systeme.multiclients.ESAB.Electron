@@ -81,7 +81,7 @@
             </tr>
             <tr v-else>
               <th scope="row">
-                <span v-if="leader.inventory.inox === leaderboard?.board[index - 1]?.inventory.inox">
+                <!-- <span v-if="leader.inventory.inox === leaderboard?.board[index - 1]?.inventory.inox">
                   <span v-if="index < 1">{{ index + 1 }}</span>
                   <span
                     v-else-if="leaderboard?.board[index - 1]?.inventory.inox === leaderboard?.board[index - 2]?.inventory.inox">
@@ -113,7 +113,8 @@
                   </span>
                   <span v-else>{{ index }}</span>
                 </span>
-                <span v-else>{{ index + 1 }}</span>
+                <span v-else>{{ index + 1 }}</span> -->
+                <span>{{ index + 1 }}</span>
               </th>
               <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
@@ -181,10 +182,10 @@ onMounted(async () => {
     isLoading.value = false;
     retrieveLeaderboard();
   }, import.meta.env.VITE_LOADING_TIME);
-  
+
   setInterval(async () => {
     retrieveLeaderboard();
-    
+
     leaderboard.value?.board.forEach(async leader => {
       if (leader.username === leaderboard.value?.me.username) {
         if (leaderboard.value?.board.indexOf(leader) !== undefined) {
@@ -200,18 +201,18 @@ onMounted(async () => {
 async function retrieveLeaderboard() {
   try {
     canRetry.value = false;
-    leaderboard.value = await leaderboardRepository.retrieveAll(order.value.toString(), href, token);
+    leaderboard.value = await leaderboardRepository.retrieveAll(href, token, order.value.toString());
 
     leaderboard.value?.board.forEach(async leader => {
       leader.allies = await allyRepository.retrieveAll(leader.href, token);
       leader.explorations = await explorationRepository.retrieveAll(leader.href, token);
 
-      if(leader.username === leaderboard.value?.me.username) {
+      if (leader.username === leaderboard.value?.me.username) {
         leaderboard.value.me.allies = await allyRepository.retrieveAll(href, token);
         leaderboard.value.me.explorations = await explorationRepository.retrieveAll(href, token);
       }
     });
-    
+
     sortLeaderboard();
   } catch (error) {
     canRetry.value = true;
@@ -221,46 +222,46 @@ async function retrieveLeaderboard() {
 async function sortLeaderboard() {
   //TODO: Remove the switch when the server will respond correctly
   switch (order.value.toString()) {
-      case 'inox':
-        leaderboard.value?.board.sort((explorer1, explorer2) => {
-          if (explorer1.inventory.inox === explorer2.inventory.inox) {
-            return explorer1.username > explorer2.username ? -1 : 1;
-          } else {
-            return explorer1.inventory.inox > explorer2.inventory.inox ? -1 : 1;
-          }
-        });
-        break;
+    case 'inox':
+      leaderboard.value?.board.sort((explorer1, explorer2) => {
+        if (explorer1.inventory.inox === explorer2.inventory.inox) {
+          return explorer1.username > explorer2.username ? -1 : 1;
+        } else {
+          return explorer1.inventory.inox > explorer2.inventory.inox ? -1 : 1;
+        }
+      });
+      break;
 
-      case 'elements':
-        leaderboard.value?.board.sort((explorer1, explorer2) => {
-          if (explorer1.inventory.elements.length === explorer2.inventory.elements.length) {
-            return explorer1.username > explorer2.username ? -1 : 1;
-          } else {
-            return explorer1.inventory.elements.length > explorer2.inventory.elements.length ? -1 : 1;
-          }
-        });
-        break;
+    case 'elements':
+      leaderboard.value?.board.sort((explorer1, explorer2) => {
+        if (explorer1.inventory.elements.length === explorer2.inventory.elements.length) {
+          return explorer1.username > explorer2.username ? -1 : 1;
+        } else {
+          return explorer1.inventory.elements.length > explorer2.inventory.elements.length ? -1 : 1;
+        }
+      });
+      break;
 
-      // case 'allies':
-      //   leaderboard.value?.board.sort((explorer1, explorer2) => {
-      //     if (explorer1.allies?.length === explorer2.allies?.length) {
-      //       return explorer1.username > explorer2.username ? -1 : 1;
-      //     } else {
-      //       return explorer1.allies?.length > explorer2.allies?.length ? -1 : 1;
-      //     }
-      //   });
-      //   break;
+    case 'allies':
+      leaderboard.value?.board.sort((explorer1, explorer2) => {
+        if (explorer1.allies?.length === explorer2.allies?.length) {
+          return explorer1.username > explorer2.username ? -1 : 1;
+        } else {
+          return explorer1.allies?.length > explorer2.allies?.length ? -1 : 1;
+        }
+      });
+      break;
 
-      // case 'explorations':
-      //   leaderboard.value?.board.sort((explorer1, explorer2) => {
-      //     if (explorer1.explorations?.length === explorer2.explorations?.length) {
-      //       return explorer1.username > explorer2.username ? -1 : 1;
-      //     } else {
-      //       return explorer1.explorations?.length > explorer2.explorations?.length ? -1 : 1;
-      //     }
-      //   });
-      //   break;
-    }
+    case 'explorations':
+      leaderboard.value?.board.sort((explorer1, explorer2) => {
+        if (explorer1.explorations?.length === explorer2.explorations?.length) {
+          return explorer1.username > explorer2.username ? -1 : 1;
+        } else {
+          return explorer1.explorations?.length > explorer2.explorations?.length ? -1 : 1;
+        }
+      });
+      break;
+  }
 }
 </script>
 
