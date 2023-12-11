@@ -2,7 +2,7 @@
   "name": "kaomia",
   "productName": "Kaomia",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "dev:web": "vite --config vite.config.web.ts",
