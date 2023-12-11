@@ -5,15 +5,14 @@
                 <h1 class="text-center mx-2 my-2 mt-5">Andromia Technologies</h1>
                 <div class="d-flex justify-content-center">
                     <div class="col-4 mx-2 my-2">
-                        <form class="form" @submit="login()">
+                        <form class="form" @submit="login(false)">
                             <label for="email" class="form-label">Adresse Courrielle</label>
                             <input v-model="email" class="form-control" id="email" required>
                             <label for="password" class="form-label">Mot de passe</label>
                             <input v-model="password" type="password" class="form-control" id="password" required>
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
-
                         </form>
-
+                        
                         <div class="modal" v-if="showError">
                             <div class="modal-content">
                                 <p>{{ message }}</p>
@@ -21,7 +20,10 @@
                             </div>
                         </div>
 
-                        <router-link :to="{ name: 'allies' }">Tricher</router-link>
+                        <div class="text-center">
+                            <button class="bg-transparent border-0 text-primary text-decoration-underline" @click="login(true)">Tricher</button>
+                        </div>
+                        
                         <div class="my-5 text-center">
                             <p>Vous êtes un citoyen et voulez être un explorateur?<br>
                                 <router-link :to="{ name: 'accountCreation' }">Créer un compte</router-link>
@@ -50,14 +52,20 @@ var showError = false;
 var message = "";
 var navigationAllowed = false;
 
-async function login() {
+async function login(cheat: boolean) {
     //TODO: Sprint 2: Corriger l'erreur suivante: La première tentative de connexion échoue toujours après avoir démarré l'application.
     // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
     // Cette erreure se produit aussi quand l'on navigue de la page de connexion a celle de création de compte et vice-versa.
 
     //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
+        if (cheat) {
+            email.value = "bob.gratton@email.ca";
+            password.value = "Canayen101";
+        }
+
         const response = await userRepository.login(email.value, password.value);
+
         if (response != null) {
             console.log('Connexion réussie!', response);
 
