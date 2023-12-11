@@ -11,7 +11,7 @@
         Leaderboard
       </router-link>
     </aside>
-    <div class="border border-3 rounded-2 rounded-start-5 p-5 overflow-auto shadow-lg ms-3 mt-3 text-center"
+    <div class="border border-3 rounded-start-5 rounded-end-4 p-5 overflow-auto shadow-lg ms-3 mt-3 me-1 text-center"
       style="width: 120rem; height: 45rem">
       <slot class="m-5"></slot>
     </div>
@@ -73,5 +73,27 @@ aside a:not(:hover) {
     color: whitesmoke;
     background-color: transparent
   }
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #E56773;
+  border: 1px solid #E56773;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-color: #00FFFF;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-color: #02f0f0;
 }
 </style>
