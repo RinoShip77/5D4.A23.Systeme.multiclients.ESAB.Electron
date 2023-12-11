@@ -93,7 +93,6 @@ aside a:not(:hover) {
 
 ::-webkit-scrollbar-thumb:hover {
   border-radius: 10px;
-  border: 3px solid transparent;
-  background-color: #02f0f0;
+  border: 4px solid transparent;
 }
 </style>

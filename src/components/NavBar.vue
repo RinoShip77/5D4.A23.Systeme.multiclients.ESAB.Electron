@@ -61,8 +61,6 @@ import router from "@/router";
 
 const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
-const token: string | null = sessionStorage.getItem('token');
-const href: string | null = sessionStorage.getItem('userHref');
 
 onMounted(async () => {
   retrieveExplorer();
@@ -70,7 +68,7 @@ onMounted(async () => {
 })
 
 async function retrieveExplorer() {
-  explorer.value = await explorerRepository.retrieveOne(href, token);
+  explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
   
   //TODO: Delete the two 'console.log(...)' when going in production
   console.log('L\'Explorateur a été mis à jour');
@@ -79,7 +77,11 @@ async function retrieveExplorer() {
 
 async function disconnect() {
   try {
-    const response = await explorerRepository.logout(token);
+    const res = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', res.accessToken);
+    sessionStorage.setItem('refreshToken', res.refreshToken);
+
+    const response = await explorerRepository.logout(res.accessToken);
 
     if (response != null) {
       sessionStorage.clear();

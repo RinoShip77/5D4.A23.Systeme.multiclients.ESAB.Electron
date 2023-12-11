@@ -93,16 +93,17 @@ onMounted(async () => {
     isLoading.value = false;
     retrieveElements();
   }, import.meta.env.VITE_LOADING_TIME);
-
+  
   setInterval(retrieveElements, import.meta.env.VITE_REFRESH_RATE);
 })
 
 async function retrieveElements() {
   try {
-    let token = sessionStorage.getItem('token');
-    let href = sessionStorage.getItem('userHref');
-
-    explorer.value = await explorerRepository.retrieveOne(href, token);
+    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', response.accessToken);
+    sessionStorage.setItem('refreshToken', response.refreshToken);
+    
+    explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), response.accessToken);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;

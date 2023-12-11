@@ -307,9 +307,11 @@
 <script setup lang="ts">
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import { AllyRepository } from '@/repositories/AllyRepository';
 import { Ally } from '@/models/Ally';
 
+const explorerRepository = new ExplorerRepository();
 const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>();
 const ally = ref<Ally>();
@@ -327,10 +329,11 @@ onMounted(async () => {
 
 async function retrieveAllies() {
   try {
-    let token = sessionStorage.getItem('token');
-    let href = sessionStorage.getItem('userHref');
+    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', response.accessToken);
+    sessionStorage.setItem('refreshToken', response.refreshToken);
 
-    allies.value = await allyRepository.retrieveAll(href, token);
+    allies.value = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;

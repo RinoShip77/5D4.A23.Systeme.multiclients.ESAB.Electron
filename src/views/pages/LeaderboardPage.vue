@@ -161,19 +161,19 @@
 <script setup lang="ts">
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
 import { AllyRepository } from '@/repositories/AllyRepository';
 import { ExplorationRepository } from '@/repositories/ExplorationRepository';
 import { Leaderboard } from '@/models/Leaderboard';
 
+const explorerRepository = new ExplorerRepository();
 const leaderboardRepository = new LeaderboardRepository();
 const allyRepository = new AllyRepository();
 const explorationRepository = new ExplorationRepository();
 const leaderboard = ref<Leaderboard>();
 const isLoading = ref(true);
 const canRetry = ref(false);
-const token = sessionStorage.getItem('token');
-const href = sessionStorage.getItem('userHref');
 let order = ref('inox');
 let lastPosition = ref();
 
@@ -200,16 +200,20 @@ onMounted(async () => {
 
 async function retrieveLeaderboard() {
   try {
+    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', response.accessToken);
+    sessionStorage.setItem('refreshToken', response.refreshToken);
+
     canRetry.value = false;
-    leaderboard.value = await leaderboardRepository.retrieveAll(href, order.value.toString());
+    leaderboard.value = await leaderboardRepository.retrieveAll(sessionStorage.getItem('userHref'), order.value.toString());
 
     leaderboard.value?.top25.forEach(async leader => {
-      leader.allies = await allyRepository.retrieveAll(leader.href, token);
-      leader.explorations = await explorationRepository.retrieveAll(leader.href, token);
+      leader.allies = await allyRepository.retrieveAll(leader.href, response.accessToken);
+      leader.explorations = await explorationRepository.retrieveAll(leader.href, response.accessToken);
 
       if (leader.username === leaderboard.value?.you.username) {
-        leaderboard.value.you.allies = await allyRepository.retrieveAll(href, token);
-        leaderboard.value.you.explorations = await explorationRepository.retrieveAll(href, token);
+        leaderboard.value.you.allies = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
+        leaderboard.value.you.explorations = await explorationRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
       }
     });
   } catch (error) {

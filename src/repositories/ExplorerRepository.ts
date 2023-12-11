@@ -67,4 +67,16 @@ export class ExplorerRepository {
             throw err;
         }
     }
+
+    public async refreshToken(token: string | null) {
+        try {
+            const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers/actions/refreshToken`, { refreshToken: `${token}` }, { headers: { 'Authorization': `Bearer ${token}` } });
+
+            if (response.status === 201) {
+                return response.data;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
 }
