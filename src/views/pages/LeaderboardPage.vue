@@ -46,7 +46,7 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="bg-body-secondary rounded-3 content" v-else-if="leaderboard?.board.length !== 0">
+      <div class="bg-body-secondary rounded-3 content" v-else-if="leaderboard?.top25?.length !== 0">
         <table class="table table-striped table-hover rounded">
           <thead class="fs-2">
             <th scope="col">#</th>
@@ -56,8 +56,8 @@
               <i class="fas fa-sort ms-5 text-body-emphasis bg-transparent"></i>
             </th>
           </thead>
-          <tbody v-for="(leader, index) of leaderboard?.board.slice(0, 25)" :key="index">
-            <tr class="table-warning fw-bold fs-5" v-if="leader.username === leaderboard?.me.username">
+          <tbody v-for="(leader, index) of leaderboard?.top25.slice(0, 25)" :key="index">
+            <tr class="table-warning fw-bold fs-5" v-if="leader.username === leaderboard?.you.username">
               <th scope="row" v-if="index < lastPosition">
                 <i class="fas fa-circle-up me-1 text-success"></i>
                 <span class="text-success fw-bolder">+</span>
@@ -74,41 +74,41 @@
                 {{ index + 1 }}
               </th>
               <td>{{ leader.username }}</td>
-              <td v-if="order === 'inox'">{{ leaderboard?.me.inventory.inox }}</td>
-              <td v-if="order === 'elements'">{{ leaderboard?.me.inventory.elements.length }}</td>
-              <td v-if="order === 'allies'">{{ leaderboard?.me.allies?.length }}</td>
-              <td v-if="order === 'explorations'">{{ leaderboard?.me.explorations?.length }}</td>
+              <td v-if="order === 'inox'">{{ leaderboard?.you.inventory.inox }}</td>
+              <td v-if="order === 'elements'">{{ leaderboard?.you.inventory.elements.length }}</td>
+              <td v-if="order === 'allies'">{{ leaderboard?.you.allies?.length }}</td>
+              <td v-if="order === 'explorations'">{{ leaderboard?.you.explorations?.length }}</td>
             </tr>
             <tr v-else>
               <th scope="row">
-                <!-- <span v-if="leader.inventory.inox === leaderboard?.board[index - 1]?.inventory.inox">
+                <!-- <span v-if="leader.inventory.inox === leaderboard?.top25[index - 1]?.inventory.inox">
                   <span v-if="index < 1">{{ index + 1 }}</span>
                   <span
-                    v-else-if="leaderboard?.board[index - 1]?.inventory.inox === leaderboard?.board[index - 2]?.inventory.inox">
+                    v-else-if="leaderboard?.top25[index - 1]?.inventory.inox === leaderboard?.top25[index - 2]?.inventory.inox">
                     {{ index - 1 }}
                   </span>
                   <span v-else>{{ index }}</span>
                 </span>
-                <span v-else-if="leader.inventory.elements.length === leaderboard?.board[index - 1]?.inventory.elements.length">
+                <span v-else-if="leader.inventory.elements.length === leaderboard?.top25[index - 1]?.inventory.elements.length">
                   <span v-if="index < 1">{{ index + 1 }}</span>
                   <span
-                    v-else-if="leaderboard?.board[index - 1]?.inventory.elements.length === leaderboard?.board[index - 2]?.inventory.elements.length">
+                    v-else-if="leaderboard?.top25[index - 1]?.inventory.elements.length === leaderboard?.top25[index - 2]?.inventory.elements.length">
                     {{ index - 1 }}
                   </span>
                   <span v-else>{{ index }}</span>
                 </span>
-                <span v-else-if="leader.allies?.length === leaderboard?.board[index - 1]?.allies?.length">
+                <span v-else-if="leader.allies?.length === leaderboard?.top25[index - 1]?.allies?.length">
                   <span v-if="index < 1">{{ index + 1 }}</span>
                   <span
-                    v-else-if="leaderboard?.board[index - 1]?.allies?.length === leaderboard?.board[index - 2]?.allies?.length">
+                    v-else-if="leaderboard?.top25[index - 1]?.allies?.length === leaderboard?.top25[index - 2]?.allies?.length">
                     {{ index - 1 }}
                   </span>
                   <span v-else>{{ index }}</span>
                 </span>
-                <span v-else-if="leader.explorations?.length === leaderboard?.board[index - 1]?.explorations?.length">
+                <span v-else-if="leader.explorations?.length === leaderboard?.top25[index - 1]?.explorations?.length">
                   <span v-if="index < 1">{{ index + 1 }}</span>
                   <span
-                    v-else-if="leaderboard?.board[index - 1]?.explorations?.length === leaderboard?.board[index - 2]?.explorations?.length">
+                    v-else-if="leaderboard?.top25[index - 1]?.explorations?.length === leaderboard?.top25[index - 2]?.explorations?.length">
                     {{ index - 1 }}
                   </span>
                   <span v-else>{{ index }}</span>
@@ -140,7 +140,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-center align-items-center">
-          <select class="form-select form-select-lg w-75 me-4" v-model="order" @change="sortLeaderboard()">
+          <select class="form-select form-select-lg w-75 me-4" v-model="order" @click="retrieveLeaderboard()">
             <option value="inox">Total d'Inox</option>
             <option value="elements">Nombre d'Éléments</option>
             <option value="allies">Nombre d'Allies</option>
@@ -186,10 +186,10 @@ onMounted(async () => {
   setInterval(async () => {
     retrieveLeaderboard();
 
-    leaderboard.value?.board.forEach(async leader => {
-      if (leader.username === leaderboard.value?.me.username) {
-        if (leaderboard.value?.board.indexOf(leader) !== undefined) {
-          sessionStorage.setItem('lastPosition', `${leaderboard.value?.board.indexOf(leader)}`)
+    leaderboard.value?.top25.forEach(async leader => {
+      if (leader.username === leaderboard.value?.you.username) {
+        if (leaderboard.value?.top25.indexOf(leader) !== undefined) {
+          sessionStorage.setItem('lastPosition', `${leaderboard.value?.top25.indexOf(leader)}`)
           lastPosition.value = Number(sessionStorage.getItem('lastPosition'));
         }
       }
@@ -201,66 +201,19 @@ onMounted(async () => {
 async function retrieveLeaderboard() {
   try {
     canRetry.value = false;
-    leaderboard.value = await leaderboardRepository.retrieveAll(href, token, order.value.toString());
+    leaderboard.value = await leaderboardRepository.retrieveAll(href, order.value.toString());
 
-    leaderboard.value?.board.forEach(async leader => {
+    leaderboard.value?.top25.forEach(async leader => {
       leader.allies = await allyRepository.retrieveAll(leader.href, token);
       leader.explorations = await explorationRepository.retrieveAll(leader.href, token);
 
-      if (leader.username === leaderboard.value?.me.username) {
-        leaderboard.value.me.allies = await allyRepository.retrieveAll(href, token);
-        leaderboard.value.me.explorations = await explorationRepository.retrieveAll(href, token);
+      if (leader.username === leaderboard.value?.you.username) {
+        leaderboard.value.you.allies = await allyRepository.retrieveAll(href, token);
+        leaderboard.value.you.explorations = await explorationRepository.retrieveAll(href, token);
       }
     });
-
-    sortLeaderboard();
   } catch (error) {
     canRetry.value = true;
-  }
-}
-
-async function sortLeaderboard() {
-  //TODO: Remove the switch when the server will respond correctly
-  switch (order.value.toString()) {
-    case 'inox':
-      leaderboard.value?.board.sort((explorer1, explorer2) => {
-        if (explorer1.inventory.inox === explorer2.inventory.inox) {
-          return explorer1.username > explorer2.username ? -1 : 1;
-        } else {
-          return explorer1.inventory.inox > explorer2.inventory.inox ? -1 : 1;
-        }
-      });
-      break;
-
-    case 'elements':
-      leaderboard.value?.board.sort((explorer1, explorer2) => {
-        if (explorer1.inventory.elements.length === explorer2.inventory.elements.length) {
-          return explorer1.username > explorer2.username ? -1 : 1;
-        } else {
-          return explorer1.inventory.elements.length > explorer2.inventory.elements.length ? -1 : 1;
-        }
-      });
-      break;
-
-    case 'allies':
-      leaderboard.value?.board.sort((explorer1, explorer2) => {
-        if (explorer1.allies?.length === explorer2.allies?.length) {
-          return explorer1.username > explorer2.username ? -1 : 1;
-        } else {
-          return explorer1.allies?.length > explorer2.allies?.length ? -1 : 1;
-        }
-      });
-      break;
-
-    case 'explorations':
-      leaderboard.value?.board.sort((explorer1, explorer2) => {
-        if (explorer1.explorations?.length === explorer2.explorations?.length) {
-          return explorer1.username > explorer2.username ? -1 : 1;
-        } else {
-          return explorer1.explorations?.length > explorer2.explorations?.length ? -1 : 1;
-        }
-      });
-      break;
   }
 }
 </script>
