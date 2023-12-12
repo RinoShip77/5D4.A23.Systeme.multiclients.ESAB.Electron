@@ -46,18 +46,18 @@
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="bg-body-secondary rounded-3 content" v-else-if="leaderboard?.top25?.length !== 0">
-        <table class="table table-striped table-hover rounded">
+      <div class="bg-info rounded-3 content" v-else-if="leaderboard?.top25?.length !== 0">
+        <table class="table table-info table-striped table-hover rounded">
           <thead class="fs-2">
-            <th scope="col">#</th>
-            <th scope="col">Nom d'utilisateur</th>
-            <th scope="col" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
+            <th scope="col" title="Position">#</th>
+            <th scope="col" title="Identifiant">Nom d'utilisateur</th>
+            <th scope="col" title="Sélectionner l'ordre de tri" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
               <span class="text-body-emphasis bg-transparent">Valeur</span>
               <i class="fas fa-sort ms-5 text-body-emphasis bg-transparent"></i>
             </th>
           </thead>
           <tbody v-for="(leader, index) of leaderboard?.top25.slice(0, 25)" :key="index">
-            <tr class="table-warning fw-bold fs-5" v-if="leader.username === leaderboard?.you.username">
+            <tr class="table-danger fw-bold fs-5" v-if="leader.username === leaderboard?.you.username">
               <th scope="row" v-if="index < lastPosition">
                 <i class="fas fa-circle-up me-1 text-success"></i>
                 <span class="text-success fw-bolder">+</span>

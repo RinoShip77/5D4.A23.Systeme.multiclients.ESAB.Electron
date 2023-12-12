@@ -11,7 +11,7 @@
         Leaderboard
       </router-link>
     </aside>
-    <div class="border border-3 rounded-start-5 rounded-end-4 p-5 overflow-auto shadow-lg ms-3 mt-3 me-1 text-center"
+    <div class="border border-3 rounded-start-5 rounded-end-4 p-5 overflow-auto shadow-lg ms-3 mt-3 me-1 text-center bg-info-subtle bg-opacity-75"
       style="width: 120rem; height: 45rem">
       <slot class="m-5"></slot>
     </div>
@@ -88,7 +88,7 @@ aside a:not(:hover) {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   border: 3px solid transparent;
-  background-color: #00FFFF;
+  background-color: #00D8D8;
 }
 
 ::-webkit-scrollbar-thumb:hover {

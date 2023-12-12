@@ -181,33 +181,35 @@
       </div>
       <div class="row row-cols-4 content" v-else-if="allies?.length !== 0">
         <div class="col my-2" v-for="ally of allies">
-          <div class="card bg-body-tertiary border-3 border-secondary-subtle shadow-lg" type="button"
+          <div class="card border-3 border-secondary-subtle shadow-lg bg-danger bg-opacity-50" type="button"
             data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally)">
-            <!-- style="background-image:  url('/src/assets/card_background.png')" -->
-            <div class="card-header bg-body-secondary">
+            <div class="card-header bg-info">
               <h4 class="text-capitalize">{{ ally.name }}</h4>
             </div>
             <div class="card-body">
               <img :src="ally.asset" class="img-fluid bg-light rounded-circle shadow-lg">
-              <div class="d-flex justify-content-between bg-body-secondary mt-3 shadow-sm rounded p-2">
-                <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4">
-                <img :src="`/src/assets/affinities/${ally.affinity}.svg`" class="img-fluid w-25 h-25">
-                <img :src="`/src/assets/books/${ally.books[1]}.png`" class="img-fluid w-25 mt-4">
+              <div class="d-flex justify-content-between mt-3 shadow-sm rounded p-2 bg-light" title="Attributs">
+                <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4"
+                  :alt="`Livre ${ally?.books[0]}`" title="Premier livre">
+                <img :src="`/src/assets/affinities/${ally.affinity}.svg`" class="img-fluid w-25 h-25"
+                  :alt="ally?.affinity" :title="`Affinité '${ally?.affinity}'`">
+                <img :src="`/src/assets/books/${ally.books[1]}.png`" class="img-fluid w-25 mt-4"
+                  :alt="`Livre ${ally?.books[1]}`" title="Deuxième livre">
               </div>
-              <div class="d-flex justify-content-around border-top mt-3 pt-3">
-                <div class="d-flex flex-column">
+              <div class="d-flex justify-content-around border-top mt-3 pt-3" title="Statistiques">
+                <div class="d-flex flex-column" title="Power">
                   <img src="@/assets/ui/power.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.power }}</p>
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column" title="Speed">
                   <img src="@/assets/ui/speed.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.speed }}</p>
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column" title="Shield">
                   <img src="@/assets/ui/shield.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.shield }}</p>
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column" title="Life">
                   <img src="@/assets/ui/life.png" class="img-fluid" width="25">
                   <p>{{ ally.stats.life }}</p>
                 </div>
@@ -225,13 +227,13 @@
   <!-- Modal for the details of one Ally -->
   <div class="modal fade" id="allyModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content bg-transparent border-0 d-flex">
-        <div class="card w-auto p-2 rounded-5">
+      <div class="modal-content d-flex rounded-5 p-3 bg-danger bg-opacity-75">
+        <div class="card w-auto p-2 rounded-5 bg-info bg-opacity-75">
           <div class="d-flex justify-content-between">
-            <img :src="ally?.asset" class="img-fluid img-thumbnail rounded-5 m-1 w-50">
-            <div class="d-flex flex-column m-1 bg-body-secondary rounded-5 content">
+            <img :src="ally?.asset" class="img-fluid rounded-5 m-1 w-50">
+            <div class="d-flex flex-column m-1 bg-info-subtle rounded-5 content">
               <div class="d-flex flex-column justify-content-between mt-3">
-                <div class="d-flex justify-content-around mb-4">
+                <div class="d-flex justify-content-around mb-3">
                   <div class="d-flex flex-column text-center">
                     <span class="text-capitalize display-5 fw-bold">{{ ally?.name }}</span>
                     <span class="opacity-75">Essence : {{ ally?.essence }}</span>
@@ -243,55 +245,50 @@
                     </span>
                   </div>
                 </div>
-                <div class="d-flex ms-5 mt-2">
-                  <div class="d-flex flex-column">
-                    <h5>Statistiques</h5>
+                <div class="d-flex ms-5 mt-2 mb-4">
+                  <div class="d-flex flex-column" title="Statistiques">
                     <div class="d-flex flex-column ms-2 fs-4">
-                      <div class="d-flex align-items-center">
-                        <img src="@/assets/ui/power.png" class="img-fluid w-25">
+                      <div class="d-flex align-items-center" title="Power">
+                        <img src="@/assets/ui/power.png" class="img-fluid w-50">
                         <span class="ms-2">{{ ally?.stats.power }}</span>
                       </div>
-                      <div class="d-flex align-items-center">
-                        <img src="@/assets/ui/speed.png" class="img-fluid w-25">
+                      <div class="d-flex align-items-center" title="Speed">
+                        <img src="@/assets/ui/speed.png" class="img-fluid w-50">
                         <span class="ms-2">{{ ally?.stats.speed }}</span>
                       </div>
-                      <div class="d-flex align-items-center">
-                        <img src="@/assets/ui/shield.png" class="img-fluid w-25">
+                      <div class="d-flex align-items-center" title="Shield">
+                        <img src="@/assets/ui/shield.png" class="img-fluid w-50">
                         <span class="ms-2">{{ ally?.stats.shield }}</span>
                       </div>
-                      <div class="d-flex align-items-center">
-                        <img src="@/assets/ui/life.png" class="img-fluid w-25">
+                      <div class="d-flex align-items-center" title="Life">
+                        <img src="@/assets/ui/life.png" class="img-fluid w-50">
                         <span class="ms-2">{{ ally?.stats.life }}</span>
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex flex-column text-center">
-                    <h5>Attributs</h5>
+                  <div class="d-flex flex-column my-auto text-center" title="Attributs">
                     <div class="d-flex mt-3">
                       <div class="d-flex flex-column mt-5">
-                        <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-50 mx-auto" type="button"
-                          title="Premier livre">
-                        <small class="font-monospace fst-italic">Premier livre</small>
+                        <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-75 mx-auto" type="button"
+                          :alt="`Livre ${ally?.books[0]}`" title="Premier livre">
                       </div>
                       <div class="d-flex flex-column mb-5">
-                        <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-75 mx-auto"
-                          type="button" title="Affinité">
-                        <small class="font-monospace fst-italic">Affinité</small>
+                        <img :src="`/src/assets/affinities/${ally?.affinity}.svg`" class="img-fluid w-100 mx-auto"
+                          type="button" :alt="ally?.affinity" :title="`Affinité '${ally?.affinity}'`">
                       </div>
                       <div class="d-flex flex-column mt-5">
-                        <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-50 mx-auto" type="button"
-                          title="Deuxième livre">
-                        <small class="font-monospace fst-italic">Deuxième livre</small>
+                        <img :src="`/src/assets/books/${ally?.books[1]}.png`" class="img-fluid w-75 mx-auto" type="button"
+                          :alt="`Livre ${ally?.books[1]}`" title="Deuxième livre">
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="d-flex flex-column mt-3 rounded-5 text-center" type="button" title="Noyau">
-                <h5>Noyau</h5>
+              <div class="d-flex flex-column mt-2 rounded-5 text-center" type="button" title="Noyau">
                 <div class="d-flex">
                   <div class="d-flex flex-column text-center" v-for="kernel of ally?.kernel">
-                    <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid">
+                    <img :src="`/src/assets/elements/element_${kernel}.png`" class="img-fluid" :alt="kernel"
+                      :title="`Element ${kernel}`">
                     <h4 class="text-capitalize">{{ kernel }}</h4>
                   </div>
                 </div>
