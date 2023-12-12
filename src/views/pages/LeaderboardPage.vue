@@ -52,8 +52,8 @@
             <th scope="col" title="Position">#</th>
             <th scope="col" title="Identifiant">Nom d'utilisateur</th>
             <th scope="col" title="Sélectionner l'ordre de tri" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
-              <span class="text-body-emphasis bg-transparent">Valeur</span>
-              <i class="fas fa-sort ms-5 text-body-emphasis bg-transparent"></i>
+              <span class="bg-transparent">Valeur</span>
+              <i class="fas fa-sort ms-5 bg-transparent"></i>
             </th>
           </thead>
           <tbody v-for="(leader, index) of leaderboard?.top25.slice(0, 25)" :key="index">

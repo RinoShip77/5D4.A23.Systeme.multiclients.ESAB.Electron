@@ -181,14 +181,14 @@
       </div>
       <div class="row row-cols-4 content" v-else-if="allies?.length !== 0">
         <div class="col my-2" v-for="ally of allies">
-          <div class="card border-3 border-secondary-subtle shadow-lg bg-danger bg-opacity-50" type="button"
+          <div class="card border-2 border-body-secondary shadow-lg" type="button"
             data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally)">
-            <div class="card-header bg-info">
-              <h4 class="text-capitalize">{{ ally.name }}</h4>
+            <div class="card-header bg-danger-subtle">
+              <h1 class="text-capitalize display-5">{{ ally.name }}</h1>
             </div>
-            <div class="card-body">
+            <div class="card-body bg-info bg-opacity-75">
               <img :src="ally.asset" class="img-fluid bg-light rounded-circle shadow-lg">
-              <div class="d-flex justify-content-between mt-3 shadow-sm rounded p-2 bg-light" title="Attributs">
+              <div class="d-flex justify-content-between mt-3" title="Attributs">
                 <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4"
                   :alt="`Livre ${ally?.books[0]}`" title="Premier livre">
                 <img :src="`/src/assets/affinities/${ally.affinity}.svg`" class="img-fluid w-25 h-25"
@@ -267,7 +267,7 @@
                     </div>
                   </div>
                   <div class="d-flex flex-column my-auto text-center" title="Attributs">
-                    <div class="d-flex mt-3">
+                    <div class="d-flex mt-3 bg-danger bg-opacity-25 rounded-4 me-2 py-3">
                       <div class="d-flex flex-column mt-5">
                         <img :src="`/src/assets/books/${ally?.books[0]}.png`" class="img-fluid w-75 mx-auto" type="button"
                           :alt="`Livre ${ally?.books[0]}`" title="Premier livre">

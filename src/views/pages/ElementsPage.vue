@@ -55,15 +55,15 @@
       </div>
       <div class="row row-cols-4 content" v-else-if="explorer?.inventory.elements.length !== 0">
         <div class="col my-2" v-for="element of explorer?.inventory.elements">
-          <div class="card border-3 border-body-tertiary shadow-lg bg-danger bg-opacity-50">
-            <div class="card-header bg-info">
-              <h2 class="text-capitalize">{{ element.element }}</h2>
+          <div class="card border-2 border-body-secondary shadow-lg">
+            <div class="card-header bg-danger-subtle">
+              <h1 class="text-capitalize display-5">{{ element.element }}</h1>
             </div>
-            <p class="fw-bold fs-4 mt-1">
-              {{ element.quantity }}
-              <i class="fas fa-boxes-stacked"></i>
-            </p>
-            <div class="card-body mb-3">
+            <div class="card-body bg-info bg-opacity-75">
+              <p class="fw-bold fs-4 mt-1">
+                {{ element.quantity }}
+                <i class="fas fa-boxes-stacked"></i>
+              </p>
               <img :src="`/src/assets/elements/element_${element.element}.png`"
                 class="img-fluid bg-light rounded-circle shadow-lg" :alt="`${element.element}`" :title="`Element ${element.element}`">
             </div>
