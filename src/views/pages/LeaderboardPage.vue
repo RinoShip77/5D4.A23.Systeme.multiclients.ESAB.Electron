@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
     <div class="mb-5">
-      <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
+      <h1 class="display-3 text-decoration-underline pageTitle">Tableau des scores</h1>
       <span class="text-body-secondary fs-5" v-if="leaderboard">
         Le classement des 25 meilleurs Explorers selon leur
         <span class="text-capitalize">
@@ -51,7 +51,8 @@
           <thead class="fs-2">
             <th scope="col" title="Position">#</th>
             <th scope="col" title="Identifiant">Nom d'utilisateur</th>
-            <th scope="col" title="Sélectionner l'ordre de tri" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
+            <th scope="col" title="Sélectionner l'ordre de tri" type="button" data-bs-toggle="modal"
+              data-bs-target="#orderModal">
               <span class="bg-transparent">Valeur</span>
               <i class="fas fa-sort ms-5 bg-transparent"></i>
             </th>
@@ -222,14 +223,4 @@ async function retrieveLeaderboard() {
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
-</style>
+<style scoped></style>

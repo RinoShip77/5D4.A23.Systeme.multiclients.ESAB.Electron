@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 title">
+    <h1 class="display-3 mb-5 pageTitle">
       <span class="text-decoration-underline">Mes Elements</span>
       <span v-if="explorer"> - ({{ explorer?.inventory.elements.length }})</span>
     </h1>
@@ -56,8 +56,8 @@
       <div class="row row-cols-4 content" v-else-if="explorer?.inventory.elements.length !== 0">
         <div class="col my-2" v-for="element of explorer?.inventory.elements">
           <div class="card border-2 border-body-secondary shadow-lg">
-            <div class="card-header bg-danger-subtle">
-              <h1 class="text-capitalize display-5">{{ element.element }}</h1>
+            <div class="card-header bg-body-tertiary">
+              <h1 class="text-capitalize display-5 fw-bold">{{ element.element }}</h1>
             </div>
             <div class="card-body bg-info bg-opacity-75">
               <p class="fw-bold fs-4 mt-1">
@@ -65,7 +65,7 @@
                 <i class="fas fa-boxes-stacked"></i>
               </p>
               <img :src="`/src/assets/elements/element_${element.element}.png`"
-                class="img-fluid bg-light rounded-circle shadow-lg" :alt="`${element.element}`" :title="`Element ${element.element}`">
+                class="img-fluid bg-body-tertiary rounded-circle shadow-lg w-75" :alt="`${element.element}`" :title="`Element ${element.element}`">
             </div>
           </div>
         </div>
@@ -111,19 +111,4 @@ async function retrieveElements() {
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
-
-img {
-  width: 125px;
-  height: auto
-}
-</style>
+<style scoped></style>

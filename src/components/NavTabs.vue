@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex">
     <aside class="bg-primary-subtle rounded-end-5 mt-3 me-5 ps-3 pt-5 shadow-lg d-flex flex-column" style="width: 30rem">
-      <router-link :to="{ name: 'allies' }">
+      <router-link class="text-primary-emphasis text-decoration-none fs-3 fw-bold p-4" :to="{ name: 'allies' }">
         Allies
       </router-link>
-      <router-link :to="{ name: 'elements' }">
+      <router-link class="text-primary-emphasis text-decoration-none fs-3 fw-bold p-4" :to="{ name: 'elements' }">
         Elements
       </router-link>
-      <router-link :to="{ name: 'leaderboard' }">
+      <router-link class="text-primary-emphasis text-decoration-none fs-3 fw-bold p-4" :to="{ name: 'leaderboard' }">
         Leaderboard
       </router-link>
       <div class="mx-auto mt-auto mb-4 d-flex fs-3">
@@ -33,13 +33,15 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-let colorSwitch = ref();
+let colorSwitch = ref(false);
 
 onMounted(() => {
-  if (localStorage.getItem('theme') != 'light') {
-    colorSwitch.value = true;
-  } else {
-    colorSwitch.value = false;
+  if (localStorage.getItem('theme') !== null) {
+    if (localStorage.getItem('theme') !== 'light') {
+      colorSwitch.value = true;
+    } else {
+      colorSwitch.value = false;
+    }
   }
 })
 
@@ -55,73 +57,7 @@ function switchTheme() {
 </script>
 
 <style scoped>
-aside a {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #016ECD;
-  padding: 1em;
-  text-decoration: none;
-}
-
-aside a:hover {
-
-  border-top-left-radius: 1.5em;
-  border-bottom-left-radius: 1.5em;
-  animation: animationOn 1s;
-  color: #016ECD;
-  background-color: whitesmoke
-}
-
-aside a:not(:hover) {
-  font-size: 1.5em;
-  font-weight: bold;
-  padding: 1em;
-  text-decoration: none;
-  border-top-left-radius: 1.5em;
-  border-bottom-left-radius: 1.5em;
-  animation: animationOff 0.5s;
-  color: #016ECD;
-  background-color: transparent
-}
-
-@keyframes animationOn {
-  from {
-    background-color: transparent
-  }
-
-  to {
-    background-color: whitesmoke
-  }
-}
-
-@keyframes animationOff {
-  from {
-    background-color: whitesmoke
-  }
-
-  to {
-    background-color: transparent
-  }
-}
-
-::-webkit-scrollbar {
-  width: 20px;
-}
-
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: #E56773;
-  border: 1px solid #E56773;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  border: 3px solid transparent;
-  background-color: #00D8D8;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  border-radius: 10px;
-  border: 4px solid transparent;
 }
 </style>

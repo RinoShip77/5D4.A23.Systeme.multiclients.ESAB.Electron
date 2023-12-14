@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 title">
+    <h1 class="display-3 mb-5 pageTitle">
       <span class="text-decoration-underline">Mes Allies</span>
       <span v-if="allies"> - ({{ allies?.length }})</span>
     </h1>
@@ -181,13 +181,13 @@
       </div>
       <div class="row row-cols-4 content" v-else-if="allies?.length !== 0">
         <div class="col my-2" v-for="ally of allies">
-          <div class="card border-2 border-body-secondary shadow-lg" type="button"
-            data-bs-toggle="modal" data-bs-target="#allyModal" @click="openModal(ally)">
-            <div class="card-header bg-danger-subtle">
-              <h1 class="text-capitalize display-5">{{ ally.name }}</h1>
+          <div class="card border-2 border-body-secondary shadow-lg" type="button" data-bs-toggle="modal"
+            data-bs-target="#allyModal" @click="openModal(ally)">
+            <div class="card-header bg-body-tertiary">
+              <h1 class="text-capitalize display-5 fw-bold">{{ ally.name }}</h1>
             </div>
             <div class="card-body bg-info bg-opacity-75">
-              <img :src="ally.asset" class="img-fluid bg-light rounded-circle shadow-lg">
+              <img :src="ally.asset" class="img-fluid bg-body-tertiary rounded-circle shadow-lg w-75">
               <div class="d-flex justify-content-between mt-3" title="Attributs">
                 <img :src="`/src/assets/books/${ally.books[0]}.png`" class="img-fluid w-25 mt-4"
                   :alt="`Livre ${ally?.books[0]}`" title="Premier livre">
@@ -342,14 +342,4 @@ async function openModal(recievedAlly: Ally) {
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
-</style>
+<style scoped></style>

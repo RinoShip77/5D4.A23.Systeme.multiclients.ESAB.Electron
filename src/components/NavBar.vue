@@ -5,7 +5,7 @@
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
           <img src="@/assets/logo.png" alt="Kaomia" title="Kaomia" class="img-fluid"
             width="100">
-          <h1 class="ms-2 title">Kaomia</h1>
+          <h1 class="ms-2 navTitle">Kaomia</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,18 +93,4 @@ async function disconnect() {
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Kenia&family=Play:wght@700&display=swap');
-
-.title {
-  font-family: 'Kenia', sans-serif;
-  font-size: 5em;
-  letter-spacing: -5px
-}
-
-.stats {
-  font-family: 'Play', sans-serif;
-  font-size: 1.5em;
-  max-width: fit-content
-}
-</style>
+<style scoped></style>
