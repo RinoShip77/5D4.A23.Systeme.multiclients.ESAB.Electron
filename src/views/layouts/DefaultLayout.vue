@@ -1,10 +1,8 @@
 <template class="d-flex">
   <NavBar></NavBar>
-
   <NavTabs>
     <slot></slot>
   </NavTabs>
-
   <Footer></Footer>
 </template>
 

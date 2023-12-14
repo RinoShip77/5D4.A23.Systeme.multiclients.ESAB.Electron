@@ -3,8 +3,7 @@
     <nav class="navbar navbar-expand-xl bg-danger bg-opacity-75">
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
-          <img src="@/assets/logo.png" alt="Kaomia" title="Kaomia" class="img-fluid"
-            width="100">
+          <img :src="`logo.ico`" alt="Kaomia" title="Kaomia" class="img-fluid" width="125">
           <h1 class="ms-2 navTitle">Kaomia</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -36,7 +35,7 @@
                 <i class="fas fa-sack-dollar display-3"></i>
                 <div class="d-flex align-items-center">
                   <span>{{ explorer?.inventory.inox }}</span>
-                  <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="60">
+                  <img :src="`ui/inox.png`" alt="Inox icon" class="img-fluid" width="60">
                 </div>
               </div>
               <div class="d-flex flex-column text-center ms-3">
@@ -69,10 +68,6 @@ onMounted(async () => {
 
 async function retrieveExplorer() {
   explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
-  
-  //TODO: Delete the two 'console.log(...)' when going in production
-  console.log('L\'Explorateur a été mis à jour');
-  console.log('');
 }
 
 async function disconnect() {

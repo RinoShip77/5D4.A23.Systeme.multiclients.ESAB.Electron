@@ -6,7 +6,6 @@ export class LeaderboardRepository {
 
   public async retrieveAll(href: string | null, order: string) {
     try {
-      //TODO: Switch the URL to the server
       let res = await this.axios.get(`${href}/leaderboards/${order}`);
 
       if (res.status === 200) {

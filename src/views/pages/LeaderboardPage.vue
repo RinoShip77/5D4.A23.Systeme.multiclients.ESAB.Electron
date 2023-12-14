@@ -81,42 +81,7 @@
               <td v-if="order === 'explorations'">{{ leaderboard?.you.explorations?.length }}</td>
             </tr>
             <tr v-else>
-              <th scope="row">
-                <!-- <span v-if="leader.inventory.inox === leaderboard?.top25[index - 1]?.inventory.inox">
-                  <span v-if="index < 1">{{ index + 1 }}</span>
-                  <span
-                    v-else-if="leaderboard?.top25[index - 1]?.inventory.inox === leaderboard?.top25[index - 2]?.inventory.inox">
-                    {{ index - 1 }}
-                  </span>
-                  <span v-else>{{ index }}</span>
-                </span>
-                <span v-else-if="leader.inventory.elements.length === leaderboard?.top25[index - 1]?.inventory.elements.length">
-                  <span v-if="index < 1">{{ index + 1 }}</span>
-                  <span
-                    v-else-if="leaderboard?.top25[index - 1]?.inventory.elements.length === leaderboard?.top25[index - 2]?.inventory.elements.length">
-                    {{ index - 1 }}
-                  </span>
-                  <span v-else>{{ index }}</span>
-                </span>
-                <span v-else-if="leader.allies?.length === leaderboard?.top25[index - 1]?.allies?.length">
-                  <span v-if="index < 1">{{ index + 1 }}</span>
-                  <span
-                    v-else-if="leaderboard?.top25[index - 1]?.allies?.length === leaderboard?.top25[index - 2]?.allies?.length">
-                    {{ index - 1 }}
-                  </span>
-                  <span v-else>{{ index }}</span>
-                </span>
-                <span v-else-if="leader.explorations?.length === leaderboard?.top25[index - 1]?.explorations?.length">
-                  <span v-if="index < 1">{{ index + 1 }}</span>
-                  <span
-                    v-else-if="leaderboard?.top25[index - 1]?.explorations?.length === leaderboard?.top25[index - 2]?.explorations?.length">
-                    {{ index - 1 }}
-                  </span>
-                  <span v-else>{{ index }}</span>
-                </span>
-                <span v-else>{{ index + 1 }}</span> -->
-                <span>{{ index + 1 }}</span>
-              </th>
+              <th scope="row">{{ index + 1 }}</th>
               <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ leader.inventory.elements.length }}</td>
