@@ -56,7 +56,6 @@ var navigationAllowed = false;
 
 async function login(cheat: boolean) {
 
-    //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
         if (cheat) {
             email.value = "bob.gratton@email.ca";
@@ -110,5 +109,4 @@ function closeError() {
 }
 </script>
 
-//TODO: Make the style for the page.
 <style scoped></style>
