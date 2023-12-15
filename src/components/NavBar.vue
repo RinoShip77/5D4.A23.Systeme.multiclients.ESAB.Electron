@@ -67,16 +67,16 @@ onMounted(async () => {
 })
 
 async function retrieveExplorer() {
-  explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
+  try {
+    explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function disconnect() {
   try {
-    const res = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
-    sessionStorage.setItem('token', res.accessToken);
-    sessionStorage.setItem('refreshToken', res.refreshToken);
-
-    const response = await explorerRepository.logout(res.accessToken);
+    const response = await explorerRepository.logout(sessionStorage.getItem('token'));
 
     if (response != null) {
       sessionStorage.clear();

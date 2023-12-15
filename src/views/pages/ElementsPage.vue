@@ -91,8 +91,8 @@ const canRetry = ref(false);
 
 onMounted(async () => {
   setTimeout(() => {
-    isLoading.value = false;
     retrieveElements();
+    isLoading.value = false;
   }, import.meta.env.VITE_LOADING_TIME);
 
   setInterval(retrieveElements, import.meta.env.VITE_REFRESH_RATE);
@@ -100,12 +100,8 @@ onMounted(async () => {
 
 async function retrieveElements() {
   try {
-    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
-    sessionStorage.setItem('token', response.accessToken);
-    sessionStorage.setItem('refreshToken', response.refreshToken);
-
-    explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), response.accessToken);
     canRetry.value = false;
+    explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
   } catch (error) {
     canRetry.value = true;
   }

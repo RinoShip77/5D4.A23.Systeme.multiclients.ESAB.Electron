@@ -63,16 +63,72 @@
                 <i class="fas fa-circle-up me-1 text-success"></i>
                 <span class="text-success fw-bolder">+</span>
                 <span class="me-1 text-success">{{ lastPosition - index }}</span>
-                {{ index + 1 }}
+                <span class="fs-1 text-warning" v-if="index === 0">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-3 text-secondary" v-else-if="index === 1">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-5 text-warning-emphasis" v-else-if="index === 2">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span v-else>
+                  {{ index + 1 }}
+                </span>
               </th>
               <th scope="row" v-else-if="index > lastPosition">
                 <i class="fas fa-circle-down me-1 text-danger"></i>
                 <span class="text-danger fw-bolder">-</span>
                 <span class="me-1 text-danger">{{ index - lastPosition }}</span>
-                {{ index + 1 }}
+                <span class="fs-1 text-warning" v-if="index === 0">
+                  <i class="fas fa-medal"></i>
+                  <span class="fs-1 text-warning" v-if="index === 0">
+                    <i class="fas fa-medal"></i>
+                    {{ index + 1 }}
+                  </span>
+                  <span class="fs-3 text-secondary" v-else-if="index === 1">
+                    <i class="fas fa-medal"></i>
+                    {{ index + 1 }}
+                  </span>
+                  <span class="fs-5 text-warning-emphasis" v-else-if="index === 2">
+                    <i class="fas fa-medal"></i>
+                    {{ index + 1 }}
+                  </span>
+                  <span v-else>
+                    {{ index + 1 }}
+                  </span>
+                </span>
+                <span class="fs-3 text-secondary" v-else-if="index === 1">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-5 text-warning-emphasis" v-else-if="index === 2">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span v-else>
+                  {{ index + 1 }}
+                </span>
               </th>
               <th scope="row" v-else>
-                {{ index + 1 }}
+                <span class="fs-1 text-warning" v-if="index === 0">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-3 text-secondary" v-else-if="index === 1">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-5 text-warning-emphasis" v-else-if="index === 2">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span v-else>
+                  {{ index + 1 }}
+                </span>
               </th>
               <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ leaderboard?.you.inventory.inox }}</td>
@@ -81,7 +137,23 @@
               <td v-if="order === 'explorations'">{{ leaderboard?.you.explorations?.length }}</td>
             </tr>
             <tr v-else>
-              <th scope="row">{{ index + 1 }}</th>
+              <th scope="row">
+                <span class="fs-1 text-warning" v-if="index === 0">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-3 text-secondary" v-else-if="index === 1">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span class="fs-5 text-warning-emphasis" v-else-if="index === 2">
+                  <i class="fas fa-medal"></i>
+                  {{ index + 1 }}
+                </span>
+                <span v-else>
+                  {{ index + 1 }}
+                </span>
+              </th>
               <td>{{ leader.username }}</td>
               <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
               <td v-if="order === 'elements'">{{ leader.inventory.elements.length }}</td>
@@ -106,7 +178,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-center align-items-center">
-          <select class="form-select form-select-lg w-75 me-4" v-model="order" @click="retrieveLeaderboard()">
+          <select class="form-select form-select-lg w-75 me-4" v-model="order" @change="retrieveLeaderboard()">
             <option value="inox">Total d'Inox</option>
             <option value="elements">Nombre d'Éléments</option>
             <option value="allies">Nombre d'Allies</option>
@@ -127,13 +199,11 @@
 <script setup lang="ts">
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
 import { AllyRepository } from '@/repositories/AllyRepository';
 import { ExplorationRepository } from '@/repositories/ExplorationRepository';
 import { Leaderboard } from '@/models/Leaderboard';
 
-const explorerRepository = new ExplorerRepository();
 const leaderboardRepository = new LeaderboardRepository();
 const allyRepository = new AllyRepository();
 const explorationRepository = new ExplorationRepository();
@@ -145,8 +215,8 @@ let lastPosition = ref();
 
 onMounted(async () => {
   setTimeout(() => {
-    isLoading.value = false;
     retrieveLeaderboard();
+    isLoading.value = false;
   }, import.meta.env.VITE_LOADING_TIME);
 
   setInterval(async () => {
@@ -166,20 +236,16 @@ onMounted(async () => {
 
 async function retrieveLeaderboard() {
   try {
-    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
-    sessionStorage.setItem('token', response.accessToken);
-    sessionStorage.setItem('refreshToken', response.refreshToken);
-
     canRetry.value = false;
-    leaderboard.value = await leaderboardRepository.retrieveAll(sessionStorage.getItem('userHref'), order.value.toString());
+    leaderboard.value = await leaderboardRepository.retrieveAll(sessionStorage.getItem('userHref'), order.value.toString(), sessionStorage.getItem('token'));
 
     leaderboard.value?.top25.forEach(async leader => {
-      leader.allies = await allyRepository.retrieveAll(leader.href, response.accessToken);
-      leader.explorations = await explorationRepository.retrieveAll(leader.href, response.accessToken);
+      leader.allies = await allyRepository.retrieveAll(leader.href, sessionStorage.getItem('token'));
+      leader.explorations = await explorationRepository.retrieveAll(leader.href, sessionStorage.getItem('token'));
 
       if (leader.username === leaderboard.value?.you.username) {
-        leaderboard.value.you.allies = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
-        leaderboard.value.you.explorations = await explorationRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
+        leaderboard.value.you.allies = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
+        leaderboard.value.you.explorations = await explorationRepository.retrieveAll(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
       }
     });
   } catch (error) {
