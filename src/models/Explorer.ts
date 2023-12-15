@@ -7,13 +7,13 @@ export interface Explorer {
         inox: number,
         elements: Element[]
     },
-    location: string,
     email: string,
     username: string,
     name: string,
     surname: string,
     createdAt: Date,
     updatedAt: Date,
+    location: string,
     href: string,
     allies: Ally[],
     explorations: Exploration[]
