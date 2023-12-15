@@ -65,7 +65,6 @@ async function login(cheat: boolean) {
         const response = await userRepository.login(email.value, password.value);
 
         if (response != null) {
-            console.log('Connexion réussie!', response);
 
             sessionStorage.setItem('token', response.tokens.accessToken);
             sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
@@ -81,7 +80,6 @@ async function login(cheat: boolean) {
             router.push({ name: 'allies' });
         }
     } catch (err) {
-        console.error('Erreur de connexion', err);
         switch (err.response.status) {
             case 401: {
                 message = "Identifiants de connexion invalides, veuillez réessayer.";

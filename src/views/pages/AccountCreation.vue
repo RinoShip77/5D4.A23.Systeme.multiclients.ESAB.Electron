@@ -69,7 +69,6 @@ async function createAccount() {
         if (password.value === repeatPassword.value) {
             const response = await userRepository.CreateAccount(email.value, username.value, password.value, name.value, surname.value);
             if (response != null) {
-                console.log('Compte créé avec succès!', response);
 
                 sessionStorage.setItem('token', response.tokens.accessToken);
                 sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
@@ -82,7 +81,6 @@ async function createAccount() {
             showError.value = true;
         }
     } catch (err) {
-        console.error('Erreur lors de la création du compte', err);
         switch (err.response.status) {
             case 409: {
                 message = "Cette adresse courrielle est déja utilisé dans un compte. Veuillez vous connecter ou utiliser une autre adresse courrielle.";
