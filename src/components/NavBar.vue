@@ -3,9 +3,8 @@
     <nav class="navbar navbar-expand-xl bg-danger bg-opacity-75">
       <div class="container-fluid mx-1">
         <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'allies' }">
-          <img src="@/assets/logo.png" alt="Andromia Technologies" title="Andromia Technologies" class="img-fluid"
-            width="100">
-          <h1 class="ms-2 title">Andromia</h1>
+          <img :src="`logo.ico`" alt="Kaomia" title="Kaomia" class="img-fluid" width="125">
+          <h1 class="ms-2 navTitle">Kaomia</h1>
         </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +35,7 @@
                 <i class="fas fa-sack-dollar display-3"></i>
                 <div class="d-flex align-items-center">
                   <span>{{ explorer?.inventory.inox }}</span>
-                  <img src="@/assets/ui/inox.png" alt="Inox icon" class="img-fluid" width="60">
+                  <img :src="`ui/inox.png`" alt="Inox icon" class="img-fluid" width="60">
                 </div>
               </div>
               <div class="d-flex flex-column text-center ms-3">
@@ -61,16 +60,23 @@ import router from "@/router";
 
 const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
-const token: string | null = sessionStorage.getItem('token');
-const href: string | null = sessionStorage.getItem('userHref');
 
 onMounted(async () => {
-  explorer.value = await explorerRepository.retrieveOne(href, token);
+  retrieveExplorer();
+  setInterval(retrieveExplorer, import.meta.env.VITE_REFRESH_RATE);
 })
+
+async function retrieveExplorer() {
+  explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
+}
 
 async function disconnect() {
   try {
-    const response = await explorerRepository.logout(token);
+    const res = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', res.accessToken);
+    sessionStorage.setItem('refreshToken', res.refreshToken);
+
+    const response = await explorerRepository.logout(res.accessToken);
 
     if (response != null) {
       sessionStorage.clear();
@@ -82,18 +88,4 @@ async function disconnect() {
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Kenia&family=Play:wght@700&display=swap');
-
-.title {
-  font-family: 'Kenia', sans-serif;
-  font-size: 5em;
-  letter-spacing: -5px
-}
-
-.stats {
-  font-family: 'Play', sans-serif;
-  font-size: 1.5em;
-  max-width: fit-content
-}
-</style>
+<style scoped></style>

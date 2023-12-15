@@ -1,12 +1,16 @@
 <template>
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 px-4 py-3 border-top">
+    <div class="d-flex align-items-center">
       <router-link class="d-flex align-items-center text-decoration-none" :to="{ name: 'allies' }">
-        <h4 class="text-body-tertiary title">© 2023 Andromia, Inc</h4>
+        <h4 class="text-body-tertiary footerTitle">© 2023 Consortium, Inc</h4>
       </router-link>
     </div>
-
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex fs-2 me-3">
+    <p class="text-center text-body-secondary">
+      Ce site à été produit dans un cadre pédagogique pour un <a
+        href="https://www.cstj.qc.ca/programmes/techniques-de-linformatique/">cours</a>.<br>
+      Il s'agit d'un univers fictif.
+    </p>
+    <ul class="nav justify-content-end list-unstyled d-flex fs-2 me-3">
       <li class="ms-3">
         <a class="text-body-secondary" href="https://github.com/">
           <i class="fa-brands fa-github"></i>
@@ -39,16 +43,4 @@
 <script setup lang="ts">
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Kenia&family=Play:wght@700&display=swap');
-
-.title {
-  font-family: 'Play', sans-serif;
-  margin-left: .25em;
-}
-
-.stats {
-  font-family: 'Kenia', sans-serif;
-  font-size: 1.5em;
-}
-</style>
+<style scoped></style>

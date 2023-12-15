@@ -1,7 +1,9 @@
 <template>
   <DefaultLayout>
-    <h1 class="display-3 mb-5 title"><span class="text-decoration-underline">Mes Elements</span><span v-if="explorer"> -
-        ({{ explorer?.inventory.elements.length }})</span></h1>
+    <h1 class="display-3 mb-5 pageTitle">
+      <span class="text-decoration-underline">Mes Elements</span>
+      <span v-if="explorer"> - ({{ explorer?.inventory.elements.length }})</span>
+    </h1>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px"
@@ -53,17 +55,18 @@
       </div>
       <div class="row row-cols-4 content" v-else-if="explorer?.inventory.elements.length !== 0">
         <div class="col my-2" v-for="element of explorer?.inventory.elements">
-          <div class="card border-3 border-body-tertiary shadow-lg">
-            <div class="card-header bg-body-secondary">
-              <h2 class="text-capitalize">{{ element.element }}</h2>
+          <div class="card border-2 border-body-secondary shadow-lg">
+            <div class="card-header bg-body-tertiary">
+              <h1 class="text-capitalize display-5 fw-bold">{{ element.element }}</h1>
             </div>
-            <p class="fw-bold fs-4 mt-1">
-              {{ element.quantity }}
-              <i class="fas fa-boxes-stacked"></i>
-            </p>
-            <div class="card-body mb-3">
-              <img :src="`/src/assets/elements/element_${element.element}.png`"
-                class="img-fluid bg-light rounded-circle shadow-lg" style="margin-top: -1em">
+            <div class="card-body bg-info bg-opacity-75">
+              <p class="fw-bold fs-4 mt-1">
+                {{ element.quantity }}
+                <i class="fas fa-boxes-stacked"></i>
+              </p>
+              <img :src="`elements/element_${element.element.toLowerCase()}.png`"
+                class="img-fluid bg-body-tertiary rounded-circle shadow-lg w-75" :alt="`${element.element}`"
+                :title="`Element ${element.element}`">
             </div>
           </div>
         </div>
@@ -85,17 +88,23 @@ const explorerRepository = new ExplorerRepository();
 const explorer = ref<Explorer>();
 const isLoading = ref(true);
 const canRetry = ref(false);
-const token = '1'; // sessionStorage.getItem('token');
-const idExplorer = '654aab9c00e2b7bbe8417c28'; //sessionStorage.getItem('idExplorer');
 
 onMounted(async () => {
-  setTimeout(() => { isLoading.value = false; }, 1000);
-  retrieveElements();
+  setTimeout(() => {
+    isLoading.value = false;
+    retrieveElements();
+  }, import.meta.env.VITE_LOADING_TIME);
+
+  setInterval(retrieveElements, import.meta.env.VITE_REFRESH_RATE);
 })
 
 async function retrieveElements() {
   try {
-    explorer.value = await explorerRepository.retrieveOne(idExplorer, token);
+    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', response.accessToken);
+    sessionStorage.setItem('refreshToken', response.refreshToken);
+
+    explorer.value = await explorerRepository.retrieveOne(sessionStorage.getItem('userHref'), response.accessToken);
     canRetry.value = false;
   } catch (error) {
     canRetry.value = true;
@@ -103,19 +112,4 @@ async function retrieveElements() {
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
-
-img {
-  width: 125px;
-  height: auto
-}
-</style>
+<style scoped></style>

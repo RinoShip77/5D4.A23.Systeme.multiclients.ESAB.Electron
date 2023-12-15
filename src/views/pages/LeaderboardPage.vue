@@ -1,11 +1,13 @@
 <template>
   <DefaultLayout>
     <div class="mb-5">
-      <h1 class="display-3 text-decoration-underline title">Tableau des scores</h1>
-      <span class="text-body-secondary fs-5" v-if="leaderboard">Le classement des 25 Explorers<span
-          v-if="order === 'inox' || order === 'elements' || order === 'allies' || order === 'explorations'"> selon leur
-          <span class="text-capitalize">{{ order
-          }}</span></span></span>
+      <h1 class="display-3 text-decoration-underline pageTitle">Tableau des scores</h1>
+      <span class="text-body-secondary fs-5" v-if="leaderboard">
+        Le classement des 25 meilleurs Explorers selon leur
+        <span class="text-capitalize">
+          {{ order }}
+        </span>
+      </span>
     </div>
     <div class="loading" v-if="isLoading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -40,36 +42,51 @@
         <div class="alert alert-danger fs-1 fw-bold w-50 mx-auto" role="alert">
           Impossible de récupérer les données
         </div>
-        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveLeaderboard(order)">
+        <button class="btn bg-transparent rounded-circle p-4" @click="retrieveLeaderboard()">
           <i class="fas fa-arrows-rotate" style="font-size: 4em"></i>
         </button>
       </div>
-      <div class="table-responsive content" v-else-if="leaderboard?.board.length !== 0">
-        <table class="table table-striped table-hover" v-if="leaderboard">
-          <thead class="fs-4 text-body-emphasis">
-            <th scope="col">#</th>
-            <th scope="col">Courriel</th>
-            <th scope="col" type="button" data-bs-toggle="modal" data-bs-target="#orderModal">
-              <span class="text-body-emphasis">Valeur</span>
-              <i class="fas fa-sort ms-5 text-body-emphasis"></i>
+      <div class="bg-info rounded-3 content" v-else-if="leaderboard?.top25?.length !== 0">
+        <table class="table table-info table-striped table-hover rounded">
+          <thead class="fs-2">
+            <th scope="col" title="Position">#</th>
+            <th scope="col" title="Identifiant">Nom d'utilisateur</th>
+            <th scope="col" title="Sélectionner l'ordre de tri" type="button" data-bs-toggle="modal"
+              data-bs-target="#orderModal">
+              <span class="bg-transparent">Valeur</span>
+              <i class="fas fa-sort ms-5 bg-transparent"></i>
             </th>
           </thead>
-          <tbody v-for="(explorer, index) of leaderboard?.board" :key="index">
-            <tr v-if="explorer.uuid === leaderboard?.me.uuid" class="table-warning">
-              <th scope="row">{{ index + 1 }}</th>
-              <td>{{ explorer.email }}</td>
-              <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
-              <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
-              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
-              <td v-if="order === 'explorations'">{{ explorer.explorations.length }}</td>
+          <tbody v-for="(leader, index) of leaderboard?.top25.slice(0, 25)" :key="index">
+            <tr class="table-danger fw-bold fs-5" v-if="leader.username === leaderboard?.you.username">
+              <th scope="row" v-if="index < lastPosition">
+                <i class="fas fa-circle-up me-1 text-success"></i>
+                <span class="text-success fw-bolder">+</span>
+                <span class="me-1 text-success">{{ lastPosition - index }}</span>
+                {{ index + 1 }}
+              </th>
+              <th scope="row" v-else-if="index > lastPosition">
+                <i class="fas fa-circle-down me-1 text-danger"></i>
+                <span class="text-danger fw-bolder">-</span>
+                <span class="me-1 text-danger">{{ index - lastPosition }}</span>
+                {{ index + 1 }}
+              </th>
+              <th scope="row" v-else>
+                {{ index + 1 }}
+              </th>
+              <td>{{ leader.username }}</td>
+              <td v-if="order === 'inox'">{{ leaderboard?.you.inventory.inox }}</td>
+              <td v-if="order === 'elements'">{{ leaderboard?.you.inventory.elements.length }}</td>
+              <td v-if="order === 'allies'">{{ leaderboard?.you.allies?.length }}</td>
+              <td v-if="order === 'explorations'">{{ leaderboard?.you.explorations?.length }}</td>
             </tr>
             <tr v-else>
               <th scope="row">{{ index + 1 }}</th>
-              <td>{{ explorer.email }}</td>
-              <td v-if="order === 'inox'">{{ explorer.inventory.inox }}</td>
-              <td v-if="order === 'elements'">{{ explorer.inventory.elements.length }}</td>
-              <td v-if="order === 'allies'">{{ explorer.allies.length }}</td>
-              <td v-if="order === 'explorations'">{{ explorer.explorations.length }}</td>
+              <td>{{ leader.username }}</td>
+              <td v-if="order === 'inox'">{{ leader.inventory.inox }}</td>
+              <td v-if="order === 'elements'">{{ leader.inventory.elements.length }}</td>
+              <td v-if="order === 'allies'">{{ leader.allies?.length }}</td>
+              <td v-if="order === 'explorations'">{{ leader.explorations?.length }}</td>
             </tr>
           </tbody>
         </table>
@@ -89,7 +106,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-center align-items-center">
-          <select class="form-select form-select-lg w-75 me-4" v-model="order" @change="retrieveLeaderboard(order)">
+          <select class="form-select form-select-lg w-75 me-4" v-model="order" @click="retrieveLeaderboard()">
             <option value="inox">Total d'Inox</option>
             <option value="elements">Nombre d'Éléments</option>
             <option value="allies">Nombre d'Allies</option>
@@ -110,58 +127,65 @@
 <script setup lang="ts">
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
+import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import { LeaderboardRepository } from '@/repositories/LeaderboardRepository';
+import { AllyRepository } from '@/repositories/AllyRepository';
+import { ExplorationRepository } from '@/repositories/ExplorationRepository';
 import { Leaderboard } from '@/models/Leaderboard';
 
+const explorerRepository = new ExplorerRepository();
 const leaderboardRepository = new LeaderboardRepository();
+const allyRepository = new AllyRepository();
+const explorationRepository = new ExplorationRepository();
 const leaderboard = ref<Leaderboard>();
 const isLoading = ref(true);
 const canRetry = ref(false);
 let order = ref('inox');
+let lastPosition = ref();
 
 onMounted(async () => {
-  setTimeout(() => { isLoading.value = false; }, 1000);
-  retrieveLeaderboard('inox');
+  setTimeout(() => {
+    isLoading.value = false;
+    retrieveLeaderboard();
+  }, import.meta.env.VITE_LOADING_TIME);
+
+  setInterval(async () => {
+    retrieveLeaderboard();
+
+    leaderboard.value?.top25.forEach(async leader => {
+      if (leader.username === leaderboard.value?.you.username) {
+        if (leaderboard.value?.top25.indexOf(leader) !== undefined) {
+          sessionStorage.setItem('lastPosition', `${leaderboard.value?.top25.indexOf(leader)}`)
+          lastPosition.value = Number(sessionStorage.getItem('lastPosition'));
+        }
+      }
+    });
+
+  }, import.meta.env.VITE_REFRESH_RATE);
 })
 
-async function retrieveLeaderboard(order: string) {
+async function retrieveLeaderboard() {
   try {
-    leaderboard.value = await leaderboardRepository.retrieveAll(order);
-    console.log(leaderboard.value?.order)
+    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
+    sessionStorage.setItem('token', response.accessToken);
+    sessionStorage.setItem('refreshToken', response.refreshToken);
+
     canRetry.value = false;
+    leaderboard.value = await leaderboardRepository.retrieveAll(sessionStorage.getItem('userHref'), order.value.toString());
 
-    //TODO: Remove the switch when the server will respond correctly
-    switch (order) {
-      case 'inox':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.inventory.inox - explorer1.inventory.inox));
-        break;
+    leaderboard.value?.top25.forEach(async leader => {
+      leader.allies = await allyRepository.retrieveAll(leader.href, response.accessToken);
+      leader.explorations = await explorationRepository.retrieveAll(leader.href, response.accessToken);
 
-      case 'elements':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.inventory.elements.length - explorer1.inventory.elements.length));
-        break;
-
-      case 'allies':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.allies.length - explorer1.allies.length));
-        break;
-
-      case 'explorations':
-        leaderboard.value?.board.sort(((explorer1, explorer2) => explorer2.explorations.length - explorer1.explorations.length));
-        break;
-    }
+      if (leader.username === leaderboard.value?.you.username) {
+        leaderboard.value.you.allies = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
+        leaderboard.value.you.explorations = await explorationRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
+      }
+    });
   } catch (error) {
     canRetry.value = true;
   }
 }
 </script>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Ubuntu:wght@500&display=swap');
-
-.title {
-  font-family: 'Oswald', sans-serif;
-}
-
-.content {
-  font-family: 'Ubuntu', sans-serif;
-}
-</style>
+<style scoped></style>

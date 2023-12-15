@@ -12,12 +12,6 @@
     "dist-electron",
     "dist"
   ],
-  "mac": {
-    "artifactName": "${productName}_${version}.${ext}",
-    "target": [
-      "dmg"
-    ]
-  },
   "win": {
     "target": [
       {
@@ -27,7 +21,8 @@
         ]
       }
     ],
-    "artifactName": "${productName}_${version}.${ext}"
+    "artifactName": "${productName}.${ext}",
+    "icon": "public/logo.ico"
   },
   "nsis": {
     "oneClick": false,
