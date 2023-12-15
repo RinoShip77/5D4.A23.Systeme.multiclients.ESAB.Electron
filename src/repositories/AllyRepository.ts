@@ -1,18 +1,24 @@
 import { inject } from "vue";
 import { AxiosStatic } from 'axios';
+import { ExplorerRepository } from "./ExplorerRepository";
 
-export class AllyRepository {
+export class AllyRepository extends ExplorerRepository {
     axios = inject('axios') as AxiosStatic;
 
     public async retrieveAll(href: string | null, token: string | null) {
         try {
-            const res = await this.axios.get(`${href}/allies`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await this.axios.get(`${href}/allies`, { headers: { 'Authorization': `Bearer ${token}` } });
 
-            if (res.status === 200) {
-                return res.data;
+            if (response.status === 200) {
+                return response.data;
             }
-        } catch (err) {
-            throw err;
+        } catch (error: any) {
+            if (error.response.status === 401) {
+                this.refreshToken(sessionStorage.getItem('refreshToken'));
+                this.retrieveAll(href, sessionStorage.getItem('token'));
+            } else {
+                throw error;
+            }
         }
     }
 }

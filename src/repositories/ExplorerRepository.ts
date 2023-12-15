@@ -51,29 +51,40 @@ export class ExplorerRepository {
             if (response.status === 200) {
                 return response.data
             }
-        } catch (err) {
-            console.error('Erreur de deconnexion', err);
+        } catch (error: any) {
+            if (error.response.status === 401) {
+                this.refreshToken(sessionStorage.getItem('refreshToken'));
+                this.logout(sessionStorage.getItem('token'));
+            } else {
+                throw error;
+            }
         }
     }
 
     public async retrieveOne(href: string | null, token: string | null) {
         try {
-            const res = await this.axios.get(`${href}`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await this.axios.get(`${href}`, { headers: { 'Authorization': `Bearer ${token}` } });
 
-            if (res.status === 200) {
-                return res.data;
+            if (response.status === 200) {
+                return response.data;
             }
-        } catch (err) {
-            throw err;
+        } catch (error: any) {
+            if (error.response.status === 401) {
+                this.refreshToken(sessionStorage.getItem('refreshToken'));
+                this.retrieveOne(href, sessionStorage.getItem('token'));
+            } else {
+                throw error;
+            }
         }
     }
 
     public async refreshToken(token: string | null) {
         try {
             const response = await this.axios.post(`${import.meta.env.VITE_BASE_URL}explorers/actions/refreshToken`, { refreshToken: `${token}` }, { headers: { 'Authorization': `Bearer ${token}` } });
-
+            
             if (response.status === 201) {
-                return response.data;
+                sessionStorage.setItem('token', response.data.accessToken);
+                sessionStorage.setItem('refreshToken', response.data.refreshToken);
             }
         } catch (error) {
             throw error;

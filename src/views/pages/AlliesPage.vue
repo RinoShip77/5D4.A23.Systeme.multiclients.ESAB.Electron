@@ -304,11 +304,9 @@
 <script setup lang="ts">
 import DefaultLayout from '@/views/layouts/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
-import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import { AllyRepository } from '@/repositories/AllyRepository';
 import { Ally } from '@/models/Ally';
 
-const explorerRepository = new ExplorerRepository();
 const allyRepository = new AllyRepository();
 const allies = ref<Ally[]>();
 const ally = ref<Ally>();
@@ -317,8 +315,8 @@ const canRetry = ref(false);
 
 onMounted(async () => {
   setTimeout(() => {
-    isLoading.value = false;
     retrieveAllies();
+    isLoading.value = false;
   }, import.meta.env.VITE_LOADING_TIME);
 
   setInterval(retrieveAllies, import.meta.env.VITE_REFRESH_RATE);
@@ -326,12 +324,8 @@ onMounted(async () => {
 
 async function retrieveAllies() {
   try {
-    const response = await explorerRepository.refreshToken(sessionStorage.getItem('refreshToken'));
-    sessionStorage.setItem('token', response.accessToken);
-    sessionStorage.setItem('refreshToken', response.refreshToken);
-
-    allies.value = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), response.accessToken);
     canRetry.value = false;
+    allies.value = await allyRepository.retrieveAll(sessionStorage.getItem('userHref'), sessionStorage.getItem('token'));
   } catch (error) {
     canRetry.value = true;
   }
