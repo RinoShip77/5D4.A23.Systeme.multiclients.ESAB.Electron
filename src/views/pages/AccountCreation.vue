@@ -1,8 +1,14 @@
 <template>
     <InitialLayout>
+        <header class="bg-danger bg-opacity-75 d-flex justify-content-center">
+            <div>
+                <img :src="`logo.ico`" alt="Kaomia" title="Kaomia" class="img-fluid" width="125">
+                <h1 class="ms-2 navTitle">Kaomia</h1>
+            </div>
+        </header>
         <div class="container">
             <div class="row">
-                <h1 class="text-center mx-2 my-2 mt-5">Andromia Technologies</h1>
+
                 <h2 class="text-center mx-2 my-2 mt-5">Création de compte</h2>
                 <div class="d-flex justify-content-center">
                     <div class="col-4 mx-2 my-2">
@@ -24,6 +30,7 @@
                                 compte</button>
 
                         </form>
+                        <ErrorModal v-if="showError" :errorMessage="message" @close="closeError" />
                         <div class="my-5 text-center">
                             <p>Vous êtes déja un explorateur?<br>
                                 <router-link :to="{ name: 'login' }">Se connecter</router-link>
@@ -43,6 +50,7 @@ import InitialLayout from '../layouts/InitialLayout.vue';
 import { ref } from 'vue';
 import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import router from "@/router";
+import ErrorModal from "@/components/ErrorModal.vue";
 
 const userRepository = new ExplorerRepository();
 const email = ref<string>("");
@@ -52,14 +60,11 @@ const surname = ref<string>("");
 const password = ref<string>("");
 const repeatPassword = ref<string>("");
 
+const showError = ref<boolean>(false);
+var message = "";
 var navigationAllowed = false;
 
 async function createAccount() {
-    //TODO: Sprint 2: Corriger l'erreur suivante: La première tentative de création échoue toujours après avoir démarré l'application.
-    // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
-    // Cette erreure se produit aussi quand l'on navigue de la page de connexion a celle de création de compte et vice-versa.
-
-    //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
         if (password.value === repeatPassword.value) {
             const response = await userRepository.CreateAccount(email.value, username.value, password.value, name.value, surname.value);
@@ -72,23 +77,43 @@ async function createAccount() {
 
                 navigationAllowed = true;
             }
-        } else (
-            console.log("Les mots de passe ne sont pas les mêmes:" + password.value + ' != ' + repeatPassword.value)
-        )
+        } else {
+            message = "Les mots de passe entrés ne sont pas identiques.";
+            showError.value = true;
+        }
     } catch (err) {
         console.error('Erreur lors de la création du compte', err);
+        switch (err.response.status) {
+            case 409: {
+                message = "Cette adresse courrielle est déja utilisé dans un compte. Veuillez vous connecter ou utiliser une autre adresse courrielle.";
+                break;
+            }
+            case 500: {
+                message = "Erreur interne du serveur, veuillez réessayer plus tard";
+                break;
+            }
+            default: {
+                message = "Erreur inconnue, veuillez réessayer plus tard";
+                break;
+            }
+        }
+
+        showError.value = true;
     }
+
     //Navigation
     if (navigationAllowed) {
         router.push({ name: 'allies' });
     }
 }
-
+function closeError() {
+    showError.value = false;
+    message = "";
+}
 
 
 </script>
 
-//TODO: Make the style for the page.
 <style scoped>
 button {
     width: 200px;

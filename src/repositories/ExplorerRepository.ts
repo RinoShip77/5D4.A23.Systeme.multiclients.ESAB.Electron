@@ -17,6 +17,7 @@ export class ExplorerRepository {
             }
         } catch (err) {
             console.error('Erreur de connexion', err);
+            throw err;
         }
     }
 
@@ -41,6 +42,7 @@ export class ExplorerRepository {
             }
         } catch (err) {
             console.error('Erreur lors de la création du compte', err);
+            throw err;
         }
     }
 

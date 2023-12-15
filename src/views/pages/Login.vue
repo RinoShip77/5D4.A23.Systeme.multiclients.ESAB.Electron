@@ -1,29 +1,30 @@
 <template>
     <InitialLayout>
+        <header class="bg-danger bg-opacity-75 d-flex justify-content-center">
+            <div>
+                <img :src="`logo.ico`" alt="Kaomia" title="Kaomia" class="img-fluid" width="125">
+                <h1 class="ms-2 navTitle">Kaomia</h1>
+            </div>
+        </header>
         <div class="container">
             <div class="row">
-                <h1 class="text-center mx-2 my-2 mt-5">Andromia Technologies</h1>
                 <div class="d-flex justify-content-center">
                     <div class="col-4 mx-2 my-2">
                         <form class="form" @submit="login(false)">
-                            <label for="email" class="form-label">Adresse Courrielle</label>
+                            <label for="email" type="email" class="form-label">Adresse Courrielle</label>
                             <input v-model="email" class="form-control" id="email" required>
                             <label for="password" class="form-label">Mot de passe</label>
                             <input v-model="password" type="password" class="form-control" id="password" required>
                             <input type="submit" class="form-control btn btn-primary my-4" value="Se connecter">
                         </form>
-                        
-                        <div class="modal" v-if="showError">
-                            <div class="modal-content">
-                                <p>{{ message }}</p>
-                                <button @click="closeModal">Close</button>
-                            </div>
-                        </div>
+
+                        <ErrorModal v-if="showError" :errorMessage="message" @close="closeError" />
 
                         <div class="text-center">
-                            <button class="bg-transparent border-0 text-primary text-decoration-underline" @click="login(true)">Tricher</button>
+                            <button class="bg-transparent border-0 text-primary text-decoration-underline"
+                                @click="login(true)">Tricher</button>
                         </div>
-                        
+
                         <div class="my-5 text-center">
                             <p>Vous êtes un citoyen et voulez être un explorateur?<br>
                                 <router-link :to="{ name: 'accountCreation' }">Créer un compte</router-link>
@@ -43,19 +44,17 @@ import InitialLayout from '../layouts/InitialLayout.vue';
 import { ref } from 'vue';
 import { ExplorerRepository } from '@/repositories/ExplorerRepository';
 import router from "@/router";
+import ErrorModal from "@/components/ErrorModal.vue";
 
 const userRepository = new ExplorerRepository();
 const email = ref<string>("");
 const password = ref<string>("");
 
-var showAlert = false;
+const showError = ref<boolean>(false);
 var message = "";
 var navigationAllowed = false;
 
 async function login(cheat: boolean) {
-    //TODO: Sprint 2: Corriger l'erreur suivante: La première tentative de connexion échoue toujours après avoir démarré l'application.
-    // La page ne fait que se rafraichir lors de la première tentative sans qu'elle ne produise une erreure.
-    // Cette erreure se produit aussi quand l'on navigue de la page de connexion a celle de création de compte et vice-versa.
 
     //TODO: Sprint 2: Afficher les messages d'erreurs à l'utilisateur.
     try {
@@ -73,6 +72,9 @@ async function login(cheat: boolean) {
             sessionStorage.setItem('refreshToken', response.tokens.refreshToken);
             sessionStorage.setItem('userHref', response.explorer.href);
 
+            message = "";
+            showError.value = false;
+
             navigationAllowed = true;
         }
         //Navigation
@@ -81,14 +83,29 @@ async function login(cheat: boolean) {
         }
     } catch (err) {
         console.error('Erreur de connexion', err);
-        message = "Identifiants de connexion invalides, veuillez réessayer.";
-        showAlert = true;
+        switch (err.response.status) {
+            case 401: {
+                message = "Identifiants de connexion invalides, veuillez réessayer.";
+                break;
+            }
+            case 500: {
+                message = "Erreur interne du serveur, veuillez réessayer plus tard";
+                break;
+            }
+            default: {
+                message = "Erreur inconnue, veuillez réessayer plus tard";
+                break;
+            }
+        }
+
+        showError.value = true;
     }
 
 
 }
-function closeAlert() {
-    showAlert = false;
+
+function closeError() {
+    showError.value = false;
     message = "";
 }
 </script>
